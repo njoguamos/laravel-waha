@@ -1,0 +1,12 @@
+# IDE Folders
+.idea
+
+# macOS-specific files
+.DS_Store
+
+# Composer
+vendor
+build
+.phpunit.cache
+.DS_Store
+workbench/storage
