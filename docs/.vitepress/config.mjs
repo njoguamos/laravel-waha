@@ -6,7 +6,7 @@ export default defineConfig({
     description: "A Laravel package for waha integration",
     lastUpdated: false,
     sitemap: {
-        hostname: 'https://waha.njoguamos.com'
+        hostname: 'https://waha.njoguamos.me.ke'
     },
     head: [
         // ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
@@ -17,7 +17,7 @@ export default defineConfig({
         // ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
         [
             'script',
-            { defer: '', 'data-domain': 'waha.njoguamos.com', src: 'https://stats.njoguamos.com/js/script.js' }
+            { defer: '', 'data-domain': 'waha.njoguamos.me.ke', src: 'https://stats.njoguamos.com/js/script.js' }
         ],
     ],
     themeConfig: {
