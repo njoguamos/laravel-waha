@@ -45,8 +45,6 @@ php artisan vendor:publish --tag=config --provider="NjoguAmos\Waha\WahaServicePr
       'base_url' => env('WAHA_BASE_URL', 'https://waha.example.com'),
 
       'api_key' => env('WAHA_API_KEY', ''),
-
-      'custom_headers' => [],
   ];
   ```
 </details>

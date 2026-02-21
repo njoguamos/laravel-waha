@@ -15,9 +15,7 @@ class WahaConnector extends Connector
     public function __construct(
         protected string $baseUrl,
         protected string $apiKey,
-        protected array $customHeaders = []
-    ) {
-    }
+    ) {}
 
     public function resolveBaseUrl(): string
     {
@@ -31,12 +29,9 @@ class WahaConnector extends Connector
 
     protected function defaultHeaders(): array
     {
-        return array_merge(
-            [
-                'Content-Type' => 'application/json',
-                'Accept'       => 'application/json',
-            ],
-            $this->customHeaders
-        );
+        return [
+            'Content-Type' => 'application/json',
+            'Accept'       => 'application/json',
+        ];
     }
 }

@@ -167,7 +167,6 @@ public function register(): void
         return new WahaConnector(
             baseUrl: config()->string(key: 'waha.base_url'),
             apiKey: config()->string(key: 'waha.api_key'),
-            customHeaders: config()->array(key: 'waha.custom_headers', default: [])
         );
     });
 }
