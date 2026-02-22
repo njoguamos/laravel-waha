@@ -19,16 +19,24 @@ You can install the package via Composer:
 composer require njoguamos/laravel-waha
 ```
 
+## Documentation
+
+Full documentation is available at [waha.njoguamos.me.ke](https://waha.njoguamos.me.ke?source=GitHubRepo).
+
 ## Configuration
 
 ### Environment variables
 
 - `WAHA_API_KEY` – Your WAHA API key
 - `WAHA_BASE_URL` – Base API URL (default `https://waha.example.com`)
+- `WAHA_SESSION` – Default WhatsApp session name (default `default`)
+- `WAHA_ENGINE` – Engine type: `WEBJS`, `GOWS`, or `NOWEB` (default `GOWS`)
 
 ```dotenv
 WAHA_API_KEY=your-api-key
 WAHA_BASE_URL=https://waha.example.com
+WAHA_SESSION=default
+WAHA_ENGINE=GOWS
 ```
 
 ## Publishing Configuration
