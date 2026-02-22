@@ -72,5 +72,9 @@ describe(description: 'check exists', tests: function () {
         expect(value: $result)
             ->toBeInstanceOf(class: ContactExistsData::class)
             ->and(value: $result->numberExists)->toBeTrue();
+
+        MockClient::global()->assertSent(function (CheckExistsRequest $request): bool {
+            return $request->query()->get('session') === 'test-session';
+        });
     });
 });

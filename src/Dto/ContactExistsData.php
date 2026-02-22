@@ -15,7 +15,7 @@ class ContactExistsData
     public static function fromArray(array $data): self
     {
         return new self(
-            numberExists: $data['numberExists'],
+            numberExists: (bool) ($data['numberExists'] ?? false),
             chatId: $data['chatId'] ?? null,
         );
     }

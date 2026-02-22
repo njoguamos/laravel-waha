@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use NjoguAmos\Waha\Facades\Status;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\TextStatusData;
@@ -22,7 +23,11 @@ test(description: 'it can send text status', closure: function () {
         font: 1
     );
 
-    expect(value: $data->text)->toBe(expected: 'Hello from WhatsApp.')
-        ->and(value: $data->backgroundColor)->toBe(expected: '#38b42f')
-        ->and(value: $data->font)->toBe(expected: 1);
+    $result = Status::sendText(session: 'default', data: $data);
+
+    expect(value: $result)
+        ->toBeInstanceOf(class: TextStatusData::class)
+        ->and(value: $result->text)->toBe(expected: 'Hello from WhatsApp.')
+        ->and(value: $result->backgroundColor)->toBe(expected: '#38b42f')
+        ->and(value: $result->font)->toBe(expected: 1);
 });

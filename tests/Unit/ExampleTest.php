@@ -1,3 +1,6 @@
 <?php
 
-expect()->extend('toBeTrue', function () {});
+declare(strict_types=1);
+
+expect()->extend('toBeTrue', function () {
+});

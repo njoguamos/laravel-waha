@@ -17,13 +17,6 @@ abstract class TestCase extends BaseTestCase
 
     protected function defineEnvironment($app): void
     {
-        $app['config']->set('database.default', 'testing');
-        $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ]);
-
         $app['config']->set('waha.base_url', 'https://waha.devlike.pro/api');
         $app['config']->set('waha.api_key', 'test-api-key');
         $app['config']->set('waha.session', 'default');
