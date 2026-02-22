@@ -37,6 +37,20 @@ export default defineConfig({
                     {text: 'About waha', link: '/introduction/about-waha'},
                 ]
             },
+            {
+                text: 'Contacts',
+                collapsed: true,
+                items: [
+                    {text: 'Check Exists', link: '/contacts/check-exists'},
+                ]
+            },
+            {
+                text: 'DTOs',
+                collapsed: true,
+                items: [
+                    {text: 'Contact Exists Data', link: '/reference/dto/contact-exists-data'},
+                ]
+            },
         ],
 
         socialLinks: [
