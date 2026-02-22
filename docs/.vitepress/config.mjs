@@ -17,7 +17,7 @@ export default defineConfig({
         // ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
         [
             'script',
-            { defer: '', 'data-domain': 'waha.njoguamos.me.ke', src: 'https://stats.njoguamos.com/js/script.js' }
+            { defer: '', 'data-domain': 'waha.njoguamos.me.ke', src: 'https://stats.njoguamos.me.ke/js/script.js' }
         ],
     ],
     themeConfig: {
