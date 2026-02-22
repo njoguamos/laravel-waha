@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace NjoguAmos\Waha\Tests;
 
-use PHPUnit\Framework\TestCase as BaseTestCase;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    /** @return array<int, class-string> */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
-            \NjoguAmos\Waha\WahaServiceProvider::class
+            \NjoguAmos\Waha\WahaServiceProvider::class,
         ];
     }
 
@@ -27,5 +26,6 @@ abstract class TestCase extends BaseTestCase
 
         $app['config']->set('waha.base_url', 'https://waha.devlike.pro/api');
         $app['config']->set('waha.api_key', 'test-api-key');
+        $app['config']->set('waha.session', 'default');
     }
 }
