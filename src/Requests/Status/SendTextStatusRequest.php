@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\Waha\Requests;
+namespace NjoguAmos\Waha\Requests\Status;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\TextStatusData;
-use NjoguAmos\Waha\Requests\SendTextStatusRequest;
+use NjoguAmos\Waha\Requests\Status\SendTextStatusRequest;
 
 test(description: 'it can send text status', closure: function () {
     MockClient::global(mockData: [
