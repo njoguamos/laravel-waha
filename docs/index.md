@@ -20,7 +20,7 @@ features:
 
   - icon: 🔧
     title: Configurable
-    details: Easily customize base URLs, API keys, and custom headers via environment variables.
+    details: Easily customize base URLs, API keys, sessions, and engines via environment variables.
 
   - icon: 📦
     title: Laravel Native
