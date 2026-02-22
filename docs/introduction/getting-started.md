@@ -23,10 +23,14 @@ composer require njoguamos/laravel-waha
 
 - `WAHA_API_KEY` – Your WAHA API key
 - `WAHA_BASE_URL` – Base API URL (default `https://waha.example.com`)
+- `WAHA_SESSION` – Default WhatsApp session name (default `default`)
+- `WAHA_ENGINE` – Engine type: `WEBJS`, `GOWS`, or `NOWEB` (default `GOWS`)
 
 ```dotenv
 WAHA_API_KEY=your-api-key
 WAHA_BASE_URL=https://waha.example.com
+WAHA_SESSION=default
+WAHA_ENGINE=GOWS
 ```
 
 ## Configuration
@@ -42,12 +46,28 @@ php artisan vendor:publish --tag=config --provider="NjoguAmos\Waha\WahaServicePr
 
   ```php
   return [
-      'base_url' => env('WAHA_BASE_URL', 'https://waha.example.com'),
+      'base_url' => env('WAHA_BASE_URL'),
 
-      'api_key' => env('WAHA_API_KEY', ''),
+      'api_key' => env('WAHA_API_KEY'),
+
+      'session' => env('WAHA_SESSION', 'default'),
+
+      'engine' => env('WAHA_ENGINE', 'GOWS'),
   ];
   ```
 </details>
+
+## Engines
+
+WAHA supports different engines with varying features:
+
+| Engine  | Description                                                          |
+|---------|----------------------------------------------------------------------|
+| WEBJS   | Connects via WhatsApp Web using Puppeteer to avoid detection         |
+| GOWS    | Connects directly via WebSocket without requiring a browser          |
+| NOWEB   | Connects directly via WebSocket, saving CPU and memory               |
+
+See [WAHA Engines](https://waha.devlike.pro/docs/how-to/engines/#engines) for more details.
 
 ## Usage
 
