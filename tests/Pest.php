@@ -14,7 +14,3 @@ uses(TestCase::class)
 uses()
     ->beforeEach(fn () => MockClient::destroyGlobal())
     ->in(__DIR__);
-
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
