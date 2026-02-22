@@ -13,11 +13,13 @@
     "require": {
         "php": "^8.4",
         "illuminate/support": "^12.0 || ^13.0",
-        "saloonphp/saloon": "^3.0"
+        "saloonphp/saloon": "^3.0",
+        "giggsey/libphonenumber-for-php-lite": "^9.0"
     },
     "require-dev": {
         "laravel/pint": "^1.25",
-        "pestphp/pest": "^3.8.4 || ^4.0.0"
+        "pestphp/pest": "^3.8.4 || ^4.0.0",
+        "orchestra/testbench": "^10.0 || ^11.0"
     },
     "autoload": {
         "psr-4": {
@@ -42,7 +44,8 @@
                 "NjoguAmos\\Waha\\WahaServiceProvider"
             ],
             "aliases": {
-                "Status": "NjoguAmos\\Waha\\Facades\\Status"
+                "Status": "NjoguAmos\\Waha\\Facades\\Status",
+                "Contacts": "NjoguAmos\\Waha\\Facades\\Contacts"
             }
         }
     },

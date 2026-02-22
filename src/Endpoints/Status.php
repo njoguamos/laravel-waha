@@ -6,7 +6,7 @@ namespace NjoguAmos\Waha\Endpoints;
 
 use NjoguAmos\Waha\Waha;
 use NjoguAmos\Waha\Dto\TextStatusData;
-use NjoguAmos\Waha\Requests\SendTextStatusRequest;
+use NjoguAmos\Waha\Requests\Status\SendTextStatusRequest;
 
 class Status extends Waha
 {
