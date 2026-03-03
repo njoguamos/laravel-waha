@@ -3169,16 +3169,16 @@
         },
         {
             "name": "saloonphp/saloon",
-            "version": "v3.14.2",
+            "version": "v3.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/saloonphp/saloon.git",
-                "reference": "634be16ca5eb0b71ab01533f58dc88d174a2e28b"
+                "reference": "8039c76132ca52d08c887407773a770c15ab04a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/saloonphp/saloon/zipball/634be16ca5eb0b71ab01533f58dc88d174a2e28b",
-                "reference": "634be16ca5eb0b71ab01533f58dc88d174a2e28b",
+                "url": "https://api.github.com/repos/saloonphp/saloon/zipball/8039c76132ca52d08c887407773a770c15ab04a0",
+                "reference": "8039c76132ca52d08c887407773a770c15ab04a0",
                 "shasum": ""
             },
             "require": {
@@ -3238,7 +3238,7 @@
             ],
             "support": {
                 "issues": "https://github.com/saloonphp/saloon/issues",
-                "source": "https://github.com/saloonphp/saloon/tree/v3.14.2"
+                "source": "https://github.com/saloonphp/saloon/tree/v3.15.0"
             },
             "funding": [
                 {
@@ -3246,7 +3246,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-20T21:42:32+00:00"
+            "time": "2026-03-02T22:04:13+00:00"
         },
         {
             "name": "symfony/clock",
