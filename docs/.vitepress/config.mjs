@@ -55,7 +55,6 @@ export default defineConfig({
                 text: 'DTOs',
                 collapsed: true,
                 items: [
-                    {text: 'Contact Exists Data', link: '/reference/dto/contact-exists-data'},
                     {text: 'Text Status Data', link: '/reference/dto/text-status-data'},
                 ]
             },

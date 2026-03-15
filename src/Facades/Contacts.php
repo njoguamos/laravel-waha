@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace NjoguAmos\Waha\Facades;
 
+use Saloon\Http\Response;
 use Illuminate\Support\Facades\Facade;
-use NjoguAmos\Waha\Dto\ContactExistsData;
 
 /**
- * @method static ContactExistsData checkExists(string $phone, ?string $session = null)
+ * @method static Response checkExists(string $phone, ?string $session = null)
  */
 class Contacts extends Facade
 {
