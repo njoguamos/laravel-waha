@@ -62,4 +62,18 @@ return [
 
     'engine' => env(key: 'WAHA_ENGINE', default: \NjoguAmos\Waha\Enums\Engine::GOWS->value),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Send Typing Status
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, the application will set online, typing, and paused
+    | statuses before sending a message. While this increases HTTP
+    | requests, it mimics natural human behavior and reduces the
+    | risk of being banned by WhatsApp for suspicious activity.
+    |
+    */
+
+    'send_typing_status' => env(key: 'WAHA_SEND_TYPING_STATUS', default: true),
+
 ];

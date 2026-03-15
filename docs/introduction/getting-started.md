@@ -25,12 +25,15 @@ composer require njoguamos/laravel-waha
 - `WAHA_BASE_URL` – Base API URL (default `https://waha.example.com`)
 - `WAHA_SESSION` – Default WhatsApp session name (default `default`)
 - `WAHA_ENGINE` – Engine type: `WEBJS`, `GOWS`, or `NOWEB` (default `GOWS`)
+- `WAHA_CHECK_NUMBER_EXISTS` – Check if number exists on WhatsApp before sending (default `true`)
+- `WAHA_SEND_TYPING_STATUS` – Send typing status before message to reduce ban risk (default `true`)
 
 ```dotenv
 WAHA_API_KEY=your-api-key
 WAHA_BASE_URL=https://waha.example.com
 WAHA_SESSION=default
 WAHA_ENGINE=GOWS
+WAHA_SEND_TYPING_STATUS=true
 ```
 
 ## Configuration
@@ -53,6 +56,8 @@ php artisan vendor:publish --tag=config --provider="NjoguAmos\Waha\WahaServicePr
       'session' => env('WAHA_SESSION', 'default'),
 
       'engine' => env('WAHA_ENGINE', 'GOWS'),
+
+      'send_typing_status' => env('WAHA_SEND_TYPING_STATUS', true),
   ];
   ```
 </details>
