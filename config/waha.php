@@ -54,13 +54,13 @@ return [
     |
     | Here you may specify the engine that powers your WAHA API instance. The
     | engine determines which features are available. Supported values are:
-    | WEBJS, NOWEB, or GOWS. Defaults to GOWS for optimal performance.
+    | WEBJS, NOWEB, or GOWS. Defaults to WEBJS for minimal blocking.
     |
     | @see https://waha.devlike.pro/docs/how-to/engines/#engines
     |
     */
 
-    'engine' => env(key: 'WAHA_ENGINE', default: \NjoguAmos\Waha\Enums\Engine::GOWS->value),
+    'engine' => env(key: 'WAHA_ENGINE', default: \NjoguAmos\Waha\Enums\Engine::WEBJS->value),
 
     /*
     |--------------------------------------------------------------------------
