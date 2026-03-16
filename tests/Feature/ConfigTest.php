@@ -6,6 +6,8 @@ use NjoguAmos\Waha\Enums\Engine;
 use NjoguAmos\Waha\Enums\Version;
 
 it(description: 'normalizes and validates WAHA_VERSION environment variable', closure: function () {
+    $originalVersion = getenv(name: 'WAHA_VERSION');
+
     // Helper function to reload config
     $refreshConfig = function () {
         $config = require __DIR__ . '/../../config/waha.php';
@@ -28,10 +30,16 @@ it(description: 'normalizes and validates WAHA_VERSION environment variable', cl
     expect(value: config(key: 'waha.version'))->toBe(expected: Version::PRO);
 
     // Cleanup
-    putenv(assignment: 'WAHA_VERSION');
+    if ($originalVersion === false) {
+        putenv(assignment: 'WAHA_VERSION');
+    } else {
+        putenv(assignment: "WAHA_VERSION={$originalVersion}");
+    }
 });
 
 it(description: 'normalizes and validates WAHA_ENGINE environment variable', closure: function () {
+    $originalEngine = getenv(name: 'WAHA_ENGINE');
+
     // Helper function to reload config
     $refreshConfig = function () {
         $config = require __DIR__ . '/../../config/waha.php';
@@ -54,5 +62,9 @@ it(description: 'normalizes and validates WAHA_ENGINE environment variable', clo
     expect(value: config(key: 'waha.engine'))->toBe(expected: Engine::WEBJS);
 
     // Cleanup
-    putenv(assignment: 'WAHA_ENGINE');
+    if ($originalEngine === false) {
+        putenv(assignment: 'WAHA_ENGINE');
+    } else {
+        putenv(assignment: "WAHA_ENGINE={$originalEngine}");
+    }
 });
