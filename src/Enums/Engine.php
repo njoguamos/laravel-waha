@@ -9,6 +9,8 @@ enum Engine: string
 {
     case WEBJS = 'WEBJS';
 
+    case WPP = 'WPP';
+
     case GOWS = 'GOWS';
 
     case NOWEB = 'NOWEB';
@@ -17,6 +19,7 @@ enum Engine: string
     {
         return match ($this) {
             self::WEBJS => 'WEBJS',
+            self::WPP   => 'WPP',
             self::GOWS  => 'GOWS',
             self::NOWEB => 'NOWEB',
         };
@@ -25,7 +28,7 @@ enum Engine: string
     public function description(): string
     {
         return match ($this) {
-            self::WEBJS => 'Connects via WhatsApp Web using Puppeteer to avoid detection.',
+            self::WEBJS,  self::WPP => 'Connects via WhatsApp Web using Puppeteer to avoid detection.',
             self::GOWS  => 'Connects directly via WebSocket without requiring a browser.',
             self::NOWEB => 'Connects directly via WebSocket, saving CPU and memory by not running Chromium.',
         };
