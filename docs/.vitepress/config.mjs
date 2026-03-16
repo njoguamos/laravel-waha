@@ -28,6 +28,7 @@ export default defineConfig({
         nav: [
             {text: 'Home', link: '/'},
             {text: 'Guide', link: '/introduction/getting-started'},
+            {text: 'Changelog', link: '/changelog'},
         ],
 
         sidebar: [
