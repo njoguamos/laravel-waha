@@ -49,6 +49,7 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                     {text: 'Send Text Status', link: '/status/send-text-status'},
+                    {text: 'Send Image Status', link: '/status/send-image-status'},
                 ]
             },
             {
@@ -56,6 +57,7 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                     {text: 'Text Status Data', link: '/reference/dto/text-status-data'},
+                    {text: 'Image Status Data', link: '/reference/dto/image-status-data'},
                 ]
             },
         ],

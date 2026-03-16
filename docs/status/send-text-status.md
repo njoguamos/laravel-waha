@@ -59,6 +59,12 @@ $result->json();   // ["text" => "Hello from WhatsApp!", ...]
 | `font`           | `int`          | Yes      | Font style (1-5)                                           |
 | `contacts`       | `array\|null`  | No       | Array of chat IDs to send status to                        |
 
+## Engines
+
+| WEBJS | WPP  | NOWEB | GOWS |
+|:-----:|:----:|:-----:|:----:|
+|   ✅   |  ✅   |   ✅   |  ✅   |
+
 ## Important Links
 
 - [WAHA API Documentation - Send Text Status](https://waha.devlike.pro/docs/how-to/status/#send-text-status)

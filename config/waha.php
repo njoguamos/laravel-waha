@@ -64,6 +64,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | WAHA Version
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the version of your WAHA API instance. The version
+    | determines which features are available. Supported values are: CORE
+    | or PRO. Defaults to PRO for all available waha features.
+    |
+    | @see https://waha.devlike.pro/docs/how-to/versions
+    |
+    */
+
+    'version' => env(key: 'WAHA_VERSION', default: \NjoguAmos\Waha\Enums\Version::PRO->value),
+
+    /*
+    |--------------------------------------------------------------------------
     | Send Typing Status
     |--------------------------------------------------------------------------
     |
