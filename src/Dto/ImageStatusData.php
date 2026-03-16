@@ -65,9 +65,15 @@ class ImageStatusData
         $data = base64_decode(mb_substr($file, 0, 128), true);
         if ($data !== false) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mimeType = finfo_buffer($finfo, $data);
-            finfo_close($finfo);
-            return $mimeType;
+
+            if ($finfo !== false) {
+                $mimeType = finfo_buffer($finfo, $data);
+                finfo_close($finfo);
+
+                if ($mimeType !== false) {
+                    return $mimeType;
+                }
+            }
         }
 
         return 'application/octet-stream';
