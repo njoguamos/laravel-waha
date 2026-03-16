@@ -27,11 +27,11 @@ $result = Contacts::checkExists(
 
 ## Result
 
-The response is an instance of `NjoguAmos\Waha\Dto\ContactExistsData`.
+The response is an instance of `Saloon\Http\Response`.
 
 ```php
-$result->numberExists; // true or false
-$result->chatId;       // "123123123@c.us" or null
+$result->json('numberExists'); // true or false
+$result->json('chatId');       // "123123123@c.us" or null
 ```
 
 ## Parameters
@@ -49,4 +49,3 @@ $result->chatId;       // "123123123@c.us" or null
 ## Important Links
 
 - [WAHA API Documentation - Check Phone Number Exists](https://waha.devlike.pro/docs/how-to/contacts/#check-phone-number-exists)
-- [ContactExistsData DTO Reference](../reference/dto/contact-exists-data)

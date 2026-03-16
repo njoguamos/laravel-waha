@@ -12,7 +12,7 @@ $data = new TextStatusData(
     font: 1
 );
 
-$result = Status::sendText(session: 'default', data: $data); // TextStatusData
+$result = Status::sendText(data: $data, session: 'default'); // \Saloon\Http\Response
 ```
 
 ## `text` → `string`
@@ -20,15 +20,15 @@ $result = Status::sendText(session: 'default', data: $data); // TextStatusData
 The status message text content.
 
 ```php
-$result->text; // "Hello from WhatsApp!"
+$data->text; // "Hello from WhatsApp!"
 ```
 
-## `backgroundColor` → `string`
+## `backgroundColor` → `string|null`
 
-Background color in hex format.
+Background color in hex format. If not provided, a random background color will be generated.
 
 ```php
-$result->backgroundColor; // "#38b42f"
+$data->backgroundColor; // "#38b42f"
 ```
 
 ## `font` → `int`
@@ -36,7 +36,7 @@ $result->backgroundColor; // "#38b42f"
 Font style identifier (1-5).
 
 ```php
-$result->font; // 1
+$data->font; // 1
 ```
 
 ## `contacts` → `array|null`
@@ -44,5 +44,5 @@ $result->font; // 1
 Array of chat IDs to send the status to. `null` if not specified.
 
 ```php
-$result->contacts; // ["123456789@c.us", "987654321@c.us"] or null
+$data->contacts; // ["123456789@c.us", "987654321@c.us"] or null
 ```

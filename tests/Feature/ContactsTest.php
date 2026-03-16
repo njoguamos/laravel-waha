@@ -5,10 +5,9 @@ declare(strict_types=1);
 use Saloon\Http\Faking\MockClient;
 use NjoguAmos\Waha\Facades\Contacts;
 use Saloon\Http\Faking\MockResponse;
-use NjoguAmos\Waha\Dto\ContactExistsData;
 use NjoguAmos\Waha\Requests\Contacts\CheckExistsRequest;
 
-describe(description: 'check exists', tests: function () {
+describe(description: 'check phone number exists', tests: function () {
     it(description: 'can check if phone number exists', closure: function () {
         MockClient::global(mockData: [
             CheckExistsRequest::class => MockResponse::make([
@@ -17,12 +16,12 @@ describe(description: 'check exists', tests: function () {
             ]),
         ]);
 
-        $result = Contacts::checkExists(phone: '11231231231', session: 'default');
+        $result = Contacts::checkExists(phone: '11231231231');
 
-        expect(value: $result)
-            ->toBeInstanceOf(class: ContactExistsData::class)
-            ->and(value: $result->numberExists)->toBeTrue()
-            ->and(value: $result->chatId)->toBe(expected: '123123123@c.us');
+        expect(value: $result->status())->toBe(expected: 200)
+            ->and(value: $result->json())->toBeArray()
+            ->and(value: $result->json(key: 'numberExists'))->toBeTrue()
+            ->and(value: $result->json(key: 'chatId'))->toBe(expected: '123123123@c.us');
     });
 
     it(description: 'can check if phone number does not exist', closure: function () {
@@ -33,12 +32,11 @@ describe(description: 'check exists', tests: function () {
             ]),
         ]);
 
-        $result = Contacts::checkExists(phone: '99999999999', session: 'default');
+        $result = Contacts::checkExists(phone: '99999999999');
 
-        expect(value: $result)
-            ->toBeInstanceOf(class: ContactExistsData::class)
-            ->and(value: $result->numberExists)->toBeFalse()
-            ->and(value: $result->chatId)->toBeNull();
+        expect(value: $result->status())->toBe(expected: 200)
+            ->and(value: $result->json(key: 'numberExists'))->toBeFalse()
+            ->and(value: $result->json(key: 'chatId'))->toBeNull();
     });
 
     it(description: 'can check if phone number exists with custom session', closure: function () {
@@ -51,10 +49,9 @@ describe(description: 'check exists', tests: function () {
 
         $result = Contacts::checkExists(phone: '55xxxxxxxxxxx', session: 'custom-session');
 
-        expect(value: $result)
-            ->toBeInstanceOf(class: ContactExistsData::class)
-            ->and(value: $result->numberExists)->toBeTrue()
-            ->and(value: $result->chatId)->toBe(expected: '55xxxxxxxxxxx@c.us');
+        expect(value: $result->status())->toBe(expected: 200)
+            ->and(value: $result->json(key: 'numberExists'))->toBeTrue()
+            ->and(value: $result->json(key: 'chatId'))->toBe(expected: '55xxxxxxxxxxx@c.us');
     });
 
     it(description: 'uses default session from config when session is null', closure: function () {
@@ -67,11 +64,10 @@ describe(description: 'check exists', tests: function () {
             ]),
         ]);
 
-        $result = Contacts::checkExists(phone: '11231231231', session: null);
+        $result = Contacts::checkExists(phone: '11231231231');
 
-        expect(value: $result)
-            ->toBeInstanceOf(class: ContactExistsData::class)
-            ->and(value: $result->numberExists)->toBeTrue();
+        expect(value: $result->status())->toBe(expected: 200)
+            ->and(value: $result->json(key: 'numberExists'))->toBeTrue();
 
         MockClient::global()->assertSent(function (CheckExistsRequest $request): bool {
             return $request->query()->get('session') === 'test-session';

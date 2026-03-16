@@ -8,26 +8,50 @@ use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\TextStatusData;
 use NjoguAmos\Waha\Requests\Status\SendTextStatusRequest;
 
-test(description: 'it can send text status', closure: function () {
-    MockClient::global(mockData: [
-        SendTextStatusRequest::class => MockResponse::make([
-            'text'            => 'Hello from WhatsApp.',
-            'backgroundColor' => '#38b42f',
-            'font'            => 1,
-        ]),
-    ]);
+describe(description: 'send text status', tests: function () {
+    it(description: 'can send text status', closure: function () {
+        MockClient::global(mockData: [
+            SendTextStatusRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
 
-    $data = new TextStatusData(
-        text: 'Hello from WhatsApp.',
-        backgroundColor: '#38b42f',
-        font: 1
-    );
+        $data = new TextStatusData(text: 'The only way to do great work is to love what you do.');
 
-    $result = Status::sendText(session: 'default', data: $data);
+        $result = Status::sendText(data: $data);
 
-    expect(value: $result)
-        ->toBeInstanceOf(class: TextStatusData::class)
-        ->and(value: $result->text)->toBe(expected: 'Hello from WhatsApp.')
-        ->and(value: $result->backgroundColor)->toBe(expected: '#38b42f')
-        ->and(value: $result->font)->toBe(expected: 1);
+        expect(value: $result->status())->toBe(expected: 201);
+    });
+
+    it(description: 'can send text status with explicit session', closure: function () {
+        MockClient::global(mockData: [
+            SendTextStatusRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new TextStatusData(text: 'The only way to do great work is to love what you do.');
+
+        $result = Status::sendText(data: $data, session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (SendTextStatusRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/custom-session/status/text';
+        });
+    });
+
+    it(description: 'uses default session from config when session is null', closure: function () {
+        config()->set(key: 'waha.session', value: 'test-session');
+
+        MockClient::global(mockData: [
+            SendTextStatusRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new TextStatusData(text: 'The only way to do great work is to love what you do.');
+
+        $result = Status::sendText(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (SendTextStatusRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/test-session/status/text';
+        });
+    });
 });
