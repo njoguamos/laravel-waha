@@ -41,8 +41,8 @@ class Status extends Waha
         $engine = config(key: 'waha.engine');
         $version = config(key: 'waha.version');
 
-        if ($engine === Engine::WPP->value && $version === Version::CORE->value) {
-            throw new RuntimeException(message: "Send Image Status is not supported on {$version} version using {$engine} engine.");
+        if ($engine === Engine::WPP && $version === Version::CORE) {
+            throw new RuntimeException(message: "Send Image Status is not supported on {$version->value} version using {$engine->value} engine.");
         }
 
         return $this->connector->send(

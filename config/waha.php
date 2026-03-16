@@ -60,7 +60,7 @@ return [
     |
     */
 
-    'engine' => env(key: 'WAHA_ENGINE', default: \NjoguAmos\Waha\Enums\Engine::WEBJS->value),
+    'engine' => \NjoguAmos\Waha\Enums\Engine::tryFrom(mb_strtoupper((string) env(key: 'WAHA_ENGINE'))) ?? \NjoguAmos\Waha\Enums\Engine::WEBJS,
 
     /*
     |--------------------------------------------------------------------------
@@ -75,7 +75,7 @@ return [
     |
     */
 
-    'version' => env(key: 'WAHA_VERSION', default: \NjoguAmos\Waha\Enums\Version::PRO->value),
+    'version' => \NjoguAmos\Waha\Enums\Version::tryFrom(mb_strtoupper((string) env(key: 'WAHA_VERSION'))) ?? \NjoguAmos\Waha\Enums\Version::PRO,
 
     /*
     |--------------------------------------------------------------------------

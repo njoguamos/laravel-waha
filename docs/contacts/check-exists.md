@@ -46,6 +46,12 @@ $result->json('chatId');       // "123123123@c.us" or null
 > [!NOTE]
 > For Brazilian phone numbers, always call this endpoint before sending messages to get the correct `chatId`, as numbers registered before 2012 require an additional 9th digit.
 
+## Engines
+
+| WEBJS | WPP  | NOWEB | GOWS |
+|:-----:|:----:|:-----:|:----:|
+|   ✅   |  ✅   |   ✅   |  ✅   |
+
 ## Important Links
 
 - [WAHA API Documentation - Check Phone Number Exists](https://waha.devlike.pro/docs/how-to/contacts/#check-phone-number-exists)

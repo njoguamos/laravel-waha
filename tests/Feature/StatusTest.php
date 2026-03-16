@@ -95,14 +95,14 @@ describe(description: 'send image status', tests: function () {
     });
 
     it(description: 'throws runtime exception when engine is WPP and version is CORE', closure: function () {
-        config()->set(key: 'waha.engine', value: Engine::WPP->value);
-        config()->set(key: 'waha.version', value: Version::CORE->value);
+        config()->set(key: 'waha.engine', value: Engine::WPP);
+        config()->set(key: 'waha.version', value: Version::CORE);
 
         $data = new ImageStatusData(
             file: 'https://github.com/devlikeapro/waha/raw/core/examples/dev.likeapro.jpg'
         );
 
         expect(fn () => Status::sendImage(data: $data))
-            ->toThrow(exception: RuntimeException::class, message: 'Send Image Status is not supported on core version using WPP engine');
+            ->toThrow(exception: RuntimeException::class, message: 'Send Image Status is not supported on core version using WPP engine.');
     });
 });

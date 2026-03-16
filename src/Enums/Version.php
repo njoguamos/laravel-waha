@@ -7,9 +7,9 @@ namespace NjoguAmos\Waha\Enums;
 /** @see https://waha.devlike.pro/support-us/ */
 enum Version: string
 {
-    case CORE = 'core';
+    case CORE = 'CORE';
 
-    case PRO = 'pro';
+    case PRO = 'PRO';
 
     public function label(): string
     {
