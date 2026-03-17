@@ -238,7 +238,6 @@ export default defineConfig({
                         text: 'Events',
                         collapsed: true,
                         items: [
-                            {text: 'Overview ⚠️', link: '/channels/events/overview'},
                         ]
                     },
                 ]
