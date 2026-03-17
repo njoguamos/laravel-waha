@@ -96,7 +96,32 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Contacts',
+                text: '📥 Receive Messages',
+                collapsed: true,
+                items: [
+                    {text: 'Message ⚠️', link: '/receive-messages/message'},
+                    {text: 'Message Any ⚠️', link: '/receive-messages/message-any'},
+                    {text: 'Message Ack ⚠️', link: '/receive-messages/message-ack'},
+                    {text: 'Message Revoked ⚠️', link: '/receive-messages/message-revoked'},
+                    {text: 'Message Reaction ⚠️', link: '/receive-messages/message-reaction'},
+                    {text: 'Message Waiting ⚠️', link: '/receive-messages/message-waiting'},
+                    {text: 'Media ⚠️', link: '/receive-messages/media'},
+                    {text: 'Polls ⚠️', link: '/receive-messages/polls'},
+                ]
+            },
+            {
+                text: '🆔 Profile',
+                collapsed: true,
+                items: [
+                    {text: 'Get Profile ⚠️', link: '/profile/get-profile'},
+                    {text: 'Set Profile Name ⚠️', link: '/profile/set-profile-name'},
+                    {text: 'Set Profile Status ⚠️', link: '/profile/set-profile-status'},
+                    {text: 'Set Profile Picture ⚠️', link: '/profile/set-profile-picture'},
+                    {text: 'Delete Profile Picture ⚠️', link: '/profile/delete-profile-picture'},
+                ]
+            },
+            {
+                text: '👤 Contacts',
                 collapsed: true,
                 items:[
                     {
