@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\Waha\Requests\Contacts;
+namespace NjoguAmos\Waha\Requests\Contact;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -19,7 +19,7 @@ class CheckExistsRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return '/api/contacts/check-exists';
+        return '/api/contact/check-exists';
     }
 
     protected function defaultQuery(): array

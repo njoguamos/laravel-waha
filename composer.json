@@ -45,7 +45,7 @@
             ],
             "aliases": {
                 "Status": "NjoguAmos\\Waha\\Facades\\Status",
-                "Contacts": "NjoguAmos\\Waha\\Facades\\Contacts"
+                "Contact": "NjoguAmos\\Waha\\Facades\\Contact"
             }
         }
     },

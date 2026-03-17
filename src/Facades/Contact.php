@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static Response checkExists(string $phone, ?string $session = null)
  */
-class Contacts extends Facade
+class Contact extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \NjoguAmos\Waha\Endpoints\Contacts::class;
+        return \NjoguAmos\Waha\Endpoints\Contact::class;
     }
 }

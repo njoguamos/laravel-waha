@@ -55,7 +55,7 @@ php artisan vendor:publish --tag=config --provider="NjoguAmos\Waha\WahaServicePr
 
       'session' => env('WAHA_SESSION', 'default'),
 
-      'engine' => env('WAHA_ENGINE', 'GOWS'),
+      'engine' => env('WAHA_ENGINE', 'WEBJS'),
   ];
   ```
 </details>

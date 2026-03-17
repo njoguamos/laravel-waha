@@ -8,9 +8,9 @@ use NjoguAmos\Waha\Waha;
 use Saloon\Http\Response;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Exceptions\Request\FatalRequestException;
-use NjoguAmos\Waha\Requests\Contacts\CheckExistsRequest;
+use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 
-class Contacts extends Waha
+class Contact extends Waha
 {
     /**
      * @throws FatalRequestException
