@@ -237,6 +237,49 @@ export default defineConfig({
                 ]
             },
             {
+                text: '👥 Groups',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'List Groups ⚠️', link: '/groups/api/list-groups'},
+                            {text: 'Create Group ⚠️', link: '/groups/api/create-group'},
+                            {text: 'Get Group ⚠️', link: '/groups/api/get-group'},
+                            {text: 'Delete Group ⚠️', link: '/groups/api/delete-group'},
+                            {text: 'Leave Group ⚠️', link: '/groups/api/leave-group'},
+                            {text: 'Get Group Picture ⚠️', link: '/groups/api/get-group-picture'},
+                            {text: 'Update Group Picture ⚠️', link: '/groups/api/update-group-picture'},
+                            {text: 'Delete Group Picture ⚠️', link: '/groups/api/delete-group-picture'},
+                            {text: 'Update Group Description ⚠️', link: '/groups/api/update-group-description'},
+                            {text: 'Update Group Subject ⚠️', link: '/groups/api/update-group-subject'},
+                            {text: 'Get Invite Code ⚠️', link: '/groups/api/get-invite-code'},
+                            {text: 'Revoke Invite Code ⚠️', link: '/groups/api/revoke-invite-code'},
+                            {text: 'Get Group Settings ⚠️', link: '/groups/api/get-group-settings'},
+                            {text: 'Update Group Settings ⚠️', link: '/groups/api/update-group-settings'},
+                            {text: 'Get Participants ⚠️', link: '/groups/api/get-participants'},
+                            {text: 'Add Participant ⚠️', link: '/groups/api/add-participant'},
+                            {text: 'Remove Participant ⚠️', link: '/groups/api/remove-participant'},
+                            {text: 'Promote Participant ⚠️', link: '/groups/api/promote-participant'},
+                            {text: 'Demote Participant ⚠️', link: '/groups/api/demote-participant'},
+                            {text: 'Join Group ⚠️', link: '/groups/api/join-group'},
+                            {text: 'Get Join Info ⚠️', link: '/groups/api/get-join-info'},
+                            {text: 'Count Groups ⚠️', link: '/groups/api/count-groups'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Group Upsert ⚠️', link: '/groups/events/group-upsert'},
+                            {text: 'Group Update ⚠️', link: '/groups/events/group-update'},
+                            {text: 'Group Participants Update ⚠️', link: '/groups/events/group-participants-update'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: '🟢 Status',
                 collapsed: true,
                 items: [
