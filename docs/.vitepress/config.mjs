@@ -237,6 +237,52 @@ export default defineConfig({
                 ]
             },
             {
+                text: '👥 Groups',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Create Group ⚠️', link: '/groups/api/create-group'},
+                            {text: 'List Groups ⚠️', link: '/groups/api/list-groups'},
+                            {text: 'Count Groups ⚠️', link: '/groups/api/count-groups'},
+                            {text: 'Get Join Info ⚠️', link: '/groups/api/get-join-info'},
+                            {text: 'Join Group ⚠️', link: '/groups/api/join-group'},
+                            {text: 'Get Group ⚠️', link: '/groups/api/get-group'},
+                            {text: 'Delete Group ⚠️', link: '/groups/api/delete-group'},
+                            {text: 'Leave Group ⚠️', link: '/groups/api/leave-group'},
+                            {text: 'Get Group Picture ⚠️', link: '/groups/api/get-group-picture'},
+                            {text: 'Update Group Picture ⚠️', link: '/groups/api/update-group-picture'},
+                            {text: 'Delete Group Picture ⚠️', link: '/groups/api/delete-group-picture'},
+                            {text: 'Update Group Description ⚠️', link: '/groups/api/update-group-description'},
+                            {text: 'Update Group Subject ⚠️', link: '/groups/api/update-group-subject'},
+                            {text: 'Get Invite Code ⚠️', link: '/groups/api/get-invite-code'},
+                            {text: 'Revoke Invite Code ⚠️', link: '/groups/api/revoke-invite-code'},
+                            {text: 'Get Info Admin Only ⚠️', link: '/groups/api/get-security-info-admin-only'},
+                            {text: 'Set Info Admin Only ⚠️', link: '/groups/api/set-security-info-admin-only'},
+                            {text: 'Get Messages Admin Only ⚠️', link: '/groups/api/get-security-messages-admin-only'},
+                            {text: 'Set Messages Admin Only ⚠️', link: '/groups/api/set-security-messages-admin-only'},
+                            {text: 'Get Participants ⚠️', link: '/groups/api/get-participants'},
+                            {text: 'Add Participant ⚠️', link: '/groups/api/add-participant'},
+                            {text: 'Remove Participant ⚠️', link: '/groups/api/remove-participant'},
+                            {text: 'Promote Participant ⚠️', link: '/groups/api/promote-participant'},
+                            {text: 'Demote Participant ⚠️', link: '/groups/api/demote-participant'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Group Join (v2) ⚠️', link: '/groups/events/group-v2-join'},
+                            {text: 'Group Leave (v2) ⚠️', link: '/groups/events/group-v2-leave'},
+                            {text: 'Group Participants (v2) ⚠️', link: '/groups/events/group-v2-participants'},
+                            {text: 'Group Update (v2) ⚠️', link: '/groups/events/group-v2-update'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: '🟢 Status',
                 collapsed: true,
                 items: [
