@@ -35,7 +35,8 @@ export default defineConfig({
             {
                 text: 'Introduction',
                 items: [
-                    {text: 'About waha', link: '/introduction/about-waha'},
+                    {text: 'About WAHA', link: '/introduction/about'},
+                    {text: 'Getting Started', link: '/introduction/getting-started'},
                     {text: 'Changelog', link: '/introduction/changelog'},
                 ]
             },
