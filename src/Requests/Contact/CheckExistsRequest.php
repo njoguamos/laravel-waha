@@ -19,7 +19,7 @@ class CheckExistsRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return '/api/contact/check-exists';
+        return '/api/contacts/check-exists';
     }
 
     protected function defaultQuery(): array
