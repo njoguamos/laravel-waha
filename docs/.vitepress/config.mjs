@@ -313,6 +313,35 @@ export default defineConfig({
                 ]
             },
             {
+                text: '🏷️ Labels',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Get All Labels ⚠️', link: '/labels/api/get-all-labels'},
+                            {text: 'Create Label ⚠️', link: '/labels/api/create-label'},
+                            {text: 'Update Label ⚠️', link: '/labels/api/update-label'},
+                            {text: 'Delete Label ⚠️', link: '/labels/api/delete-label'},
+                            {text: 'Get Chats by Label ⚠️', link: '/labels/api/get-chats-by-label'},
+                            {text: 'Get Labels by Chat ⚠️', link: '/labels/api/get-labels-by-chat'},
+                            {text: 'Put Labels to Chat ⚠️', link: '/labels/api/put-labels-to-chat'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Label Upsert ⚠️', link: '/labels/events/label-upsert'},
+                            {text: 'Label Deleted ⚠️', link: '/labels/events/label-deleted'},
+                            {text: 'Label Chat Added ⚠️', link: '/labels/events/label-chat-added'},
+                            {text: 'Label Chat Deleted ⚠️', link: '/labels/events/label-chat-deleted'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: 'DTOs',
                 collapsed: true,
                 items: [
