@@ -122,6 +122,28 @@ export default defineConfig({
                 ]
             },
             {
+                text: '📊 Polls',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Send Poll ⚠️', link: '/polls/api/send-poll'},
+                            {text: 'Send Poll Vote ⚠️', link: '/polls/api/send-poll-vote'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Poll Vote ⚠️', link: '/polls/events/poll-vote'},
+                            {text: 'Poll Vote Failed ⚠️', link: '/polls/events/poll-vote-failed'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: '👤 Contacts',
                 collapsed: true,
                 items:[
