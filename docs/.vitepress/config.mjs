@@ -121,7 +121,7 @@ export default defineConfig({
                             {text: 'All Contacts ⚠️', link: '/contacts/c.us/all-contacts'},
                             {text: 'Get Contact ⚠️', link: '/contacts/c.us/get-contact'},
                             {text: 'Update Contact ⚠️', link: '/contacts/c.us/update-contact'},
-                            {text: 'Check Exists ✅', link: '/contacts/c.us/check-exists'},
+                            {text: 'Check Exists', link: '/contacts/c.us/check-exists'},
                             {text: 'Get About ⚠️', link: '/contacts/c.us/get-about'},
                             {text: 'Profile Picture ⚠️', link: '/contacts/c.us/profile-picture'},
                             {text: 'Block Contact ⚠️', link: '/contacts/c.us/block-contact'},
