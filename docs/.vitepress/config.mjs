@@ -40,6 +40,43 @@ export default defineConfig({
                 ]
             },
             {
+                text: 'Sessions',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'List Sessions ⚠️', link: '/sessions/api/list-sessions'},
+                            {text: 'Get Session ⚠️', link: '/sessions/api/get-session'},
+                            {text: 'Create Session ⚠️', link: '/sessions/api/create-session'},
+                            {text: 'Update Session ⚠️', link: '/sessions/api/update-session'},
+                            {text: 'Delete Session ⚠️', link: '/sessions/api/delete-session'},
+                            {text: 'Start Session ⚠️', link: '/sessions/api/start-session'},
+                            {text: 'Stop Session ⚠️', link: '/sessions/api/stop-session'},
+                            {text: 'Restart Session ⚠️', link: '/sessions/api/restart-session'},
+                            {text: 'Logout Session ⚠️', link: '/sessions/api/logout-session'},
+                            {text: 'Get Screenshot ⚠️', link: '/sessions/api/get-screenshot'},
+                            {text: 'Get Me ⚠️', link: '/sessions/api/get-me'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Session Status ⚠️', link: '/sessions/events/session-status'},
+                            {text: 'Message ⚠️', link: '/sessions/events/message'},
+                            {text: 'Message Any ⚠️', link: '/sessions/events/message-any'},
+                            {text: 'Message Ack ⚠️', link: '/sessions/events/message-ack'},
+                            {text: 'Message Revoked ⚠️', link: '/sessions/events/message-revoked'},
+                            {text: 'Message Reaction ⚠️', link: '/sessions/events/message-reaction'},
+                            {text: 'QR Code ⚠️', link: '/sessions/events/qr'},
+                            {text: 'Engine Event ⚠️', link: '/sessions/events/engine-event'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: 'Contacts',
                 collapsed: true,
                 items:[
@@ -69,7 +106,6 @@ export default defineConfig({
                     },
                 ]
             },
-
             {
                 text: 'Status',
                 collapsed: true,
