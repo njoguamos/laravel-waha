@@ -363,6 +363,27 @@ export default defineConfig({
                 ]
             },
             {
+                text: '📞 Calls',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Configure Calls ⚠️', link: '/calls/api/configure-calls'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Call Accepted ⚠️', link: '/calls/events/call-accepted'},
+                            {text: 'Call Rejected ⚠️', link: '/calls/events/call-rejected'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: 'DTOs',
                 collapsed: true,
                 items: [
