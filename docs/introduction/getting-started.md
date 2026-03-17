@@ -1,6 +1,6 @@
 # Getting Started
 
-**Laravel WAHA** is an opinionated Laravel package for interacting with the [WAHA API](https://waha.devlike.pro).
+**Laravel WAHA** is an elegant [Saloon PHP](https://docs.saloon.dev/) package for interacting with the [WAHA API](https://waha.devlike.pro).
 
 ## Requirements
 
@@ -19,22 +19,23 @@ You can install the package via Composer:
 composer require njoguamos/laravel-waha
 ```
 
-## Environment variables
+## Environment Variables
 
-- `WAHA_API_KEY` – Your WAHA API key
-- `WAHA_BASE_URL` – Base API URL (default `https://waha.example.com`)
-- `WAHA_SESSION` – Default WhatsApp session name (default `default`)
-- `WAHA_ENGINE` – Engine type: `WEBJS`, `GOWS`, or `NOWEB` (default `GOWS`)
-- `WAHA_CHECK_NUMBER_EXISTS` – Check if number exists on WhatsApp before sending (default `true`)
-- `WAHA_SEND_TYPING_STATUS` – Send typing status before message to reduce ban risk (default `true`)
+The package uses the following environment variables. You can add them to your `.env` file:
 
 ```dotenv
 WAHA_API_KEY=your-api-key
 WAHA_BASE_URL=https://waha.example.com
-WAHA_SESSION=default
-WAHA_ENGINE=GOWS
-WAHA_SEND_TYPING_STATUS=true
 ```
+
+| Variable                   | Description                                                      | Default                      |
+|----------------------------|------------------------------------------------------------------|------------------------------|
+| `WAHA_API_KEY`             | Your WAHA API key                                                | -                            |
+| `WAHA_BASE_URL`            | Base API URL                                                     | `https://waha.example.com`   |
+| `WAHA_SESSION`             | Default WhatsApp session name                                    | `default`                    |
+| `WAHA_ENGINE`              | Engine type: `WEBJS`, `GOWS`, or `NOWEB`                         | `GOWS`                       |
+| `WAHA_CHECK_NUMBER_EXISTS` | Check if number exists on WhatsApp before sending                | `true`                       |
+| `WAHA_SEND_TYPING_STATUS`  | Send typing status before message to reduce ban risk             | `true`                       |
 
 ## Configuration
 
@@ -57,6 +58,8 @@ php artisan vendor:publish --tag=config --provider="NjoguAmos\Waha\WahaServicePr
 
       'engine' => env('WAHA_ENGINE', 'GOWS'),
 
+      'check_number_exists' => env('WAHA_CHECK_NUMBER_EXISTS', true),
+
       'send_typing_status' => env('WAHA_SEND_TYPING_STATUS', true),
   ];
   ```
@@ -75,6 +78,8 @@ WAHA supports different engines with varying features:
 See [WAHA Engines](https://waha.devlike.pro/docs/how-to/engines/#engines) for more details.
 
 ## Usage
+
+Here is a quick example of how to send a text status message using the `Status` facade.
 
 ```php
 use NjoguAmos\Waha\Facades\Status;
