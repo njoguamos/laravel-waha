@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Renamed `Contacts` facade and endpoint to `Contact` (singular) for consistency.
 - Updated default `WAHA_ENGINE` from `GOWS` to `WEBJS`.
+
 ## [0.1.0-beta.1] - 2026-03-16
 
 ### Added
