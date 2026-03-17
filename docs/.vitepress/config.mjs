@@ -234,12 +234,6 @@ export default defineConfig({
                             {text: 'Categories for Search ⚠️', link: '/channels/api/search/get-categories'},
                         ]
                     },
-                    {
-                        text: 'Events',
-                        collapsed: true,
-                        items: [
-                        ]
-                    },
                 ]
             },
             {
