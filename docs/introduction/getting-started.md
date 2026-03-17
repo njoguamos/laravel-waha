@@ -28,14 +28,13 @@ WAHA_API_KEY=your-api-key
 WAHA_BASE_URL=https://waha.example.com
 ```
 
-| Variable                   | Description                                                      | Default                      |
-|----------------------------|------------------------------------------------------------------|------------------------------|
-| `WAHA_API_KEY`             | Your WAHA API key                                                | -                            |
-| `WAHA_BASE_URL`            | Base API URL                                                     | `https://waha.example.com`   |
-| `WAHA_SESSION`             | Default WhatsApp session name                                    | `default`                    |
-| `WAHA_ENGINE`              | Engine type: `WEBJS`, `GOWS`, or `NOWEB`                         | `GOWS`                       |
-| `WAHA_CHECK_NUMBER_EXISTS` | Check if number exists on WhatsApp before sending                | `true`                       |
-| `WAHA_SEND_TYPING_STATUS`  | Send typing status before message to reduce ban risk             | `true`                       |
+| Variable                  | Description                                          | Default                    |
+|---------------------------|------------------------------------------------------|----------------------------|
+| `WAHA_API_KEY`            | Your WAHA API key                                    | -                          |
+| `WAHA_BASE_URL`           | Base API URL                                         | `https://waha.example.com` |
+| `WAHA_SESSION`            | Default WhatsApp session name                        | `default`                  |
+| `WAHA_ENGINE`             | Engine type: `WEBJS`,`WPP`, `GOWS`, or `NOWEB`       | `WEBJS`                    |
+| `WAHA_SEND_TYPING_STATUS` | Send typing status before message to reduce ban risk | `true`                     |
 
 ## Configuration
 
@@ -57,10 +56,6 @@ php artisan vendor:publish --tag=config --provider="NjoguAmos\Waha\WahaServicePr
       'session' => env('WAHA_SESSION', 'default'),
 
       'engine' => env('WAHA_ENGINE', 'GOWS'),
-
-      'check_number_exists' => env('WAHA_CHECK_NUMBER_EXISTS', true),
-
-      'send_typing_status' => env('WAHA_SEND_TYPING_STATUS', true),
   ];
   ```
 </details>

@@ -53,7 +53,7 @@ export default defineConfig({
                             {text: 'Create Session ⚠️', link: '/sessions/api/create-session'},
                             {text: 'Update Session ⚠️', link: '/sessions/api/update-session'},
                             {text: 'Delete Session ⚠️', link: '/sessions/api/delete-session'},
-                            {text: 'Start Session ⚠️', link: '/sessions/api/start-session'},
+                            {text: 'Start Session', link: '/sessions/api/start-session'},
                             {text: 'Stop Session ⚠️', link: '/sessions/api/stop-session'},
                             {text: 'Restart Session ⚠️', link: '/sessions/api/restart-session'},
                             {text: 'Logout Session ⚠️', link: '/sessions/api/logout-session'},
