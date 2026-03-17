@@ -384,6 +384,27 @@ export default defineConfig({
                 ]
             },
             {
+                text: '🔭 Observability',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Ping ⚠️', link: '/observability/api/ping'},
+                            {text: 'Get Server Version ⚠️', link: '/observability/api/get-server-version'},
+                            {text: 'Get Server Environment ⚠️', link: '/observability/api/get-server-environment'},
+                            {text: 'Get Server Status ⚠️', link: '/observability/api/get-server-status'},
+                            {text: 'Restart Server ⚠️', link: '/observability/api/restart-server'},
+                            {text: 'Health Check ⚠️', link: '/observability/api/health-check'},
+                            {text: 'Node Heapsnapshot ⚠️', link: '/observability/api/debug-heapsnapshot'},
+                            {text: 'Node CPU Profiling ⚠️', link: '/observability/api/debug-cpu-profiling'},
+                            {text: 'Browser Trace ⚠️', link: '/observability/api/debug-browser-trace'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: 'DTOs',
                 collapsed: true,
                 items: [
