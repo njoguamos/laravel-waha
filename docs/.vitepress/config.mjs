@@ -111,6 +111,17 @@ export default defineConfig({
                 ]
             },
             {
+                text: '🆔 Profile',
+                collapsed: true,
+                items: [
+                    {text: 'Get Profile ⚠️', link: '/profile/get-profile'},
+                    {text: 'Set Profile Name ⚠️', link: '/profile/set-profile-name'},
+                    {text: 'Set Profile Status ⚠️', link: '/profile/set-profile-status'},
+                    {text: 'Set Profile Picture ⚠️', link: '/profile/set-profile-picture'},
+                    {text: 'Delete Profile Picture ⚠️', link: '/profile/delete-profile-picture'},
+                ]
+            },
+            {
                 text: '👤 Contacts',
                 collapsed: true,
                 items:[
