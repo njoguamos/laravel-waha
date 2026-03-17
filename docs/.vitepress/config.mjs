@@ -144,6 +144,40 @@ export default defineConfig({
                 ]
             },
             {
+                text: '💬 Chats',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Get All Chats ⚠️', link: '/chats/api/get-all-chats'},
+                            {text: 'Get Chats Overview ⚠️', link: '/chats/api/get-chats-overview'},
+                            {text: 'Get Chat Picture ⚠️', link: '/chats/api/get-chat-picture'},
+                            {text: 'Mark Chat Unread ⚠️', link: '/chats/api/mark-chat-unread'},
+                            {text: 'Archive Chat ⚠️', link: '/chats/api/archive-chat'},
+                            {text: 'Unarchive Chat ⚠️', link: '/chats/api/unarchive-chat'},
+                            {text: 'Delete Chat ⚠️', link: '/chats/api/delete-chat'},
+                            {text: 'Read Messages ⚠️', link: '/chats/api/read-messages'},
+                            {text: 'Get Messages ⚠️', link: '/chats/api/get-messages'},
+                            {text: 'Get Message By ID ⚠️', link: '/chats/api/get-message-by-id'},
+                            {text: 'Pin Message ⚠️', link: '/chats/api/pin-message'},
+                            {text: 'Unpin Message ⚠️', link: '/chats/api/unpin-message'},
+                            {text: 'Edit Message ⚠️', link: '/chats/api/edit-message'},
+                            {text: 'Delete Message ⚠️', link: '/chats/api/delete-message'},
+                            {text: 'Delete All Messages ⚠️', link: '/chats/api/delete-all-messages'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Chat Archive ⚠️', link: '/chats/events/chat-archive'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: '👤 Contacts',
                 collapsed: true,
                 items:[
