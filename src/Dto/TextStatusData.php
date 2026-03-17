@@ -10,7 +10,7 @@ class TextStatusData
         public string $text,
         public ?string $backgroundColor = null,
         public int $font = 1,
-        public ?array $contacts = null,
+        public ?array $contact = null,
     ) {
         $this->backgroundColor ??= $this->getRandomBackgroundColor();
     }
@@ -23,8 +23,8 @@ class TextStatusData
             'font'            => $this->font,
         ];
 
-        if ($this->contacts !== null) {
-            $array['contacts'] = $this->contacts;
+        if ($this->contact !== null) {
+            $array['contacts'] = $this->contact;
         }
 
         return $array;

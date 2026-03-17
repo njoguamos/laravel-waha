@@ -7,9 +7,11 @@ namespace NjoguAmos\Waha\Facades;
 use Saloon\Http\Response;
 use Illuminate\Support\Facades\Facade;
 use NjoguAmos\Waha\Dto\TextStatusData;
+use NjoguAmos\Waha\Dto\ImageStatusData;
 
 /**
  * @method static Response sendText(TextStatusData $data, ?string $session = null)
+ * @method static Response sendImage(ImageStatusData $data, ?string $session = null)
  */
 class Status extends Facade
 {

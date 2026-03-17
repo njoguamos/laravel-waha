@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Saloon\Http\Faking\MockClient;
-use NjoguAmos\Waha\Facades\Contacts;
+use NjoguAmos\Waha\Facades\Contact;
 use Saloon\Http\Faking\MockResponse;
-use NjoguAmos\Waha\Requests\Contacts\CheckExistsRequest;
+use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 
 describe(description: 'check phone number exists', tests: function () {
     it(description: 'can check if phone number exists', closure: function () {
@@ -16,7 +16,7 @@ describe(description: 'check phone number exists', tests: function () {
             ]),
         ]);
 
-        $result = Contacts::checkExists(phone: '11231231231');
+        $result = Contact::checkExists(phone: '11231231231');
 
         expect(value: $result->status())->toBe(expected: 200)
             ->and(value: $result->json())->toBeArray()
@@ -32,7 +32,7 @@ describe(description: 'check phone number exists', tests: function () {
             ]),
         ]);
 
-        $result = Contacts::checkExists(phone: '99999999999');
+        $result = Contact::checkExists(phone: '99999999999');
 
         expect(value: $result->status())->toBe(expected: 200)
             ->and(value: $result->json(key: 'numberExists'))->toBeFalse()
@@ -47,7 +47,7 @@ describe(description: 'check phone number exists', tests: function () {
             ]),
         ]);
 
-        $result = Contacts::checkExists(phone: '55xxxxxxxxxxx', session: 'custom-session');
+        $result = Contact::checkExists(phone: '55xxxxxxxxxxx', session: 'custom-session');
 
         expect(value: $result->status())->toBe(expected: 200)
             ->and(value: $result->json(key: 'numberExists'))->toBeTrue()
@@ -64,7 +64,7 @@ describe(description: 'check phone number exists', tests: function () {
             ]),
         ]);
 
-        $result = Contacts::checkExists(phone: '11231231231');
+        $result = Contact::checkExists(phone: '11231231231');
 
         expect(value: $result->status())->toBe(expected: 200)
             ->and(value: $result->json(key: 'numberExists'))->toBeTrue();
