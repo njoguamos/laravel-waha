@@ -1,6 +1,6 @@
 # Count Groups
 
-Get count of groups.
+Get total number of groups.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

@@ -1,6 +1,6 @@
-# Get Group Settings
+# Group Participants (v2)
 
-Get group security settings.
+Sent when group participants are updated.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

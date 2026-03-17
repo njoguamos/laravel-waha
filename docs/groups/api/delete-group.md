@@ -1,6 +1,6 @@
 # Delete Group
 
-Delete a group (for admin only).
+Delete a group (remove all participants and leave).
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
@@ -10,7 +10,7 @@ This feature is not implemented yet, please submit a [PR](https://github.com/njo
 
 | WEBJS | WPP | NOWEB | GOWS |
 |:-----:|:----:|:-----:|:----:|
-|   ✅   |  ✅   |   ✅   |  ✅   |
+|   ✅   |  ✅   |   ❌   |  ❌   |
 
 ## References
 

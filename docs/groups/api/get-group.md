@@ -1,6 +1,6 @@
 # Get Group
 
-Get group information.
+Get group metadata by ID.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

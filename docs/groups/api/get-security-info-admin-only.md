@@ -1,6 +1,6 @@
-# Remove Participant
+# Get Info Admin Only
 
-Remove a participant from a group.
+Check if only admins can update group info.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

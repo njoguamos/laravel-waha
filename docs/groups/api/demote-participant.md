@@ -1,6 +1,6 @@
 # Demote Participant
 
-Demote participant from admin.
+Demote an admin to participant.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

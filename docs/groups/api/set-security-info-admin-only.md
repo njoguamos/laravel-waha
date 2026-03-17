@@ -1,6 +1,6 @@
-# Update Group Settings
+# Set Info Admin Only
 
-Update group security settings.
+Set if only admins can update group info.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

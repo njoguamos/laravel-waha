@@ -1,6 +1,6 @@
 # Join Group
 
-Join a group by invite code.
+Join a group via invite code.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

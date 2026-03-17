@@ -1,6 +1,6 @@
 # Add Participant
 
-Add participant to group.
+Add a participant to a group.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

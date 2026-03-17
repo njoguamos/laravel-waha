@@ -1,6 +1,6 @@
 # Get Join Info
 
-Get group information by invite code.
+Get group join information.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

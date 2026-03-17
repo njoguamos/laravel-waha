@@ -1,6 +1,6 @@
 # Promote Participant
 
-Promote participant to admin.
+Promote a participant to admin.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

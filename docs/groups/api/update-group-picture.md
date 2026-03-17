@@ -10,7 +10,7 @@ This feature is not implemented yet, please submit a [PR](https://github.com/njo
 
 | WEBJS | WPP | NOWEB | GOWS |
 |:-----:|:----:|:-----:|:----:|
-|   ✅   |  ✅   |   ✅   |  ✅   |
+|   ➕   |  ✅   |   ➕   |  ➕   |
 
 ## References
 

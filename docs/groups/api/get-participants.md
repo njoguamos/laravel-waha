@@ -1,6 +1,6 @@
 # Get Participants
 
-Get group participants list.
+List all participants in a group.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

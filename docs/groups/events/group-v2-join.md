@@ -1,6 +1,6 @@
-# Group Participants Update
+# Group Join (v2)
 
-Sent when a group participants are updated (add, remove, promote, demote).
+Sent when a user joins a group.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
@@ -14,4 +14,4 @@ This feature is not implemented yet, please submit a [PR](https://github.com/njo
 
 ## References
 
-- [WAHA Events Documentation](https://waha.devlike.pro/docs/how-to/events/)
+- [WAHA Groups Documentation](https://waha.devlike.pro/docs/how-to/groups/)

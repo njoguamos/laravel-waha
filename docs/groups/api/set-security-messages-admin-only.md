@@ -1,6 +1,6 @@
-# Remove Participant
+# Set Messages Admin Only
 
-Remove a participant from a group.
+Set if only admins can send messages.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).

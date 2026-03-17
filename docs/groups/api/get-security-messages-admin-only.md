@@ -1,6 +1,6 @@
-# Group Upsert
+# Get Messages Admin Only
 
-Sent when a group is created or the current user is added to a group.
+Check if only admins can send messages.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
@@ -14,4 +14,4 @@ This feature is not implemented yet, please submit a [PR](https://github.com/njo
 
 ## References
 
-- [WAHA Events Documentation](https://waha.devlike.pro/docs/how-to/events/)
+- [WAHA Groups Documentation](https://waha.devlike.pro/docs/how-to/groups/)

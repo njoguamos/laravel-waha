@@ -1,6 +1,6 @@
-# Remove Participant
+# Group Update (v2)
 
-Remove a participant from a group.
+Sent when group settings or metadata are updated.
 
 ::: danger
 This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
