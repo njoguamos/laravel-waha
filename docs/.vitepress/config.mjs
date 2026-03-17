@@ -237,6 +237,14 @@ export default defineConfig({
                 ]
             },
             {
+                text: '🟢 Status',
+                collapsed: true,
+                items: [
+                    {text: 'Send Text Status', link: '/status/send-text-status'},
+                    {text: 'Send Image Status', link: '/status/send-image-status'},
+                ]
+            },
+            {
                 text: '👥 Groups',
                 collapsed: true,
                 items: [
@@ -283,11 +291,25 @@ export default defineConfig({
                 ]
             },
             {
-                text: '🟢 Status',
+                text: '✅ Presence',
                 collapsed: true,
                 items: [
-                    {text: 'Send Text Status', link: '/status/send-text-status'},
-                    {text: 'Send Image Status', link: '/status/send-image-status'},
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Get All Presence ⚠️', link: '/presence/api/get-presence'},
+                            {text: 'Set Presence ⚠️', link: '/presence/api/set-presence'},
+                            {text: 'Subscribe to Presence ⚠️', link: '/presence/api/subscribe-presence'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Presence Update ⚠️', link: '/presence/events/presence-update'},
+                        ]
+                    },
                 ]
             },
             {
