@@ -77,6 +77,25 @@ export default defineConfig({
                 ]
             },
             {
+                text: 'Send Messages',
+                collapsed: true,
+                items: [
+                    {text: 'Send Text ⚠️', link: '/send-messages/send-text'},
+                    {text: 'Send Image ⚠️', link: '/send-messages/send-image'},
+                    {text: 'Send File ⚠️', link: '/send-messages/send-file'},
+                    {text: 'Send Voice ⚠️', link: '/send-messages/send-voice'},
+                    {text: 'Send Video ⚠️', link: '/send-messages/send-video'},
+                    {text: 'Send Location ⚠️', link: '/send-messages/send-location'},
+                    {text: 'Send Link Preview ⚠️', link: '/send-messages/send-link-preview'},
+                    {text: 'Send Poll ⚠️', link: '/send-messages/send-poll'},
+                    {text: 'Send List ⚠️', link: '/send-messages/send-list'},
+                    {text: 'Forward Message ⚠️', link: '/send-messages/forward-message'},
+                    {text: 'Send Seen ⚠️', link: '/send-messages/send-seen'},
+                    {text: 'Start Typing ⚠️', link: '/send-messages/start-typing'},
+                    {text: 'Stop Typing ⚠️', link: '/send-messages/stop-typing'},
+                ]
+            },
+            {
                 text: 'Contacts',
                 collapsed: true,
                 items:[
