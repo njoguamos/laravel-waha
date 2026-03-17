@@ -298,22 +298,6 @@ export default defineConfig({
                         text: 'API',
                         collapsed: true,
                         items: [
-                    {
-                        text: 'API',
-                        collapsed: true,
-                        items: [
-                            {text: 'Get All Presence ⚠️', link: '/presence/api/get-presence'},
-                            {text: 'Set Presence ⚠️', link: '/presence/api/set-presence'},
-                            {text: 'Subscribe to Presence ⚠️', link: '/presence/api/subscribe-presence'},
-                        ]
-                    },
-                    {
-                        text: 'Events',
-                        collapsed: true,
-                        items: [
-                            {text: 'Presence Update ⚠️', link: '/presence/events/presence-update'},
-                        ]
-                    },
                             {text: 'Get All Presence ⚠️', link: '/presence/api/get-presence'},
                             {text: 'Set Presence ⚠️', link: '/presence/api/set-presence'},
                             {text: 'Subscribe to Presence ⚠️', link: '/presence/api/subscribe-presence'},
