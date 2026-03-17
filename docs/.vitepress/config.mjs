@@ -342,6 +342,27 @@ export default defineConfig({
                 ]
             },
             {
+                text: '📅 Event Message',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Send Event Message ⚠️', link: '/event-message/api/send-event-message'},
+                        ]
+                    },
+                    {
+                        text: 'Events',
+                        collapsed: true,
+                        items: [
+                            {text: 'Event Response ⚠️', link: '/event-message/events/event-response'},
+                            {text: 'Event Response Failed ⚠️', link: '/event-message/events/event-response-failed'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: 'DTOs',
                 collapsed: true,
                 items: [
