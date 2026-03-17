@@ -40,7 +40,7 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Sessions',
+                text: '🖥️ Sessions',
                 collapsed: true,
                 items: [
                     {
@@ -77,7 +77,7 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Send Messages',
+                text: '📤 Send Messages',
                 collapsed: true,
                 items: [
                     {text: 'Send Text ⚠️', link: '/send-messages/send-text'},
@@ -96,12 +96,27 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Contacts',
+                text: '📥 Receive Messages',
+                collapsed: true,
+                items: [
+                    {text: 'Overview ⚠️', link: '/receive-messages/overview'},
+                    {text: 'Message ⚠️', link: '/receive-messages/message'},
+                    {text: 'Message Any ⚠️', link: '/receive-messages/message-any'},
+                    {text: 'Message Ack ⚠️', link: '/receive-messages/message-ack'},
+                    {text: 'Message Revoked ⚠️', link: '/receive-messages/message-revoked'},
+                    {text: 'Message Reaction ⚠️', link: '/receive-messages/message-reaction'},
+                    {text: 'Message Waiting ⚠️', link: '/receive-messages/message-waiting'},
+                    {text: 'Media ⚠️', link: '/receive-messages/media'},
+                    {text: 'Polls ⚠️', link: '/receive-messages/polls'},
+                ]
+            },
+            {
+                text: '👤 Contacts',
                 collapsed: true,
                 items:[
                     {
                         text: 'c.us',
-                        collapsed: true,
+                        collapsed: false,
                         items: [
                             {text: 'All Contacts ⚠️', link: '/contacts/c.us/all-contacts'},
                             {text: 'Get Contact ⚠️', link: '/contacts/c.us/get-contact'},
@@ -115,7 +130,7 @@ export default defineConfig({
                     },
                     {
                         text: 'LIDs',
-                        collapsed: true,
+                        collapsed: false,
                         items: [
                             {text: 'Known LIDs ⚠️', link: '/contacts/lids/known-lids'},
                             {text: 'Count of LIDs ⚠️', link: '/contacts/lids/count-lids'},
@@ -126,7 +141,7 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Status',
+                text: '🟢 Status',
                 collapsed: true,
                 items: [
                     {text: 'Send Text Status', link: '/status/send-text-status'},
