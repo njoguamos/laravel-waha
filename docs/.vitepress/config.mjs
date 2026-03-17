@@ -208,6 +208,35 @@ export default defineConfig({
                 ]
             },
             {
+                text: '📢 Channels',
+                collapsed: true,
+                items: [
+                    {
+                        text: 'Channels API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Preview Channel Messages ⚠️', link: '/channels/api/channels/preview-messages'},
+                            {text: 'Create Channel ⚠️', link: '/channels/api/channels/create-channel'},
+                            {text: 'Get Channel ⚠️', link: '/channels/api/channels/get-channel'},
+                            {text: 'List Channels ⚠️', link: '/channels/api/channels/list-channels'},
+                            {text: 'Delete Channel ⚠️', link: '/channels/api/channels/delete-channel'},
+                            {text: 'Get Messages ⚠️', link: '/channels/api/channels/get-messages'},
+                        ]
+                    },
+                    {
+                        text: 'Search API',
+                        collapsed: true,
+                        items: [
+                            {text: 'Search by View ⚠️', link: '/channels/api/search/search-by-view'},
+                            {text: 'Search by Text ⚠️', link: '/channels/api/search/search-by-text'},
+                            {text: 'Views for Search ⚠️', link: '/channels/api/search/get-views'},
+                            {text: 'Countries for Search ⚠️', link: '/channels/api/search/get-countries'},
+                            {text: 'Categories for Search ⚠️', link: '/channels/api/search/get-categories'},
+                        ]
+                    },
+                ]
+            },
+            {
                 text: '🟢 Status',
                 collapsed: true,
                 items: [
