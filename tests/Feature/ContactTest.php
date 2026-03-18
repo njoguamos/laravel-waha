@@ -13,12 +13,12 @@ describe(description: 'check phone number exists', tests: function () {
             CheckExistsRequest::class => MockResponse::make([
                 'numberExists' => true,
                 'chatId'       => '123123123@c.us',
-            ]),
+            ], status: 201),
         ]);
 
         $result = Contact::checkExists(phone: '11231231231');
 
-        expect(value: $result->status())->toBe(expected: 200)
+        expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json())->toBeArray()
             ->and(value: $result->json(key: 'numberExists'))->toBeTrue()
             ->and(value: $result->json(key: 'chatId'))->toBe(expected: '123123123@c.us');
@@ -29,12 +29,12 @@ describe(description: 'check phone number exists', tests: function () {
             CheckExistsRequest::class => MockResponse::make([
                 'numberExists' => false,
                 'chatId'       => null,
-            ]),
+            ], status: 201),
         ]);
 
         $result = Contact::checkExists(phone: '99999999999');
 
-        expect(value: $result->status())->toBe(expected: 200)
+        expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json(key: 'numberExists'))->toBeFalse()
             ->and(value: $result->json(key: 'chatId'))->toBeNull();
     });
@@ -44,12 +44,12 @@ describe(description: 'check phone number exists', tests: function () {
             CheckExistsRequest::class => MockResponse::make([
                 'numberExists' => true,
                 'chatId'       => '55xxxxxxxxxxx@c.us',
-            ]),
+            ], status: 201),
         ]);
 
         $result = Contact::checkExists(phone: '55xxxxxxxxxxx', session: 'custom-session');
 
-        expect(value: $result->status())->toBe(expected: 200)
+        expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json(key: 'numberExists'))->toBeTrue()
             ->and(value: $result->json(key: 'chatId'))->toBe(expected: '55xxxxxxxxxxx@c.us');
     });
@@ -61,12 +61,12 @@ describe(description: 'check phone number exists', tests: function () {
             CheckExistsRequest::class => MockResponse::make([
                 'numberExists' => true,
                 'chatId'       => '123123123@c.us',
-            ]),
+            ], status: 201),
         ]);
 
         $result = Contact::checkExists(phone: '11231231231');
 
-        expect(value: $result->status())->toBe(expected: 200)
+        expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json(key: 'numberExists'))->toBeTrue();
 
         MockClient::global()->assertSent(function (CheckExistsRequest $request): bool {

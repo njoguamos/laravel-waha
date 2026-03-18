@@ -6,6 +6,8 @@ namespace NjoguAmos\Waha\Requests\Session;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
+use NjoguAmos\Waha\Dto\SessionData;
 
 class ListSessionsRequest extends Request
 {
@@ -19,6 +21,14 @@ class ListSessionsRequest extends Request
     public function resolveEndpoint(): string
     {
         return '/api/sessions';
+    }
+
+    public function createDtoFromResponse(Response $response): array
+    {
+        return array_map(
+            static fn (array $data) => SessionData::fromArray($data),
+            $response->json()
+        );
     }
 
     protected function defaultQuery(): array
