@@ -26,16 +26,17 @@ This is **Laravel WAHA** - a PHP Laravel package that provides an elegant API cl
 │   ├── Feature/      # Feature tests
 │   ├── Unit/         # Unit tests
 │   ├── Pest.php      # Pest configuration
-│   └── TestCase.php  # Base test case
+│   └── TestCase.php  # Base test case (not used for test files)
 ```
 
 ### Core Patterns
-
-1. **Saloon HTTP:** `WahaConnector` (auth & headers) → `Request` classes (per endpoint) → DTOs
-2. **Endpoints:** Extend `Waha` base class, return typed DTOs, accessible via facades
-3. **DTOs:** Have `toArray()` serialization. `fromArray()` is **prohibited**.
-4. **Service Provider:** Binds `WahaConnector` to container, publishes config
-5. **Facades:** Static access via `Status::sendText()` instead of `app(Status::class)->sendText()`
+ 
+ 1. **Saloon HTTP:** `WahaConnector` (auth & headers) → `Request` classes (per endpoint) → DTOs
+ 2. **Endpoints:** Extend `Waha` base class, return typed DTOs, accessible via facades
+ 3. **DTOs:** Have `toArray()` serialization. `fromArray()` is **prohibited**.
+ 4. **Testing:** All tests MUST use **Pest PHP** syntax (`test()` or `it()`). PHPUnit class-based tests are prohibited.
+ 5. **Service Provider:** Binds `WahaConnector` to container, publishes config
+ 6. **Facades:** Static access via `Status::sendText()` instead of `app(Status::class)->sendText()`
 
 ## Coding Standards
 
