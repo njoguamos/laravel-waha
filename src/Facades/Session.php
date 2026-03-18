@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static Response start(?string $session = null)
+ * @method static Response logout(?string $session = null)
+ * @method static Response restart(?string $session = null)
+ * @method static Response stop(?string $session = null)
  *
  * @see \NjoguAmos\Waha\Endpoints\Session
  */
