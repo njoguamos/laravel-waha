@@ -81,7 +81,7 @@ export default defineConfig({
                 text: '📤 Send Messages',
                 collapsed: true,
                 items: [
-                    {text: 'Send Text ⚠️', link: '/send-messages/send-text'},
+                    {text: 'Send Text', link: '/send-messages/send-text'},
                     {text: 'Send Image ⚠️', link: '/send-messages/send-image'},
                     {text: 'Send File ⚠️', link: '/send-messages/send-file'},
                     {text: 'Send Voice ⚠️', link: '/send-messages/send-voice'},
@@ -91,7 +91,7 @@ export default defineConfig({
                     {text: 'Send Poll ⚠️', link: '/send-messages/send-poll'},
                     {text: 'Send List ⚠️', link: '/send-messages/send-list'},
                     {text: 'Forward Message ⚠️', link: '/send-messages/forward-message'},
-                    {text: 'Send Seen ⚠️', link: '/send-messages/send-seen'},
+                    {text: 'Send Seen', link: '/send-messages/send-seen'},
                     {text: 'Start Typing ⚠️', link: '/send-messages/start-typing'},
                     {text: 'Stop Typing ⚠️', link: '/send-messages/stop-typing'},
                 ]
@@ -300,7 +300,7 @@ export default defineConfig({
                         collapsed: true,
                         items: [
                             {text: 'Get All Presence ⚠️', link: '/presence/api/get-presence'},
-                            {text: 'Set Presence ⚠️', link: '/presence/api/set-presence'},
+                            {text: 'Set Presence', link: '/presence/api/set-presence'},
                             {text: 'Subscribe to Presence ⚠️', link: '/presence/api/subscribe-presence'},
                         ]
                     },

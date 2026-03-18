@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\Waha\Requests\Status;
+namespace NjoguAmos\Waha\Requests\Message;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
-use NjoguAmos\Waha\Dto\TextStatusData;
+use NjoguAmos\Waha\Dto\MessageTextData;
 
-class SendTextStatusRequest extends Request implements HasBody
+class SendTextRequest extends Request implements HasBody
 {
     use HasJsonBody;
 
@@ -18,16 +18,16 @@ class SendTextStatusRequest extends Request implements HasBody
 
     public function __construct(
         protected string $session,
-        protected TextStatusData $data
+        protected MessageTextData $data
     ) {
     }
 
     public function resolveEndpoint(): string
     {
-        return '/api/'.rawurlencode($this->session).'/status/text';
+        return '/api/'.rawurlencode($this->session).'/sendText';
     }
 
-    public function defaultBody(): array
+    protected function defaultBody(): array
     {
         return $this->data->toArray();
     }

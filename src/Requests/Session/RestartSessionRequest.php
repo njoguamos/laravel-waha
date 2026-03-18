@@ -18,6 +18,6 @@ class RestartSessionRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return "/api/sessions/{$this->session}/restart";
+        return '/api/sessions/'.rawurlencode($this->session).'/restart';
     }
 }

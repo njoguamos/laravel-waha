@@ -87,8 +87,12 @@ return [
     | requests, it mimics natural human behavior and reduces the
     | risk of being banned by WhatsApp for suspicious activity.
     |
+    | NOTE: Enabling this option reduces the chances of being blocked
+    | by WhatsApp but may add 3–30 seconds of blocking latency
+    | to every sendText() call.
+    |
     */
 
-    'send_typing_status' => env(key: 'WAHA_SEND_TYPING_STATUS', default: true),
+    'send_typing_status' => env(key: 'WAHA_SEND_TYPING_STATUS', default: false),
 
 ];

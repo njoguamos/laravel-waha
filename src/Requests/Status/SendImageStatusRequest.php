@@ -24,7 +24,7 @@ class SendImageStatusRequest extends Request implements HasBody
 
     public function resolveEndpoint(): string
     {
-        return "/api/{$this->session}/status/image";
+        return '/api/'.rawurlencode($this->session).'/status/image';
     }
 
     public function defaultBody(): array

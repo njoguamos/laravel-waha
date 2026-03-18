@@ -18,6 +18,6 @@ class LogoutSessionRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return "/api/sessions/{$this->session}/logout";
+        return '/api/sessions/'.rawurlencode($this->session).'/logout';
     }
 }
