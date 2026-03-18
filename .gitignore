@@ -15,3 +15,4 @@ workbench/storage
 .junie/memory/language.json
 .junie/memory/memory.version
 .junie/memory/tasks.md
+.output.txt
