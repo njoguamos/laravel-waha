@@ -20,3 +20,18 @@ it(description: 'can be created from array and converted to array', closure: fun
 
     expect(value: $dto->toArray())->toBe(expected: $data);
 });
+
+it(description: 'can be created without username and password', closure: function () {
+    $data = [
+        'server' => 'localhost:3128',
+    ];
+
+    $dto = SessionProxyData::fromArray($data);
+
+    expect(value: $dto)->toBeInstanceOf(class: SessionProxyData::class)
+        ->and(value: $dto->server)->toBe(expected: 'localhost:3128')
+        ->and(value: $dto->username)->toBeNull()
+        ->and(value: $dto->password)->toBeNull();
+
+    expect(value: $dto->toArray())->toBe(expected: $data);
+});
