@@ -30,7 +30,7 @@ class Message extends Waha
         // To avoid a ban, we start by sending a typing status if the config
         // is enabled. This will make it look like a human is typing
         // the message.
-        if (config(key: 'waha.send_typing_status', default: true)) {
+        if (config(key: 'waha.send_typing_status')) {
             $this->sendPresenceStatus(session: $session, chatId: $data->chatId);
         }
 

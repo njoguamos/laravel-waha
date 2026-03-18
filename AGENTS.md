@@ -31,7 +31,7 @@ This is **Laravel WAHA** - a PHP Laravel package that provides an elegant API cl
 
 ### Core Patterns
 
-1. **Saloon HTTP:** `WahaConnector` (auth & headers) → `Request` classes (per endpoint) → DTOs via `createDtoFromResponse()`
+1. **Saloon HTTP:** `WahaConnector` (auth & headers) → `Request` classes (per endpoint) → DTOs
 2. **Endpoints:** Extend `Waha` base class, return typed DTOs, accessible via facades
 3. **DTOs:** Have `toArray()` serialization. `fromArray()` is **prohibited**.
 4. **Service Provider:** Binds `WahaConnector` to container, publishes config
@@ -64,18 +64,34 @@ Key rules from `pint.json`:
 
 declare(strict_types=1);
 
-namespace NjoguAmos\Waha\Requests;
+namespace NjoguAmos\Waha\Requests\Status;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasJsonBody;
+use NjoguAmos\Waha\Dto\TextStatusData;
 
-class SendTextStatusRequest extends Request
+class SendTextStatusRequest extends Request implements HasBody
 {
+    use HasJsonBody;
+
     protected Method $method = Method::POST;
+
+    public function __construct(
+        protected string $session,
+        protected TextStatusData $data
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {
-        return '/api/{session}/status/text';
+        return '/api/'.rawurlencode($this->session).'/status/text';
+    }
+
+    public function defaultBody(): array
+    {
+        return $this->data->toArray();
     }
 }
 ```
@@ -93,9 +109,9 @@ class TextStatusData
 {
     public function __construct(
         public string $text,
-        public string $backgroundColor,
-        public int $font,
-        public ?array $contacts = null,
+        public ?string $backgroundColor = null,
+        public int $font = 1,
+        public ?array $contact = null,
     ) {
     }
 
@@ -107,8 +123,8 @@ class TextStatusData
             'font'            => $this->font,
         ];
 
-        if ($this->contacts !== null) {
-            $array['contacts'] = $this->contacts;
+        if ($this->contact !== null) {
+            $array['contacts'] = $this->contact;
         }
 
         return $array;
@@ -153,18 +169,24 @@ The `WahaServiceProvider` (in `src/WahaServiceProvider.php`):
 ```php
 public function register(): void
 {
-    $this->app->bind(WahaConnector::class, function (): WahaConnector {
-        return new WahaConnector(
-            baseUrl: config()->string(key: 'waha.base_url'),
-            apiKey: config()->string(key: 'waha.api_key'),
-        );
-    });
+    $this->app->bind(
+        abstract: WahaConnector::class,
+        concrete: function (): WahaConnector {
+            return new WahaConnector(
+                baseUrl: config()->string(key: 'waha.base_url'),
+                apiKey: config()->string(key: 'waha.api_key'),
+            );
+        }
+    );
 }
 
 public function boot(): void
 {
-    $this->mergeConfigFrom(__DIR__ . '/../config/waha.php', 'waha');
-    $this->publishes([__DIR__ . '/../config/waha.php' => config_path('waha.php')], 'config');
+    $this->mergeConfigFrom(path: __DIR__ . '/../config/waha.php', key: 'waha');
+
+    $this->publishes(paths: [
+        __DIR__ . '/../config/waha.php' => config_path('waha.php'),
+    ], groups: 'config');
 }
 ```
 
@@ -199,31 +221,41 @@ Each facade implements `getFacadeAccessor()` pointing to its endpoint class.
 
 ### Adding a New API Endpoint
 
-1. **Create the Request class** in `src/Requests/`:
+1. **Create the Request class** in `src/Requests/` (implement `HasBody` if needed):
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace NjoguAmos\Waha\Requests;
+namespace NjoguAmos\Waha\Requests\Something;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Http\Response;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasJsonBody;
+use NjoguAmos\Waha\Dto\SomethingData;
 
-class GetSomething extends Request
+class GetSomething extends Request implements HasBody
 {
-    protected Method $method = Method::GET;
+    use HasJsonBody;
+
+    protected Method $method = Method::POST;
+
+    public function __construct(
+        protected string $session,
+        protected SomethingData $data
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {
-        return '/something';
+        return '/api/'.rawurlencode($this->session).'/something';
     }
 
-    public function createDtoFromResponse(Response $response): SomethingData
+    public function defaultBody(): array
     {
-        return new SomethingData(...$response->json());
+        return $this->data->toArray();
     }
 }
 ```
