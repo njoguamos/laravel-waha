@@ -18,17 +18,20 @@ class SendTextRequest extends Request implements HasBody
 
     public function __construct(
         protected string $session,
-        protected MessageTextData $data
+        protected MessageTextData $data,
     ) {
     }
 
     public function resolveEndpoint(): string
     {
-        return '/api/'.rawurlencode($this->session).'/sendText';
+        return '/api/sendText';
     }
 
     protected function defaultBody(): array
     {
-        return $this->data->toArray();
+        return [
+            'session' => $this->session,
+            ...$this->data->toArray()
+        ];
     }
 }
