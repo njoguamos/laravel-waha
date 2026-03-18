@@ -6,9 +6,41 @@ use Saloon\Http\Faking\MockClient;
 use NjoguAmos\Waha\Facades\Session;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Requests\Session\StopSessionRequest;
+use NjoguAmos\Waha\Requests\Session\ListSessionsRequest;
 use NjoguAmos\Waha\Requests\Session\StartSessionRequest;
 use NjoguAmos\Waha\Requests\Session\LogoutSessionRequest;
 use NjoguAmos\Waha\Requests\Session\RestartSessionRequest;
+
+describe(description: 'list sessions', tests: function () {
+    it(description: 'can list all sessions', closure: function () {
+        MockClient::global(mockData: [
+            ListSessionsRequest::class => MockResponse::make(body: [['name' => 'default', 'status' => 'ONLINE']], status: 200)
+        ]);
+
+        $result = Session::all();
+
+        expect(value: $result->status())->toBe(expected: 200)
+            ->and(value: $result->json())->toBe(expected: [['name' => 'default', 'status' => 'ONLINE']]);
+
+        MockClient::global()->assertSent(function (ListSessionsRequest $request): bool {
+            return $request->query()->all() === ['all' => 'true'];
+        });
+    });
+
+    it(description: 'can list only active sessions', closure: function () {
+        MockClient::global(mockData: [
+            ListSessionsRequest::class => MockResponse::make(body: [['name' => 'default', 'status' => 'ONLINE']], status: 200)
+        ]);
+
+        $result = Session::all(all: false);
+
+        expect(value: $result->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (ListSessionsRequest $request): bool {
+            return $request->query()->all() === [];
+        });
+    });
+});
 
 describe(description: 'start session', tests: function () {
     it(description: 'can start session', closure: function () {
@@ -18,8 +50,8 @@ describe(description: 'start session', tests: function () {
 
         $result = Session::start();
 
-        expect(value: $result->status())->toBe(expected: 201);
-        expect(value: $result->json(key: 'name'))->toBe(expected: 'default');
+        expect(value: $result->status())->toBe(expected: 201)
+            ->and(value: $result->json(key: 'name'))->toBe(expected: 'default');
 
         MockClient::global()->assertSent(function (StartSessionRequest $request): bool {
             return $request->body()->all() === ['name' => 'default'];
@@ -33,8 +65,8 @@ describe(description: 'start session', tests: function () {
 
         $result = Session::start(session: 'custom-session');
 
-        expect(value: $result->status())->toBe(expected: 201);
-        expect(value: $result->json(key: 'name'))->toBe(expected: 'custom-session');
+        expect(value: $result->status())->toBe(expected: 201)
+            ->and(value: $result->json(key: 'name'))->toBe(expected: 'custom-session');
 
         MockClient::global()->assertSent(function (StartSessionRequest $request): bool {
             return $request->body()->all() === ['name' => 'custom-session'];
@@ -50,8 +82,8 @@ describe(description: 'start session', tests: function () {
 
         $result = Session::start();
 
-        expect(value: $result->status())->toBe(expected: 201);
-        expect(value: $result->json(key: 'name'))->toBe(expected: 'test-session');
+        expect(value: $result->status())->toBe(expected: 201)
+            ->and(value: $result->json(key: 'name'))->toBe(expected: 'test-session');
 
         MockClient::global()->assertSent(function (StartSessionRequest $request): bool {
             return $request->body()->all() === ['name' => 'test-session'];

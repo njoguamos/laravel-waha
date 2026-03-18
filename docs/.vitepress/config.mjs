@@ -48,7 +48,7 @@ export default defineConfig({
                         text: 'API',
                         collapsed: true,
                         items: [
-                            {text: 'List Sessions ⚠️', link: '/sessions/api/list-sessions'},
+                            {text: 'List Sessions', link: '/sessions/api/list-sessions'},
                             {text: 'Get Session ⚠️', link: '/sessions/api/get-session'},
                             {text: 'Create Session ⚠️', link: '/sessions/api/create-session'},
                             {text: 'Update Session ⚠️', link: '/sessions/api/update-session'},
