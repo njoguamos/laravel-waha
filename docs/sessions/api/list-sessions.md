@@ -31,6 +31,17 @@ $result->status(); // 200
 $result->json();   // [["name" => "default", "status" => "ONLINE", ...]]
 ```
 
+### DTO
+
+You can also get the result as an array of `SessionData` DTOs.
+
+```php
+$sessions = Session::all()->dtoOrFail();
+
+$sessions[0]->name; // "default"
+$sessions[0]->status; // "WORKING"
+```
+
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
@@ -40,3 +51,4 @@ $result->json();   // [["name" => "default", "status" => "ONLINE", ...]]
 ## References
 
 - [WAHA Sessions Documentation](https://waha.devlike.pro/docs/how-to/sessions/)
+- [SessionData DTO Reference](../../reference/dto/session-data)

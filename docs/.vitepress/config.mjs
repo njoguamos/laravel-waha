@@ -411,6 +411,12 @@ export default defineConfig({
                 items: [
                     {text: 'Text Status Data', link: '/reference/dto/text-status-data'},
                     {text: 'Image Status Data', link: '/reference/dto/image-status-data'},
+                    {text: 'Session Data', link: '/reference/dto/session-data'},
+                    {text: 'Session Config Data', link: '/reference/dto/session-config-data'},
+                    {text: 'Session Me Data', link: '/reference/dto/session-me-data'},
+                    {text: 'Session Engine Data', link: '/reference/dto/session-engine-data'},
+                    {text: 'Session Proxy Data', link: '/reference/dto/session-proxy-data'},
+                    {text: 'Session Webhook Data', link: '/reference/dto/session-webhook-data'},
                 ]
             },
         ],

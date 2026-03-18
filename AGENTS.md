@@ -33,7 +33,7 @@ This is **Laravel WAHA** - a PHP Laravel package that provides an elegant API cl
  
  1. **Saloon HTTP:** `WahaConnector` (auth & headers) → `Request` classes (per endpoint) → DTOs
  2. **Endpoints:** Extend `Waha` base class, return typed DTOs, accessible via facades
- 3. **DTOs:** Have `toArray()` serialization. `fromArray()` is **prohibited**.
+ 3. **DTOs:** Have `toArray()` serialization. `fromArray()` is allowed only when needed.
  4. **Testing:** All tests MUST use **Pest PHP** syntax (`test()` or `it()`). PHPUnit class-based tests are prohibited.
  5. **Service Provider:** Binds `WahaConnector` to container, publishes config
  6. **Facades:** Static access via `Status::sendText()` instead of `app(Status::class)->sendText()`
