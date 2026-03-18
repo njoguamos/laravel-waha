@@ -18,7 +18,7 @@ $response = Message::sendText(data: $data);
 Enabling `send_typing_status` in your `config/waha.php` reduces the chances of being blocked by WhatsApp but may add 3–30 seconds of blocking latency to every `sendText()` call.
 :::
 
-### Reply to message
+## Reply to message
 
 To reply to a message, use the `reply_to` field:
 
@@ -32,7 +32,7 @@ $data = new MessageTextData(
 $response = Message::sendText(data: $data);
 ```
 
-### Mentions
+## Mentions
 
 To mention a contact in a group, use the `mentions` field:
 
@@ -46,7 +46,7 @@ $data = new MessageTextData(
 $response = Message::sendText(data: $data);
 ```
 
-### Link Preview
+## Link Preview
 
 By default, WAHA generates a preview for links in the message. You can control this using the `linkPreview` and `linkPreviewHighQuality` fields:
 
