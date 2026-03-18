@@ -2,13 +2,34 @@
 
 Returns information about a specific session.
 
-::: danger
-This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
-:::
+## Usage
+
+```php
+use NjoguAmos\Waha\Facades\Session;
+
+$result = Session::get();
+```
+
+### Get Specific Session
+
+```php
+use NjoguAmos\Waha\Facades\Session;
+
+$result = Session::get(session: 'custom-session');
+```
+
+## Result
+
+The response is an instance of `Saloon\Http\Response`.
+
+```php
+$result->status(); // 200
+$result->json();   // ["name" => "default", "status" => "ONLINE", ...]
+```
 
 ## Engines
 
-| WEBJS | WPP | NOWEB | GOWS |
+| WEBJS | WPP | NOWEB | GWS |
 |:-----:|:----:|:-----:|:----:|
 |   ✅   |  ✅   |   ✅   |  ✅   |
 
