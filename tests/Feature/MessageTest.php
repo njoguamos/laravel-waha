@@ -5,6 +5,7 @@ declare(strict_types=1);
 use NjoguAmos\Waha\Dto\SeenData;
 use NjoguAmos\Waha\Enums\Presence;
 use Saloon\Http\Faking\MockClient;
+use Illuminate\Support\Facades\Log;
 use NjoguAmos\Waha\Facades\Message;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\MessageTextData;
@@ -122,6 +123,37 @@ describe(description: 'send text message', tests: function () {
 
         // 4. Send Text
         expect($sentRequests[3]->getRequest())->toBeInstanceOf(SendTextRequest::class);
+    });
+
+    it(description: 'continues sending text message even if presence status fails and logs the error', closure: function () {
+        config()->set(key: 'waha.send_typing_status', value: true);
+
+        Log::shouldReceive('error')
+            ->times(3)
+            ->withArgs(function ($message, $context) {
+                return str_contains($message, 'Internal Server Error')
+                    && $context === [
+                        'session' => 'default',
+                        'chatId'  => '123456789@c.us',
+                    ];
+            });
+
+        MockClient::global(mockData: [
+            SetPresenceRequest::class => MockResponse::make(body: ['error' => 'Internal Server Error'], status: 500),
+            SendTextRequest::class    => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageTextData(
+            chatId: '123456789@c.us',
+            text: 'Still sent even if presence fails.'
+        );
+
+        $result = Message::sendText(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        // Verify that SendTextRequest was still sent
+        MockClient::global()->assertSent(SendTextRequest::class);
     });
 });
 
