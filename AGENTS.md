@@ -135,7 +135,7 @@ class TextStatusData
 
 ## Testing
 
-Run tests: `composer test`
+Run tests: `composer test -- --parallel`
 
 - **`tests/Feature/`** - Integration tests (endpoint methods, HTTP cycles)
 - **`tests/Unit/`** - Unit tests (DTOs, support classes)
@@ -214,7 +214,7 @@ Each facade implements `getFacadeAccessor()` pointing to its endpoint class.
 
 | Command           | Description                    |
 |-------------------|--------------------------------|
-| `composer test`   | Run Pest tests                 |
+| `composer test -- --parallel` | Run Pest tests (use --parallel for speed) |
 | `composer format` | Run Laravel Pint (format code) |
 | `composer lint`   | Check code style with Pint     |
 
