@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace NjoguAmos\Waha\Endpoints;
 
 use NjoguAmos\Waha\Waha;
-use Random\RandomException;
 use Saloon\Http\Response;
+use Random\RandomException;
 use NjoguAmos\Waha\Dto\SeenData;
 use NjoguAmos\Waha\Enums\Presence;
 use NjoguAmos\Waha\Dto\PresenceData;
@@ -25,12 +25,12 @@ class Message extends Waha
      */
     public function sendText(MessageTextData $data, ?string $session = null): Response
     {
-        $session = $session ?? $this->session;
+        $session ??= $this->session;
 
         // To avoid a ban, we start by sending a typing status if the config
         // is enabled. This will make it look like a human is typing
         // the message.
-        if (config(key: 'waha.send_typing_status', default: false)) {
+        if (config(key: 'waha.send_typing_status', default: true)) {
             $this->sendPresenceStatus(session: $session, chatId: $data->chatId);
         }
 

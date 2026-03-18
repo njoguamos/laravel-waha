@@ -33,7 +33,7 @@ This is **Laravel WAHA** - a PHP Laravel package that provides an elegant API cl
 
 1. **Saloon HTTP:** `WahaConnector` (auth & headers) → `Request` classes (per endpoint) → DTOs via `createDtoFromResponse()`
 2. **Endpoints:** Extend `Waha` base class, return typed DTOs, accessible via facades
-3. **DTOs:** Have `fromArray()` constructor and `toArray()` serialization
+3. **DTOs:** Have `toArray()` serialization. `fromArray()` is **prohibited**.
 4. **Service Provider:** Binds `WahaConnector` to container, publishes config
 5. **Facades:** Static access via `Status::sendText()` instead of `app(Status::class)->sendText()`
 
@@ -97,16 +97,6 @@ class TextStatusData
         public int $font,
         public ?array $contacts = null,
     ) {
-    }
-
-    public static function fromArray(array $data): self
-    {
-        return new self(
-            text: $data['text'],
-            backgroundColor: $data['backgroundColor'],
-            font: $data['font'],
-            contacts: $data['contacts'] ?? null,
-        );
     }
 
     public function toArray(): array
@@ -233,7 +223,7 @@ class GetSomething extends Request
 
     public function createDtoFromResponse(Response $response): SomethingData
     {
-        return SomethingData::fromArray($response->json());
+        return new SomethingData(...$response->json());
     }
 }
 ```
@@ -250,11 +240,6 @@ namespace NjoguAmos\Waha\Dto;
 class SomethingData
 {
     public function __construct(public int $id, public string $name) {}
-
-    public static function fromArray(array $data): self
-    {
-        return new self(id: $data['id'], name: $data['name']);
-    }
 }
 ```
 

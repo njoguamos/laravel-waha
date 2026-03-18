@@ -93,6 +93,6 @@ return [
     |
     */
 
-    'send_typing_status' => env(key: 'WAHA_SEND_TYPING_STATUS', default: false),
+    'send_typing_status' => env(key: 'WAHA_SEND_TYPING_STATUS', default: true),
 
 ];
