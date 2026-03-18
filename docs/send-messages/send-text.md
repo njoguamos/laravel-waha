@@ -14,6 +14,10 @@ $data = new MessageTextData(
 $response = Message::sendText(data: $data);
 ```
 
+::: warning Send Typing Status
+Enabling `send_typing_status` in your `config/waha.php` reduces the chances of being blocked by WhatsApp but may add 3–30 seconds of blocking latency to every `sendText()` call.
+:::
+
 ### Reply to message
 
 To reply to a message, use the `reply_to` field:

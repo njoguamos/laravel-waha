@@ -26,3 +26,21 @@ test('presence data to array contains optional chatId', function () {
         'chatId'   => '1234567890@c.us',
     ]);
 });
+
+test('presence data throws exception when chatId is missing for typing', function () {
+    new PresenceData(
+        presence: Presence::TYPING,
+    );
+})->throws(InvalidArgumentException::class, 'The chatId is required when presence is set to typing.');
+
+test('presence data throws exception when chatId is missing for recording', function () {
+    new PresenceData(
+        presence: Presence::RECORDING,
+    );
+})->throws(InvalidArgumentException::class, 'The chatId is required when presence is set to recording.');
+
+test('presence data throws exception when chatId is missing for paused', function () {
+    new PresenceData(
+        presence: Presence::PAUSED,
+    );
+})->throws(InvalidArgumentException::class, 'The chatId is required when presence is set to paused.');

@@ -13,7 +13,7 @@ $data = new SeenData(
 $response = Message::sendSeen(data: $data);
 ```
 
-### Read specific messages
+## Read specific messages
 
 In **NOWEB** and **GOWS** Engines you can control what messages to read by using `messageIds` field:
 
@@ -29,7 +29,7 @@ $data = new SeenData(
 $response = Message::sendSeen(data: $data);
 ```
 
-### Group Messages
+## Group Messages
 
 For Group Message you need to provide `participant` field:
 

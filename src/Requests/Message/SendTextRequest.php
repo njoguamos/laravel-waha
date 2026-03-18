@@ -24,7 +24,7 @@ class SendTextRequest extends Request implements HasBody
 
     public function resolveEndpoint(): string
     {
-        return "/api/{$this->session}/sendText";
+        return '/api/'.rawurlencode($this->session).'/sendText';
     }
 
     protected function defaultBody(): array

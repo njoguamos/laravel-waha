@@ -18,6 +18,6 @@ class StopSessionRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return "/api/sessions/{$this->session}/stop";
+        return '/api/sessions/'.rawurlencode($this->session).'/stop';
     }
 }

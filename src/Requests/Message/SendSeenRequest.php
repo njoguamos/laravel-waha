@@ -24,7 +24,7 @@ class SendSeenRequest extends Request implements HasBody
 
     public function resolveEndpoint(): string
     {
-        return "/api/{$this->session}/sendSeen";
+        return '/api/'.rawurlencode($this->session).'/sendSeen';
     }
 
     protected function defaultBody(): array

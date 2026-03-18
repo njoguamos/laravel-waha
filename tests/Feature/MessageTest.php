@@ -14,8 +14,6 @@ use NjoguAmos\Waha\Requests\Presence\SetPresenceRequest;
 
 describe(description: 'send text message', tests: function () {
     it(description: 'can send text message', closure: function () {
-        config()->set(key: 'waha.send_typing_status', value: false);
-
         MockClient::global(mockData: [
             SendTextRequest::class => MockResponse::make(body: [], status: 201)
         ]);
@@ -31,8 +29,6 @@ describe(description: 'send text message', tests: function () {
     });
 
     it(description: 'can send text message with explicit session', closure: function () {
-        config()->set(key: 'waha.send_typing_status', value: false);
-
         MockClient::global(mockData: [
             SendTextRequest::class => MockResponse::make(body: [], status: 201)
         ]);
@@ -53,7 +49,6 @@ describe(description: 'send text message', tests: function () {
 
     it(description: 'uses default session from config when session is null', closure: function () {
         config()->set(key: 'waha.session', value: 'test-session');
-        config()->set(key: 'waha.send_typing_status', value: false);
 
         MockClient::global(mockData: [
             SendTextRequest::class => MockResponse::make(body: [], status: 201)
