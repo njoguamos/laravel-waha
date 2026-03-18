@@ -5,18 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-beta.3] - 2026-03-18
+
+### Added
+- `Message` endpoint with support for:
+  - `sendText()`: Send a text message with optional reply, mentions, and link preview support.
+  - `sendSeen()`: Send a read receipt for a chat or specific messages.
+- `Presence` endpoint with `setPresence()` method and `Presence` Enum (online, offline, typing, recording, paused).
+- Human-like presence simulation for `sendText()` with configurable typing/paused signals and random delays.
+- New `PresenceData`, `MessageTextData`, and `SeenData` DTOs.
+- `send_typing_status` configuration in `config/waha.php`.
+
+### Changed
+- Improved URL safety by encoding session IDs in all API request endpoints using `rawurlencode()`.
+- Standardized documentation heading hierarchies and navigation labels.
+- Optimized DTOs by removing unused `fromArray()` methods.
+- Refactored `SendTextRequest` and other classes to align imports by length.
+
+## [0.1.0-beta.2] - 2026-03-17
+
+### Added
+- `Session` endpoint with `start()` method to programmatically initiate WAHA sessions.
+- Comprehensive draft documentation for multiple modules:
+  - Contacts and LID
+  - Sessions API and Events
+  - Sending and Receiving Messages
+  - Profile, Polls, Chats, Channels, Groups, Presence, Labels, and Calls
+  - Event Messages and Observability
+
+### Changed
+- Renamed `Contacts` facade and endpoint to `Contact` (singular) for consistency.
+- Updated default `WAHA_ENGINE` from `GOWS` to `WEBJS`.
+
 ## [0.1.0-beta.1] - 2026-03-16
 
 ### Added
 - Initial release of Laravel WAHA package.
 - `Status` endpoint with support for:
-    - `sendText()`: Send a text status update.
-    - `sendImage()`: Send an image status update.
+  - `sendText()`: Send a text status update.
+  - `sendImage()`: Send an image status update.
 - `Contact` endpoint with support for:
-    - `checkExists()`: Check if a phone number exists on WhatsApp.
+  - `checkExists()`: Check if a phone number exists on WhatsApp.
 - DTOs for structured data:
-    - `TextStatusData`
-    - `ImageStatusData`
+  - `TextStatusData`
+  - `ImageStatusData`
 - Saloon PHP integration for API requests.
 - Laravel Service Provider and Facades.
 - Documentation built with VitePress.
