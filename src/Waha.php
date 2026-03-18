@@ -26,8 +26,7 @@ abstract class Waha
     }
 
     /**
-     * @throws FatalRequestException
-     * @throws RequestException
+     * Send the presence status before sending a message to mimic human behavior.
      */
     protected function sendPresenceStatus(string $session, string $chatId): void
     {
