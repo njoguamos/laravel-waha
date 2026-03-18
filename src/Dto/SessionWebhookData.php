@@ -6,11 +6,14 @@ namespace NjoguAmos\Waha\Dto;
 
 class SessionWebhookData
 {
+    /**
+     * @param  SessionWebhookCustomHeaderData[]|null  $customHeaders
+     */
     public function __construct(
         public string $url,
         public array $events,
-        public ?string $hmac = null,
-        public ?int $retries = null,
+        public ?SessionWebhookHmacData $hmac = null,
+        public ?SessionWebhookRetryData $retries = null,
         public ?array $customHeaders = null,
     ) {
     }
@@ -20,9 +23,9 @@ class SessionWebhookData
         return new self(
             url: $data['url'],
             events: $data['events'],
-            hmac: $data['hmac'] ?? null,
-            retries: $data['retries'] ?? null,
-            customHeaders: $data['customHeaders'] ?? null,
+            hmac: isset($data['hmac']) ? SessionWebhookHmacData::fromArray($data['hmac']) : null,
+            retries: isset($data['retries']) ? SessionWebhookRetryData::fromArray($data['retries']) : null,
+            customHeaders: isset($data['customHeaders']) ? array_map(static fn (array $header) => SessionWebhookCustomHeaderData::fromArray($header), $data['customHeaders']) : null,
         );
     }
 
@@ -31,9 +34,9 @@ class SessionWebhookData
         return [
             'url'           => $this->url,
             'events'        => $this->events,
-            'hmac'          => $this->hmac,
-            'retries'       => $this->retries,
-            'customHeaders' => $this->customHeaders,
+            'hmac'          => $this->hmac?->toArray(),
+            'retries'       => $this->retries?->toArray(),
+            'customHeaders' => isset($this->customHeaders) ? array_map(static fn (SessionWebhookCustomHeaderData $header) => $header->toArray(), $this->customHeaders) : null,
         ];
     }
 }

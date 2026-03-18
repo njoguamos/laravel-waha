@@ -417,6 +417,13 @@ export default defineConfig({
                     {text: 'Session Engine Data', link: '/reference/dto/session-engine-data'},
                     {text: 'Session Proxy Data', link: '/reference/dto/session-proxy-data'},
                     {text: 'Session Webhook Data', link: '/reference/dto/session-webhook-data'},
+                    {text: 'Session Webhook HMAC Data', link: '/reference/dto/session-webhook-hmac-data'},
+                    {text: 'Session Webhook Retry Data', link: '/reference/dto/session-webhook-retry-data'},
+                    {text: 'Session Webhook Custom Header Data', link: '/reference/dto/session-webhook-custom-header-data'},
+                    {text: 'Session Config Client Data', link: '/reference/dto/session-config-client-data'},
+                    {text: 'Session Config Ignore Data', link: '/reference/dto/session-config-ignore-data'},
+                    {text: 'Session Config NOWEB Data', link: '/reference/dto/session-config-noweb-data'},
+                    {text: 'Session Config WEBJS Data', link: '/reference/dto/session-config-webjs-data'},
                 ]
             },
             {

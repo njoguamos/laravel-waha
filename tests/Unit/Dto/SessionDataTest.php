@@ -13,9 +13,9 @@ it(description: 'can be created from array and converted to array', closure: fun
         'name'   => 'default',
         'status' => 'WORKING',
         'config' => [
-            'proxy'    => null,
             'webhooks' => [],
             'debug'    => false,
+            'metadata' => [],
         ],
         'me' => [
             'id'       => '79111111@c.us',

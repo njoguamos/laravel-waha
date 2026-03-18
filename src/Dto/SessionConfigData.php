@@ -13,6 +13,11 @@ class SessionConfigData
         public ?SessionProxyData $proxy = null,
         public array $webhooks = [],
         public bool $debug = false,
+        public ?SessionConfigNowebData $noweb = null,
+        public ?SessionConfigWebjsData $webjs = null,
+        public ?SessionConfigClientData $client = null,
+        public ?SessionConfigIgnoreData $ignore = null,
+        public array $metadata = [],
     ) {
     }
 
@@ -22,15 +27,42 @@ class SessionConfigData
             proxy: isset($data['proxy']) ? SessionProxyData::fromArray($data['proxy']) : null,
             webhooks: array_map(static fn (array $webhook) => SessionWebhookData::fromArray($webhook), $data['webhooks'] ?? []),
             debug: $data['debug'] ?? false,
+            noweb: isset($data['noweb']) ? SessionConfigNowebData::fromArray($data['noweb']) : null,
+            webjs: isset($data['webjs']) ? SessionConfigWebjsData::fromArray($data['webjs']) : null,
+            client: isset($data['client']) ? SessionConfigClientData::fromArray($data['client']) : null,
+            ignore: isset($data['ignore']) ? SessionConfigIgnoreData::fromArray($data['ignore']) : null,
+            metadata: $data['metadata'] ?? [],
         );
     }
 
     public function toArray(): array
     {
-        return [
-            'proxy'    => $this->proxy?->toArray(),
+        $array = [
             'webhooks' => array_map(static fn (SessionWebhookData $webhook) => $webhook->toArray(), $this->webhooks),
             'debug'    => $this->debug,
+            'metadata' => $this->metadata,
         ];
+
+        if ($this->proxy !== null) {
+            $array['proxy'] = $this->proxy->toArray();
+        }
+
+        if ($this->noweb !== null) {
+            $array['noweb'] = $this->noweb->toArray();
+        }
+
+        if ($this->webjs !== null) {
+            $array['webjs'] = $this->webjs->toArray();
+        }
+
+        if ($this->client !== null) {
+            $array['client'] = $this->client->toArray();
+        }
+
+        if ($this->ignore !== null) {
+            $array['ignore'] = $this->ignore->toArray();
+        }
+
+        return $array;
     }
 }
