@@ -1,6 +1,6 @@
 # Stop Session
 
-Stop a session. Stop doesn’t Log out or Delete anything.
+Stopping a session does not log out or delete anything.
 
 ::: tip Idempotent operation
 You can call it multiple times, and it’ll stop the session only if it’s running.
