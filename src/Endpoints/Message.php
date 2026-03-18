@@ -6,17 +6,12 @@ namespace NjoguAmos\Waha\Endpoints;
 
 use NjoguAmos\Waha\Waha;
 use Saloon\Http\Response;
-use Random\RandomException;
 use NjoguAmos\Waha\Dto\SeenData;
-use NjoguAmos\Waha\Enums\Presence;
-use Illuminate\Support\Facades\Log;
-use NjoguAmos\Waha\Dto\PresenceData;
 use NjoguAmos\Waha\Dto\MessageTextData;
 use Saloon\Exceptions\Request\RequestException;
 use NjoguAmos\Waha\Requests\Message\SendSeenRequest;
 use NjoguAmos\Waha\Requests\Message\SendTextRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
-use NjoguAmos\Waha\Requests\Presence\SetPresenceRequest;
 
 class Message extends Waha
 {
@@ -52,61 +47,5 @@ class Message extends Waha
                 data: $data
             )
         );
-    }
-
-    /**
-     * @throws FatalRequestException
-     * @throws RequestException
-     * @throws RandomException
-     */
-    private function sendPresenceStatus(string $session, string $chatId): void
-    {
-        // 1. Send Online status
-        try {
-            $this->connector->send(new SetPresenceRequest(
-                session: $session,
-                data: new PresenceData(presence: Presence::ONLINE)
-            ));
-        } catch (FatalRequestException|RequestException $exception) {
-            Log::error(message: $exception->getMessage(), context: [
-                'session' => $session,
-                'chatId'  => $chatId,
-            ]);
-        }
-
-        try {
-            sleep(random_int(min: 1, max: 10));
-
-            // 2. Send Typing status
-            $this->connector->send(new SetPresenceRequest(
-                session: $session,
-                data: new PresenceData(presence: Presence::TYPING, chatId: $chatId)
-            ));
-        } catch (FatalRequestException|RequestException $exception) {
-            Log::error(message: $exception->getMessage(), context: [
-                'session' => $session,
-                'chatId'  => $chatId,
-            ]);
-        }
-
-        try {
-            sleep(random_int(min: 1, max: 10));
-
-            // 3. Send Paused status
-            $this->connector->send(new SetPresenceRequest(
-                session: $session,
-                data: new PresenceData(presence: Presence::PAUSED, chatId: $chatId)
-            ));
-        } catch (FatalRequestException|RequestException $exception) {
-            Log::error(message: $exception->getMessage(), context: [
-                'session' => $session,
-                'chatId'  => $chatId,
-            ]);
-        }
-
-        try {
-            sleep(random_int(min: 1, max: 5));
-        } catch (RandomException) {
-        }
     }
 }

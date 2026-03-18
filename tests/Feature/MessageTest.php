@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Sleep;
 use NjoguAmos\Waha\Dto\SeenData;
 use NjoguAmos\Waha\Enums\Presence;
 use Saloon\Http\Faking\MockClient;
@@ -82,10 +83,11 @@ describe(description: 'send text message', tests: function () {
     });
 
     it(description: 'sends presence status before sending text message when enabled', closure: function () {
+        Sleep::fake();
         config()->set(key: 'waha.send_typing_status', value: true);
 
         MockClient::global(mockData: [
-            SetPresenceRequest::class => MockResponse::make(body: [], status: 200),
+            SetPresenceRequest::class => MockResponse::make(body: [], status: 201),
             SendTextRequest::class    => MockResponse::make(body: [], status: 201)
         ]);
 
@@ -126,6 +128,7 @@ describe(description: 'send text message', tests: function () {
     });
 
     it(description: 'continues sending text message even if presence status fails and logs the error', closure: function () {
+        Sleep::fake();
         config()->set(key: 'waha.send_typing_status', value: true);
 
         Log::shouldReceive('error')
