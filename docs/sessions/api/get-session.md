@@ -29,7 +29,7 @@ $result->json();   // ["name" => "default", "status" => "ONLINE", ...]
 
 ## Engines
 
-| WEBJS | WPP | NOWEB | GWS |
+| WEBJS | WPP | NOWEB | GOWS |
 |:-----:|:----:|:-----:|:----:|
 |   ✅   |  ✅   |   ✅   |  ✅   |
 

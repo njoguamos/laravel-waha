@@ -12,7 +12,7 @@ class ListSessionsRequest extends Request
     protected Method $method = Method::GET;
 
     public function __construct(
-        protected bool $all = true,
+        private bool $all = true,
     ) {
     }
 
