@@ -17,6 +17,8 @@ class TextStatusData
 
     public function toArray(): array
     {
+        // Note: $contact property is singular in the model but serialized as 'contacts'
+        // (plural) to match the external WAHA API contract
         $array = [
             'text'            => $this->text,
             'backgroundColor' => $this->backgroundColor,
