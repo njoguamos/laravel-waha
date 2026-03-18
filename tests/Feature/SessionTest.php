@@ -5,10 +5,43 @@ declare(strict_types=1);
 use Saloon\Http\Faking\MockClient;
 use NjoguAmos\Waha\Facades\Session;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Requests\Session\GetSessionRequest;
 use NjoguAmos\Waha\Requests\Session\StopSessionRequest;
 use NjoguAmos\Waha\Requests\Session\StartSessionRequest;
 use NjoguAmos\Waha\Requests\Session\LogoutSessionRequest;
 use NjoguAmos\Waha\Requests\Session\RestartSessionRequest;
+
+describe(description: 'get session', tests: function () {
+    it(description: 'can get session', closure: function () {
+        MockClient::global(mockData: [
+            GetSessionRequest::class => MockResponse::make(body: ['name' => 'default', 'status' => 'ONLINE'], status: 200)
+        ]);
+
+        $result = Session::get();
+
+        expect(value: $result->status())->toBe(expected: 200)
+            ->and(value: $result->json(key: 'name'))->toBe(expected: 'default');
+
+        MockClient::global()->assertSent(function (GetSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/default';
+        });
+    });
+
+    it(description: 'can get explicit session', closure: function () {
+        MockClient::global(mockData: [
+            GetSessionRequest::class => MockResponse::make(body: ['name' => 'custom-session', 'status' => 'ONLINE'], status: 200)
+        ]);
+
+        $result = Session::get(session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 200)
+            ->and(value: $result->json(key: 'name'))->toBe(expected: 'custom-session');
+
+        MockClient::global()->assertSent(function (GetSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/custom-session';
+        });
+    });
+});
 
 describe(description: 'start session', tests: function () {
     it(description: 'can start session', closure: function () {
