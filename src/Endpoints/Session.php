@@ -8,6 +8,7 @@ use NjoguAmos\Waha\Waha;
 use Saloon\Http\Response;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Exceptions\Request\FatalRequestException;
+use NjoguAmos\Waha\Requests\Session\GetSessionRequest;
 use NjoguAmos\Waha\Requests\Session\StopSessionRequest;
 use NjoguAmos\Waha\Requests\Session\StartSessionRequest;
 use NjoguAmos\Waha\Requests\Session\LogoutSessionRequest;
@@ -15,6 +16,19 @@ use NjoguAmos\Waha\Requests\Session\RestartSessionRequest;
 
 class Session extends Waha
 {
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function get(?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new GetSessionRequest(
+                session: $session ?? $this->session,
+            )
+        );
+    }
+
     /**
      * @throws FatalRequestException
      * @throws RequestException
