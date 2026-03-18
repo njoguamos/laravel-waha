@@ -5,7 +5,10 @@ declare(strict_types=1);
 use Saloon\Http\Faking\MockClient;
 use NjoguAmos\Waha\Facades\Session;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Requests\Session\StopSessionRequest;
 use NjoguAmos\Waha\Requests\Session\StartSessionRequest;
+use NjoguAmos\Waha\Requests\Session\LogoutSessionRequest;
+use NjoguAmos\Waha\Requests\Session\RestartSessionRequest;
 
 describe(description: 'start session', tests: function () {
     it(description: 'can start session', closure: function () {
@@ -52,6 +55,96 @@ describe(description: 'start session', tests: function () {
 
         MockClient::global()->assertSent(function (StartSessionRequest $request): bool {
             return $request->body()->all() === ['name' => 'test-session'];
+        });
+    });
+});
+
+describe(description: 'logout session', tests: function () {
+    it(description: 'can logout session', closure: function () {
+        MockClient::global(mockData: [
+            LogoutSessionRequest::class => MockResponse::make(body: ['status' => 'OK'], status: 200)
+        ]);
+
+        $result = Session::logout();
+
+        expect(value: $result->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (LogoutSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/default/logout';
+        });
+    });
+
+    it(description: 'can logout explicit session', closure: function () {
+        MockClient::global(mockData: [
+            LogoutSessionRequest::class => MockResponse::make(body: ['status' => 'OK'], status: 200)
+        ]);
+
+        $result = Session::logout(session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (LogoutSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/custom-session/logout';
+        });
+    });
+});
+
+describe(description: 'restart session', tests: function () {
+    it(description: 'can restart session', closure: function () {
+        MockClient::global(mockData: [
+            RestartSessionRequest::class => MockResponse::make(body: ['status' => 'OK'], status: 200)
+        ]);
+
+        $result = Session::restart();
+
+        expect(value: $result->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (RestartSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/default/restart';
+        });
+    });
+
+    it(description: 'can restart explicit session', closure: function () {
+        MockClient::global(mockData: [
+            RestartSessionRequest::class => MockResponse::make(body: ['status' => 'OK'], status: 200)
+        ]);
+
+        $result = Session::restart(session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (RestartSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/custom-session/restart';
+        });
+    });
+});
+
+describe(description: 'stop session', tests: function () {
+    it(description: 'can stop session', closure: function () {
+        MockClient::global(mockData: [
+            StopSessionRequest::class => MockResponse::make(body: ['status' => 'OK'], status: 200)
+        ]);
+
+        $result = Session::stop();
+
+        expect(value: $result->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (StopSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/default/stop';
+        });
+    });
+
+    it(description: 'can stop explicit session', closure: function () {
+        MockClient::global(mockData: [
+            StopSessionRequest::class => MockResponse::make(body: ['status' => 'OK'], status: 200)
+        ]);
+
+        $result = Session::stop(session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (StopSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/custom-session/stop';
         });
     });
 });
