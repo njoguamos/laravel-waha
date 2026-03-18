@@ -419,6 +419,13 @@ export default defineConfig({
                     {text: 'Session Webhook Data', link: '/reference/dto/session-webhook-data'},
                 ]
             },
+            {
+                text: 'Enums',
+                collapsed: true,
+                items: [
+                    {text: 'Session Status', link: '/reference/enums/session-status'},
+                ]
+            },
         ],
 
         socialLinks: [

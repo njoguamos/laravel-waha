@@ -1,8 +1,9 @@
 # Session Data DTO Reference
 
-The `NjoguAmos\Waha\Dto\SessionData` represents a WhatsApp session information.
+The `NjoguAmos\Waha\Dto\SessionData` represents WhatsApp session information.
 
 ```php
+use NjoguAmos\Waha\Enums\SessionStatus;
 use NjoguAmos\Waha\Facades\Session;
 use NjoguAmos\Waha\Dto\SessionData;
 
@@ -17,12 +18,12 @@ The session name.
 $session->name; // "default"
 ```
 
-## `status` → `string`
+## `status` → [`SessionStatus`](../enums/session-status.md)
 
-The current status of the session (e.g., `WORKING`, `SCAN_QR`, `STARTING`, `STOPPED`).
+The current status of the session.
 
 ```php
-$session->status; // "WORKING"
+$session->status; // SessionStatus::WORKING
 ```
 
 ## `config` → [`SessionConfigData`](./session-config-data.md) or `null`
