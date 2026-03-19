@@ -6,6 +6,8 @@ namespace NjoguAmos\Waha\Requests\Session;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
+use NjoguAmos\Waha\Dto\ScreenshotData;
 
 class ScreenshotRequest extends Request
 {
@@ -26,5 +28,10 @@ class ScreenshotRequest extends Request
         return [
             'session' => $this->session,
         ];
+    }
+
+    public function createDtoFromResponse(Response $response): ScreenshotData
+    {
+        return ScreenshotData::fromArray($response->json());
     }
 }
