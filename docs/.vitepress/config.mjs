@@ -28,6 +28,7 @@ export default defineConfig({
         nav: [
             {text: 'Home', link: '/'},
             {text: 'Guide', link: '/introduction/getting-started'},
+            {text: 'Handling Response', link: '/introduction/responses'},
             {text: 'Changelog', link: '/introduction/changelog'},
         ],
 
@@ -37,6 +38,7 @@ export default defineConfig({
                 items: [
                     {text: 'About WAHA', link: '/introduction/about'},
                     {text: 'Getting Started', link: '/introduction/getting-started'},
+                    {text: 'Handling Response', link: '/introduction/responses'},
                     {text: 'Changelog', link: '/introduction/changelog'},
                 ]
             },
