@@ -9,6 +9,8 @@ class SessionMeData
     public function __construct(
         public string $id,
         public string $pushName,
+        public ?string $lid = null,
+        public ?string $jid = null,
     ) {
     }
 
@@ -17,14 +19,18 @@ class SessionMeData
         return new self(
             id: $data['id'],
             pushName: $data['pushName'],
+            lid: $data['lid'] ?? null,
+            jid: $data['jid'] ?? null,
         );
     }
 
     public function toArray(): array
     {
-        return [
+        return array_filter([
             'id'       => $this->id,
             'pushName' => $this->pushName,
-        ];
+            'lid'      => $this->lid,
+            'jid'      => $this->jid,
+        ]);
     }
 }

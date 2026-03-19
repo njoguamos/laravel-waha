@@ -15,6 +15,7 @@ class SessionConfigData
         public bool $debug = false,
         public ?SessionConfigNowebData $noweb = null,
         public ?SessionConfigWebjsData $webjs = null,
+        public ?SessionConfigGowsData $gows = null,
         public ?SessionConfigClientData $client = null,
         public ?SessionConfigIgnoreData $ignore = null,
         public array $metadata = [],
@@ -29,6 +30,7 @@ class SessionConfigData
             debug: $data['debug'] ?? false,
             noweb: isset($data['noweb']) ? SessionConfigNowebData::fromArray($data['noweb']) : null,
             webjs: isset($data['webjs']) ? SessionConfigWebjsData::fromArray($data['webjs']) : null,
+            gows: isset($data['gows']) ? SessionConfigGowsData::fromArray($data['gows']) : null,
             client: isset($data['client']) ? SessionConfigClientData::fromArray($data['client']) : null,
             ignore: isset($data['ignore']) ? SessionConfigIgnoreData::fromArray($data['ignore']) : null,
             metadata: $data['metadata'] ?? [],
@@ -53,6 +55,10 @@ class SessionConfigData
 
         if ($this->webjs !== null) {
             $array['webjs'] = $this->webjs->toArray();
+        }
+
+        if ($this->gows !== null) {
+            $array['gows'] = $this->gows->toArray();
         }
 
         if ($this->client !== null) {

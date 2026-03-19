@@ -88,3 +88,7 @@ $statusData = new TextStatusData(
 
 $result = Status::sendText(session: 'default', data: $statusData);
 ```
+
+## References
+
+- [`TextStatusData` DTO](../reference/dto/text-status-data.md)

@@ -1,10 +1,28 @@
 # Delete Session
 
-Delete a session and all its data.
+Delete the session with the given name. Stop and logout as well. Idempotent operation.
 
-::: danger
-This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
-:::
+## Usage
+
+```php
+use NjoguAmos\Waha\Facades\Session;
+
+$result = Session::delete();
+```
+
+### Delete Custom Session
+
+```php
+$result = Session::delete(session: 'custom-session');
+```
+
+## Result
+
+The response is an instance of `Saloon\Http\Response`.
+
+```php
+$result->status(); // 201
+```
 
 ## Engines
 

@@ -1,10 +1,29 @@
 # Get Me
 
-Returns information about the current user.
+Get information about the authenticated account.
 
-::: danger
-This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
-:::
+## Usage
+
+```php
+use NjoguAmos\Waha\Facades\Session;
+
+$result = Session::me();
+```
+
+### Result
+
+The response is an instance of `Saloon\Http\Response`.
+
+```php
+$result->status(); // 201
+$result->json();   // ["id" => "123456789@c.us", "pushName" => "John", ...]
+```
+
+You can also get the result as a `SessionMeData` DTO.
+
+```php
+$me = $result->dtoOrFail(); // NjoguAmos\Waha\Dto\SessionMeData
+```
 
 ## Engines
 
@@ -14,4 +33,5 @@ This feature is not implemented yet, please submit a [PR](https://github.com/njo
 
 ## References
 
+- [`SessionMeData` DTO](../../reference/dto/session-me-data.md)
 - [WAHA Sessions Documentation](https://waha.devlike.pro/docs/how-to/sessions/)

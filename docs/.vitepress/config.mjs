@@ -50,15 +50,15 @@ export default defineConfig({
                         items: [
                             {text: 'List Sessions', link: '/sessions/api/list-sessions'},
                             {text: 'Get Session', link: '/sessions/api/get-session'},
-                            {text: 'Create Session ⚠️', link: '/sessions/api/create-session'},
-                            {text: 'Update Session ⚠️', link: '/sessions/api/update-session'},
-                            {text: 'Delete Session ⚠️', link: '/sessions/api/delete-session'},
+                            {text: 'Create Session', link: '/sessions/api/create-session'},
+                            {text: 'Update Session', link: '/sessions/api/update-session'},
+                            {text: 'Delete Session', link: '/sessions/api/delete-session'},
                             {text: 'Start Session', link: '/sessions/api/start-session'},
                             {text: 'Stop Session', link: '/sessions/api/stop-session'},
                             {text: 'Restart Session', link: '/sessions/api/restart-session'},
                             {text: 'Logout Session', link: '/sessions/api/logout-session'},
-                            {text: 'Get Screenshot ⚠️', link: '/sessions/api/get-screenshot'},
-                            {text: 'Get Me ⚠️', link: '/sessions/api/get-me'},
+                            {text: 'Get Screenshot', link: '/sessions/api/get-screenshot'},
+                            {text: 'Get Me', link: '/sessions/api/get-me'},
                         ]
                     },
                     {

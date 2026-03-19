@@ -76,4 +76,5 @@ Presence::set(data: $data);
 
 ## References
 
+- [`PresenceData` DTO](../../reference/dto/presence-data.md)
 - [WAHA Presence Documentation](https://waha.devlike.pro/docs/how-to/presence/)
