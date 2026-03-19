@@ -431,6 +431,9 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                     {text: 'Session Status', link: '/reference/enums/session-status'},
+                    {text: 'Presence', link: '/reference/enums/presence'},
+                    {text: 'Engine', link: '/reference/enums/engine'},
+                    {text: 'Version', link: '/reference/enums/version'},
                 ]
             },
         ],
