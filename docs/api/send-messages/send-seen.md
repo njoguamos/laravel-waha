@@ -54,5 +54,5 @@ $response = Message::sendSeen(data: $data);
 
 ## References
 
-- [`SeenData` DTO](../reference/dto/seen-data.md)
+- [`SeenData` DTO](/reference/dto/seen-data.md)
 - [WAHA Documentation: Send Seen](https://waha.devlike.pro/docs/how-to/send-messages/#send-seen)

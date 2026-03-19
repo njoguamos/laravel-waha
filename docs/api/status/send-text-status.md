@@ -68,4 +68,4 @@ $result->json();   // ["text" => "Hello from WhatsApp!", ...]
 ## References
 
 - [WAHA API Documentation - Send Text Status](https://waha.devlike.pro/docs/how-to/status/#send-text-status)
-- [`TextStatusData` DTO](../reference/dto/text-status-data.md)
+- [`TextStatusData` DTO](/reference/dto/text-status-data.md)
