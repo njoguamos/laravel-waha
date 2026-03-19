@@ -1,0 +1,73 @@
+name: Sync OpenAPI Spec
+
+on:
+  schedule:
+#    - cron: '0 7 * * *'   # 07:00 UTC every day (10:00 AM Nairobi time)
+    - cron: '0 10 * * *'   # 07:00 UTC every day (10:00 AM Nairobi time)
+
+jobs:
+  sync-openapi:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch remote OpenAPI spec
+        run: |
+          curl -sSL --fail --retry 3 --connect-timeout 10 -o /tmp/remote-openapi.json \
+            https://raw.githubusercontent.com/devlikeapro/waha-docs/main/static/swagger/openapi.json
+          
+          if ! jq . /tmp/remote-openapi.json > /dev/null; then
+            echo "Error: Downloaded file is not valid JSON"
+            exit 1
+          fi
+
+      - name: Compare files
+        id: compare
+        run: |
+          if ! diff -q openapi.json /tmp/remote-openapi.json > /dev/null; then
+            echo "Files differ"
+            echo "diff=true" >> $GITHUB_OUTPUT
+          else
+            echo "Files are the same"
+            echo "diff=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update OpenAPI spec
+        if: steps.compare.outputs.diff == 'true'
+        id: update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          cp /tmp/remote-openapi.json openapi.json
+
+          BRANCH_NAME="update-openapi"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
+          git checkout -b $BRANCH_NAME || git checkout $BRANCH_NAME
+          git add openapi.json
+          git commit -m "chore: update openapi.json from remote"
+          git push origin $BRANCH_NAME --force-with-lease
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.diff == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_EXISTS=$(gh pr list --head "${{ steps.update.outputs.branch_name }}" --json number --jq 'length')
+          if [ "$PR_EXISTS" -eq "0" ]; then
+            gh pr create \
+              --title "chore: update openapi.json from remote" \
+              --body "This PR updates the openapi.json file to match the remote specification from devlikeapro/waha-docs." \
+              --head "${{ steps.update.outputs.branch_name }}" \
+              --base main
+          else
+            echo "PR already exists, updating title/body if needed..."
+            gh pr edit "${{ steps.update.outputs.branch_name }}" \
+              --title "chore: update openapi.json from remote" \
+              --body "This PR updates the openapi.json file to match the remote specification from devlikeapro/waha-docs."
+          fi

@@ -62,7 +62,8 @@
             "/tests",
             "/.github",
             "/.gitignore",
-            "/docs"
+            "/docs",
+            "openapi.json"
         ]
     }
 }
