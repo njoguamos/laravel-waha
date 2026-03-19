@@ -1,3 +1,8 @@
+---
+name: commit
+description: Use for managing commits, branching, and pull requests in the Laravel WAHA project to ensure a clean and logical git history.
+---
+
 # Commit Skill
 
 This skill provides instructions for managing commits and pull requests in the Laravel WAHA project, ensuring a clean and logical git history.
