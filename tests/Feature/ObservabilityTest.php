@@ -13,6 +13,7 @@ use NjoguAmos\Waha\Dto\ServerStatusData;
 use NjoguAmos\Waha\Dto\ServerVersionData;
 use NjoguAmos\Waha\Facades\Observability;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
+use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
@@ -86,3 +87,17 @@ it(description: 'can get the server status', closure: function () {
         ->and(value: $result->startTimestamp->getPreciseTimestamp(3))->toBe(expected: (float) $startTimestamp)
         ->and(value: $result->uptime)->toBe(expected: $uptime);
 });
+
+it(description: 'can restart the server', closure: function (bool $force) {
+    MockClient::global(mockData: [
+        RestartServerRequest::class => function (PendingRequest $request) use ($force) {
+            expect(value: $request->body()->all())->toBe(expected: ['force' => $force]);
+
+            return MockResponse::make(status: 200);
+        }
+    ]);
+
+    $response = Observability::stop(force: $force);
+
+    expect(value: $response->status())->toBe(expected: 200);
+})->with([true, false]);

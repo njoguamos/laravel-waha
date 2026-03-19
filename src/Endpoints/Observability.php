@@ -9,6 +9,7 @@ use Saloon\Http\Response;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
+use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
@@ -56,6 +57,17 @@ class Observability extends Waha
     {
         return $this->connector->send(
             request: new GetServerStatusRequest()
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function stop(bool $force = false): Response
+    {
+        return $this->connector->send(
+            request: new RestartServerRequest(force: $force)
         );
     }
 }
