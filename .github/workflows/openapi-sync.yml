@@ -43,18 +43,28 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          cp /tmp/remote-openapi.json openapi.json
-
           BRANCH_NAME="update-openapi"
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
 
-          git checkout -b $BRANCH_NAME || git checkout $BRANCH_NAME
+          # Delete local branch if it exists, and create it fresh from current main
+          git branch -D $BRANCH_NAME 2>/dev/null || true
+          git checkout -b $BRANCH_NAME
+
+          cp /tmp/remote-openapi.json openapi.json
           git add openapi.json
-          git commit -m "chore: update openapi.json from remote"
-          git push origin $BRANCH_NAME --force-with-lease
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update openapi.json from remote"
+            # Force push to overwrite the remote branch, avoiding any conflicts or "stale info" errors
+            git push origin $BRANCH_NAME --force
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create Pull Request
-        if: steps.compare.outputs.diff == 'true'
+        if: steps.compare.outputs.diff == 'true' && steps.update.outputs.has_changes == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
