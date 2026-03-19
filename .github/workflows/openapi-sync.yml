@@ -43,19 +43,29 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          cp /tmp/remote-openapi.json openapi.json
-
           BRANCH_NAME="update-openapi"
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
 
-          git checkout -b $BRANCH_NAME || git checkout $BRANCH_NAME
+          git fetch origin
+          if git ls-remote --heads origin $BRANCH_NAME | grep -q $BRANCH_NAME; then
+            git checkout $BRANCH_NAME
+            git pull origin $BRANCH_NAME
+            # Ensure we are up-to-date with main if main has changed
+            git merge origin/main --no-edit || true
+          else
+            git checkout -b $BRANCH_NAME
+          fi
+
+          cp /tmp/remote-openapi.json openapi.json
           git add openapi.json
-          git commit -m "chore: update openapi.json from remote"
-          git push origin $BRANCH_NAME --force-with-lease
+          git commit -m "chore: update openapi.json from remote" || echo "No changes to commit"
+          git push origin $BRANCH_NAME
 
       - name: Create Pull Request
         if: steps.compare.outputs.diff == 'true'
         env:
+          # Note: Requires "Allow GitHub Actions to create and approve pull requests" 
+          # to be enabled in repository Settings > Actions > General > Workflow permissions
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PR_EXISTS=$(gh pr list --head "${{ steps.update.outputs.branch_name }}" --json number --jq 'length')
