@@ -18,6 +18,7 @@ use NjoguAmos\Waha\Enums\HealthIndicatorStatus;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
 use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
+use NjoguAmos\Waha\Requests\Observability\GetBrowserTraceRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
 use NjoguAmos\Waha\Requests\Observability\GetNodeCpuProfileRequest;
@@ -185,3 +186,39 @@ it(description: 'can generate a node cpu profile', closure: function (int $secon
     expect(value: $response->status())->toBe(expected: 200)
         ->and(value: $response->body())->toBe(expected: 'binary-content');
 })->with([30, 60]);
+
+it(description: 'can get a browser trace', closure: function (int $seconds, string $categories) {
+    MockClient::global(mockData: [
+        GetBrowserTraceRequest::class => function (PendingRequest $request) use ($seconds, $categories) {
+            expect(value: $request->query()->all())->toBe(expected: [
+                'seconds'    => $seconds,
+                'categories' => $categories,
+            ])
+                ->and(value: $request->getRequest()->resolveEndpoint())->toBe(expected: '/api/server/debug/browser/trace/default');
+
+            return MockResponse::make(body: 'binary-content', status: 200);
+        }
+    ]);
+
+    $response = Observability::browserTrace(session: 'default', seconds: $seconds, categories: $categories);
+
+    expect(value: $response->status())->toBe(expected: 200)
+        ->and(value: $response->body())->toBe(expected: 'binary-content');
+})->with([
+    [30, '*'],
+    [60, 'devtools.timeline'],
+]);
+
+it(description: 'can get a browser trace with null session', closure: function () {
+    MockClient::global(mockData: [
+        GetBrowserTraceRequest::class => function (PendingRequest $request) {
+            expect(value: $request->getRequest()->resolveEndpoint())->toBe(expected: '/api/server/debug/browser/trace/default');
+
+            return MockResponse::make(body: 'binary-content', status: 200);
+        }
+    ]);
+
+    $response = Observability::browserTrace();
+
+    expect(value: $response->status())->toBe(expected: 200);
+});

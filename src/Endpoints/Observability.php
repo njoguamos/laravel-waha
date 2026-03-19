@@ -11,6 +11,7 @@ use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
 use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
+use NjoguAmos\Waha\Requests\Observability\GetBrowserTraceRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
 use NjoguAmos\Waha\Requests\Observability\GetNodeCpuProfileRequest;
@@ -104,6 +105,21 @@ class Observability extends Waha
     {
         return $this->connector->send(
             request: new GetNodeCpuProfileRequest(seconds: $seconds)
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function browserTrace(?string $session = null, int $seconds = 30, string $categories = '*'): Response
+    {
+        return $this->connector->send(
+            request: new GetBrowserTraceRequest(
+                session:    $session ?? $this->session,
+                seconds:    $seconds,
+                categories: $categories,
+            )
         );
     }
 }

@@ -15,6 +15,7 @@ use NjoguAmos\Waha\Endpoints\Observability as ObservabilityEndpoint;
  * @method static \Saloon\Http\Response stop(bool $force = false)
  * @method static \Saloon\Http\Response heapSnapshot()
  * @method static \Saloon\Http\Response cpuProfile(int $seconds = 30)
+ * @method static \Saloon\Http\Response browserTrace(?string $session = null, int $seconds = 30, string $categories = '*')
  * @method static \Saloon\Http\Response environment(bool $all = false)
  *
  * @see \NjoguAmos\Waha\Endpoints\Observability
