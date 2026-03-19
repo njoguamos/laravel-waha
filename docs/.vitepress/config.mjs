@@ -259,7 +259,7 @@ export default defineConfig({
                         text: '🔭 Observability',
                         collapsed: true,
                         items: [
-                            {text: 'Ping ⚠️', link: '/api/observability/ping'},
+                            {text: 'Ping', link: '/api/observability/ping'},
                             {text: 'Get Server Version ⚠️', link: '/api/observability/get-server-version'},
                             {text: 'Get Server Environment ⚠️', link: '/api/observability/get-server-environment'},
                             {text: 'Get Server Status ⚠️', link: '/api/observability/get-server-status'},
