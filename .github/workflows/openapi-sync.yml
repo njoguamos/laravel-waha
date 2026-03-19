@@ -1,0 +1,57 @@
+name: Sync OpenAPI Spec
+
+on:
+  schedule:
+#    - cron: '0 7 * * *'   # 07:00 UTC every day (10:00 AM Nairobi time)
+    - cron: '*/5 * * * *'   # Every 5 mins for testing
+
+jobs:
+  sync-openapi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch remote OpenAPI spec
+        run: |
+          curl -s -o /tmp/remote-openapi.json \
+            https://raw.githubusercontent.com/devlikeapro/waha-docs/main/static/swagger/openapi.json
+
+      - name: Compare files
+        id: compare
+        run: |
+          if ! diff -q openapi.json /tmp/remote-openapi.json > /dev/null; then
+            echo "Files differ"
+            echo "diff=true" >> $GITHUB_OUTPUT
+          else
+            echo "Files are the same"
+            echo "diff=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update OpenAPI spec
+        if: steps.compare.outputs.diff == 'true'
+        id: update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          cp /tmp/remote-openapi.json openapi.json
+
+          BRANCH_NAME="update-openapi-$(date +%s)"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
+          git checkout -b $BRANCH_NAME
+          git add openapi.json
+          git commit -m "chore: update openapi.json from remote"
+          git push origin $BRANCH_NAME
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.diff == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "chore: update openapi.json from remote" \
+            --body "This PR updates the openapi.json file to match the remote specification from devlikeapro/waha-docs." \
+            --head "${{ steps.update.outputs.branch_name }}" \
+            --base main
