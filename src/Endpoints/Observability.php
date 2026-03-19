@@ -10,6 +10,7 @@ use Saloon\Exceptions\Request\RequestException;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
+use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
 
 class Observability extends Waha
 {
@@ -32,6 +33,17 @@ class Observability extends Waha
     {
         return $this->connector->send(
             request: new GetServerVersionRequest()
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function environment(bool $all = false): Response
+    {
+        return $this->connector->send(
+            request: new GetServerEnvVariablesRequest(all: $all)
         );
     }
 }

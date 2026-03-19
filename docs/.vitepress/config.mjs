@@ -261,7 +261,7 @@ export default defineConfig({
                         items: [
                             {text: 'Ping', link: '/api/observability/ping'},
                             {text: 'Get Server Version', link: '/api/observability/get-server-version'},
-                            {text: 'Get Server Environment ⚠️', link: '/api/observability/get-server-environment'},
+                            {text: 'Get Server Environment', link: '/api/observability/get-server-environment'},
                             {text: 'Get Server Status ⚠️', link: '/api/observability/get-server-status'},
                             {text: 'Restart Server ⚠️', link: '/api/observability/restart-server'},
                             {text: 'Health Check ⚠️', link: '/api/observability/health-check'},

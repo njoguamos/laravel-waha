@@ -11,8 +11,8 @@ The `Observability` facade's `version` method may be used to get the server vers
 ```php [Usage]
 use NjoguAmos\Waha\Facades\Observability;
 
-/** @var \Saloon\Http\Response $observability */
-$observability = Observability::version();
+/** @var \Saloon\Http\Response $server */
+$server = Observability::version();
 ```
 
 :::
@@ -24,10 +24,10 @@ The response returned by the `version` method is an instance of `Saloon\Http\Res
 ::: code-group
 
 ```php [Saloon Response]
-/** @var \Saloon\Http\Response $observability */
+/** @var \Saloon\Http\Response $server */
 
-$observability->status(); // 200
-$observability->json();   
+$server->status(); // 200
+$server->json();   
 /*
 {
   "version": "2024.2.3",
@@ -41,16 +41,16 @@ $observability->json();
 ```php [DTO]
 use NjoguAmos\Waha\Facades\Observability;
 
-/** @var \NjoguAmos\Waha\Dto\ServerVersionData $observability */
-$observability = Observability::version()->dtoOrFail();
+/** @var \NjoguAmos\Waha\Dto\ServerVersionData $server */
+$server = Observability::version()->dtoOrFail();
 
-$observability->version; // "2024.2.3"
-$observability->engine;  // \NjoguAmos\Waha\Enums\Engine::NOWEB
-$observability->tier;    // \NjoguAmos\Waha\Enums\Version::PRO
-$observability->browser; // "/usr/bin/google-chrome-stable"
+$server->version; // "2024.2.3"
+$server->engine;  // \NjoguAmos\Waha\Enums\Engine::NOWEB
+$server->tier;    // \NjoguAmos\Waha\Enums\Version::PRO
+$server->browser; // "/usr/bin/google-chrome-stable"
 
-$observability->engine->value; // "NOWEB"
-$observability->tier->value;   // "PLUS"
+$server->engine->value; // "NOWEB"
+$server->tier->value;   // "PLUS"
 ```
 
 :::
