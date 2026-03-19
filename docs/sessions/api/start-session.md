@@ -2,9 +2,8 @@
 
 Start a session.
 
-::: tip Idempotent Operation
+**Idempotent Operation**
 If you're trying to start an already running session, it'll return its current state and won't do anything else.
-:::
 
 ## Usage
 

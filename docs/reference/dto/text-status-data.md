@@ -39,10 +39,10 @@ Font style identifier (1-5).
 $data->font; // 1
 ```
 
-## `contacts` → `array|null`
+## `contact` → `array|null`
 
 Array of chat IDs to send the status to. `null` if not specified.
 
 ```php
-$data->contacts; // ["123456789@c.us", "987654321@c.us"] or null
+$data->contact; // ["123456789@c.us", "987654321@c.us"] or null
 ```
