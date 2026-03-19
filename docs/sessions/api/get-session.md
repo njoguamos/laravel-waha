@@ -48,4 +48,4 @@ $session->status; // SessionStatus::WORKING
 ## References
 
 - [WAHA Sessions Documentation](https://waha.devlike.pro/docs/how-to/sessions/)
-- [SessionData DTO Reference](../../reference/dto/session-data)
+- [SessionData DTO Reference](../../reference/dto/session-data.md)

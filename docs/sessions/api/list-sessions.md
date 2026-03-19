@@ -2,9 +2,8 @@
 
 List all sessions.
 
-::: tip Filter Active Sessions
+**Filter Active Sessions**
 By default, the `all` parameter is set to `true` to return all sessions. You can set it to `false` to only list active sessions.
-:::
 
 ## Usage
 
@@ -52,4 +51,4 @@ $sessions[0]->status; // SessionStatus::WORKING
 ## References
 
 - [WAHA Sessions Documentation](https://waha.devlike.pro/docs/how-to/sessions/)
-- [SessionData DTO Reference](../../reference/dto/session-data)
+- [SessionData DTO Reference](../../reference/dto/session-data.md)

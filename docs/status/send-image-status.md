@@ -11,8 +11,8 @@ use NjoguAmos\Waha\Facades\Status;
 use NjoguAmos\Waha\Dto\ImageStatusData;
 
 $data = new ImageStatusData(
-    file: Storage::disk('s3')->url('images/my-image.jpg'),
-    caption: 'Image caption'
+    file: 'https://waha.devlike.pro/img/logo.png',
+    caption: 'Dev Like A Pro'
 );
 
 $result = Status::sendImage(data: $data);
@@ -68,7 +68,7 @@ $result->json();   // ["file" => [...], "caption" => "Image ", ...]
 |:-----:|:---:|:-----:|:----:|
 |   ✅   |  ➕  |   ✅   |  ✅   |
 
-## Important Links
+## References
 
 - [WAHA API Documentation - Send Image Status](https://waha.devlike.pro/docs/how-to/status/#send-image-status)
-- [ImageStatusData DTO Reference](../reference/dto/image-status-data)
+- [`ImageStatusData` DTO](../reference/dto/image-status-data.md)

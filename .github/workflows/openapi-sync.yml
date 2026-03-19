@@ -3,7 +3,7 @@ name: Sync OpenAPI Spec
 on:
   schedule:
 #    - cron: '0 7 * * *'   # 07:00 UTC every day (10:00 AM Nairobi time)
-    - cron: '0 10 * * *'   # 07:00 UTC every day (10:00 AM Nairobi time)
+    - cron: '0 * * * *' # Hourly for testins
 
 jobs:
   sync-openapi:

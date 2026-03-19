@@ -51,3 +51,7 @@ $session->config->metadata['user.id']; // "123"
 ## `ignore` → [`SessionConfigIgnoreData`](./session-config-ignore-data.md) or `null`
 
 Configuration for ignoring certain types of events.
+
+## `gows` → [`SessionConfigGowsData`](./session-config-gows-data.md) or `null`
+
+Configuration specifically for the `GOWS` engine.

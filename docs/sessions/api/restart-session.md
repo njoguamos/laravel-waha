@@ -2,9 +2,8 @@
 
 Restart a session.
 
-::: tip Force Restart
+**Force Restart**
 If the session is already running (status is not STOPPED), it’ll be stopped and started.
-:::
 
 ## Usage
 

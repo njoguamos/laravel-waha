@@ -2,10 +2,9 @@
 
 Logout from a session (unpair a device). Log out removes session information (authentication info and data), but keeps the session’s configuration, so you can start a new session with the same configuration.
 
-::: warning Force Logout
+**Force Logout**
 - If the session is running (not in STOPPED status), it’ll be logged out and started from scratch.
 - If the session is in WORKING status, it’ll also remove an associated device from the Connected Devices list in the app.
-:::
 
 ## Usage
 
