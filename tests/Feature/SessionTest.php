@@ -7,10 +7,12 @@ use NjoguAmos\Waha\Dto\SessionData;
 use NjoguAmos\Waha\Facades\Session;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\SessionMeData;
+use NjoguAmos\Waha\Dto\ScreenshotData;
 use NjoguAmos\Waha\Dto\SessionCreateData;
 use NjoguAmos\Waha\Dto\SessionUpdateData;
 use NjoguAmos\Waha\Requests\Session\GetMeRequest;
 use NjoguAmos\Waha\Requests\Session\GetSessionRequest;
+use NjoguAmos\Waha\Requests\Session\ScreenshotRequest;
 use NjoguAmos\Waha\Requests\Session\StopSessionRequest;
 use NjoguAmos\Waha\Requests\Session\ListSessionsRequest;
 use NjoguAmos\Waha\Requests\Session\StartSessionRequest;
@@ -104,6 +106,22 @@ describe(description: 'update session', tests: function () {
                 && $request->body()->all() === ['apps' => [['app' => 'calls', 'enabled' => true]]];
         });
     });
+
+    it(description: 'can update explicit session', closure: function () {
+        MockClient::global(mockData: [
+            UpdateSessionRequest::class => MockResponse::make(body: ['name' => 'custom-session', 'status' => 'WORKING'], status: 201)
+        ]);
+
+        $data = new SessionUpdateData(apps: [['app' => 'calls', 'enabled' => true]]);
+        $result = Session::update(data: $data, session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (UpdateSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/custom-session'
+                && $request->body()->all() === ['apps' => [['app' => 'calls', 'enabled' => true]]];
+        });
+    });
 });
 
 describe(description: 'delete session', tests: function () {
@@ -118,6 +136,20 @@ describe(description: 'delete session', tests: function () {
 
         MockClient::global()->assertSent(function (DeleteSessionRequest $request): bool {
             return $request->resolveEndpoint() === '/api/sessions/default';
+        });
+    });
+
+    it(description: 'can delete explicit session', closure: function () {
+        MockClient::global(mockData: [
+            DeleteSessionRequest::class => MockResponse::make(status: 201)
+        ]);
+
+        $result = Session::delete(session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (DeleteSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/custom-session';
         });
     });
 });
@@ -198,6 +230,20 @@ describe(description: 'get authenticated account info', tests: function () {
         $me = Session::me()->dtoOrFail();
 
         expect(value: $me)->toBeInstanceOf(class: SessionMeData::class);
+    });
+
+    it(description: 'can get authenticated account info for explicit session', closure: function () {
+        MockClient::global(mockData: [
+            GetMeRequest::class => MockResponse::make(body: ['id' => '123456789@c.us', 'name' => 'John'], status: 201)
+        ]);
+
+        $result = Session::me(session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (GetMeRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/custom-session/me';
+        });
     });
 });
 
@@ -336,6 +382,60 @@ describe(description: 'stop session', tests: function () {
 
         MockClient::global()->assertSent(function (StopSessionRequest $request): bool {
             return $request->resolveEndpoint() === '/api/sessions/custom-session/stop';
+        });
+    });
+});
+
+describe(description: 'screenshot session', tests: function () {
+    it(description: 'can get session screenshot', closure: function () {
+        $body = [
+            'mimetype' => 'image/png',
+            'data'     => 'base64-encoded-data',
+        ];
+
+        MockClient::global(mockData: [
+            ScreenshotRequest::class => MockResponse::make(body: $body, status: 201)
+        ]);
+
+        $result = Session::screenshot();
+
+        expect(value: $result->status())->toBe(expected: 201)
+            ->and(value: $result->json())->toBe(expected: $body);
+
+        MockClient::global()->assertSent(function (ScreenshotRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/screenshot'
+                && $request->query()->all() === ['session' => 'default'];
+        });
+    });
+
+    it(description: 'can return ScreenshotData DTO', closure: function () {
+        $body = [
+            'mimetype' => 'image/png',
+            'data'     => 'base64-encoded-data',
+        ];
+
+        MockClient::global(mockData: [
+            ScreenshotRequest::class => MockResponse::make(body: $body, status: 201),
+        ]);
+
+        $screenshot = Session::screenshot()->dtoOrFail();
+
+        expect(value: $screenshot)->toBeInstanceOf(class: ScreenshotData::class)
+            ->and(value: $screenshot->mimetype)->toBe(expected: 'image/png')
+            ->and(value: $screenshot->data)->toBe(expected: 'base64-encoded-data');
+    });
+
+    it(description: 'can get session screenshot for explicit session', closure: function () {
+        MockClient::global(mockData: [
+            ScreenshotRequest::class => MockResponse::make(body: ['mimetype' => 'image/png', 'data' => 'data'], status: 201)
+        ]);
+
+        $result = Session::screenshot(session: 'custom-session');
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (ScreenshotRequest $request): bool {
+            return $request->query()->all() === ['session' => 'custom-session'];
         });
     });
 });

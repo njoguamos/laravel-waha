@@ -6,6 +6,8 @@ namespace NjoguAmos\Waha\Requests\Session;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
+use NjoguAmos\Waha\Dto\ScreenshotData;
 
 class ScreenshotRequest extends Request
 {
@@ -19,6 +21,11 @@ class ScreenshotRequest extends Request
     public function resolveEndpoint(): string
     {
         return '/api/screenshot';
+    }
+
+    public function createDtoFromResponse(Response $response): ScreenshotData
+    {
+        return ScreenshotData::fromArray($response->json());
     }
 
     protected function defaultQuery(): array

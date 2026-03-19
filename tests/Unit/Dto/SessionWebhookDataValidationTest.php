@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use InvalidArgumentException;
+
 use NjoguAmos\Waha\Dto\SessionWebhookData;
 use NjoguAmos\Waha\Dto\SessionWebhookHmacData;
 use NjoguAmos\Waha\Dto\SessionWebhookRetryData;
@@ -17,7 +17,7 @@ it(description: 'throws exception when hmac is missing key in fromArray', closur
     ];
 
     SessionWebhookData::fromArray($data);
-})->throws(exception: InvalidArgumentException::class, exceptionMessage: 'The [hmac] must be an array and contain [key].');
+})->throws(exception: \InvalidArgumentException::class, exceptionMessage: 'The [hmac] must be an array and contain [key].');
 
 it(description: 'throws exception when retries is missing keys in fromArray', closure: function () {
     $data = [
@@ -30,7 +30,7 @@ it(description: 'throws exception when retries is missing keys in fromArray', cl
     ];
 
     SessionWebhookData::fromArray($data);
-})->throws(exception: InvalidArgumentException::class, exceptionMessage: 'The [retries] must be an array and contain [policy, delaySeconds, attempts].');
+})->throws(exception: \InvalidArgumentException::class, exceptionMessage: 'The [retries] must be an array and contain [policy, delaySeconds, attempts].');
 
 it(description: 'throws exception when customHeaders is not an array of arrays', closure: function () {
     $data = [
@@ -42,7 +42,7 @@ it(description: 'throws exception when customHeaders is not an array of arrays',
     ];
 
     SessionWebhookData::fromArray($data);
-})->throws(exception: InvalidArgumentException::class, exceptionMessage: 'The [customHeaders] must be an indexed array of associative arrays.');
+})->throws(exception: \InvalidArgumentException::class, exceptionMessage: 'The [customHeaders] must be an indexed array of associative arrays.');
 
 it(description: 'throws exception when customHeaders element is missing name or value', closure: function () {
     $data = [
@@ -54,7 +54,7 @@ it(description: 'throws exception when customHeaders element is missing name or 
     ];
 
     SessionWebhookData::fromArray($data);
-})->throws(exception: InvalidArgumentException::class, exceptionMessage: 'Each item in [customHeaders] must be an array and contain [name, value].');
+})->throws(exception: \InvalidArgumentException::class, exceptionMessage: 'Each item in [customHeaders] must be an array and contain [name, value].');
 
 it(description: 'can be instantiated with array for hmac and retries (backward compatibility)', closure: function () {
     $hmac = ['key' => 'secret'];

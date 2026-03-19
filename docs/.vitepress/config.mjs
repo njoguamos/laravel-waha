@@ -259,15 +259,15 @@ export default defineConfig({
                         text: '🔭 Observability',
                         collapsed: true,
                         items: [
-                            {text: 'Ping ⚠️', link: '/api/observability/ping'},
-                            {text: 'Get Server Version ⚠️', link: '/api/observability/get-server-version'},
-                            {text: 'Get Server Environment ⚠️', link: '/api/observability/get-server-environment'},
-                            {text: 'Get Server Status ⚠️', link: '/api/observability/get-server-status'},
-                            {text: 'Restart Server ⚠️', link: '/api/observability/restart-server'},
-                            {text: 'Health Check ⚠️', link: '/api/observability/health-check'},
-                            {text: 'Node Heapsnapshot ⚠️', link: '/api/observability/debug-heapsnapshot'},
-                            {text: 'Node CPU Profiling ⚠️', link: '/api/observability/debug-cpu-profiling'},
-                            {text: 'Browser Trace ⚠️', link: '/api/observability/debug-browser-trace'},
+                            {text: 'Ping', link: '/api/observability/ping'},
+                            {text: 'Get Server Version', link: '/api/observability/get-server-version'},
+                            {text: 'Get Server Environment', link: '/api/observability/get-server-environment'},
+                            {text: 'Get Server Status', link: '/api/observability/get-server-status'},
+                            {text: 'Restart Server', link: '/api/observability/restart-server'},
+                            {text: 'Health Check', link: '/api/observability/health-check'},
+                            {text: 'Node Heapsnapshot', link: '/api/observability/debug-heapsnapshot'},
+                            {text: 'Node CPU Profiling', link: '/api/observability/debug-cpu-profiling'},
+                            {text: 'Browser Trace', link: '/api/observability/debug-browser-trace'},
                         ]
                     },
                 ]
@@ -388,6 +388,7 @@ export default defineConfig({
                             {text: 'Session Config Ignore Data', link: '/reference/dto/session-config-ignore-data'},
                             {text: 'Session Config NOWEB Data', link: '/reference/dto/session-config-noweb-data'},
                             {text: 'Session Config WEBJS Data', link: '/reference/dto/session-config-webjs-data'},
+                            {text: 'Server Version Data', link: '/reference/dto/server-version-data'},
                         ]
                     },
                     {

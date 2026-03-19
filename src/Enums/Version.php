@@ -9,7 +9,7 @@ enum Version: string
 {
     case CORE = 'CORE';
 
-    case PRO = 'PRO';
+    case PRO = 'PLUS';
 
     public function label(): string
     {
