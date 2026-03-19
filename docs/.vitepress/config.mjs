@@ -256,6 +256,16 @@ export default defineConfig({
                         ]
                     },
                     {
+                        text: '🧩 Apps',
+                        collapsed: true,
+                        items: [
+                            {text: 'List Apps', link: '/api/apps/list-apps'},
+                            {text: 'Create App', link: '/api/apps/create-app'},
+                            {text: 'Update App', link: '/api/apps/update-app'},
+                            {text: 'Delete App', link: '/api/apps/delete-app'},
+                        ]
+                    },
+                    {
                         text: '🔭 Observability',
                         collapsed: true,
                         items: [
@@ -389,6 +399,7 @@ export default defineConfig({
                             {text: 'Session Config NOWEB Data', link: '/reference/dto/session-config-noweb-data'},
                             {text: 'Session Config WEBJS Data', link: '/reference/dto/session-config-webjs-data'},
                             {text: 'Server Version Data', link: '/reference/dto/server-version-data'},
+                            {text: 'App Data', link: '/reference/dto/app-data'},
                         ]
                     },
                     {
@@ -399,6 +410,7 @@ export default defineConfig({
                             {text: 'Presence', link: '/reference/enums/presence'},
                             {text: 'Engine', link: '/reference/enums/engine'},
                             {text: 'Version', link: '/reference/enums/version'},
+                            {text: 'App Type', link: '/reference/enums/app-type'},
                         ]
                     },
                 ]

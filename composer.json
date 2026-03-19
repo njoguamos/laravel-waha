@@ -50,6 +50,7 @@
                 "Message": "NjoguAmos\\Waha\\Facades\\Message",
                 "Presence": "NjoguAmos\\Waha\\Facades\\Presence",
                 "Session": "NjoguAmos\\Waha\\Facades\\Session",
+                "App": "NjoguAmos\\Waha\\Facades\\App",
                 "Observability": "NjoguAmos\\Waha\\Facades\\Observability"
             }
         }
