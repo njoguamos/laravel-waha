@@ -146,7 +146,7 @@ export default defineConfig({
                                 items: [
                                     {text: 'Known LIDs ⚠️', link: '/api/contacts/lids/known-lids'},
                                     {text: 'Count of LIDs ⚠️', link: '/api/contacts/lids/count-lids'},
-                                    {text: 'Phone Number by LID ⚠️', link: '/api/contacts/lids/phone-number-by-lid'},
+                                    {text: 'Phone Number by LID', link: '/api/contacts/lids/phone-number-by-lid'},
                                     {text: 'LID by Phone Number', link: '/api/contacts/lids/lid-by-phone-number'},
                                 ]
                             },
