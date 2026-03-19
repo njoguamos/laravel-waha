@@ -27,3 +27,27 @@ Whether debug mode is enabled.
 ```php
 $session->config->debug; // false
 ```
+
+## `noweb` → [`SessionConfigNowebData`](./session-config-noweb-data.md) or `null`
+
+Configuration specifically for the `NOWEB` engine.
+
+## `webjs` → [`SessionConfigWebjsData`](./session-config-webjs-data.md) or `null`
+
+Configuration specifically for the `WEBJS` engine.
+
+## `client` → [`SessionConfigClientData`](./session-config-client-data.md) or `null`
+
+Configuration for the WhatsApp client (device and browser name).
+
+## `metadata` → `array`
+
+An associative array of additional metadata information.
+
+```php
+$session->config->metadata['user.id']; // "123"
+```
+
+## `ignore` → [`SessionConfigIgnoreData`](./session-config-ignore-data.md) or `null`
+
+Configuration for ignoring certain types of events.

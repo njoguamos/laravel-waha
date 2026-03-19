@@ -18,26 +18,26 @@ An array of events that trigger the webhook.
 $webhook->events; // ["message", "session.status"]
 ```
 
-## `hmac` → `string|null`
+## `hmac` → `SessionWebhookHmacData|null`
 
-The HMAC secret for webhook signature verification.
-
-```php
-$webhook->hmac; // "secret"
-```
-
-## `retries` → `int|null`
-
-The number of retries for failed webhook deliveries.
+The HMAC secret configuration for webhook signature verification.
 
 ```php
-$webhook->retries; // 3
+$webhook->hmac; // Instance of SessionWebhookHmacData
 ```
 
-## `customHeaders` → `array|null`
+## `retries` → `SessionWebhookRetryData|null`
+
+The retry policy configuration for failed webhook deliveries.
+
+```php
+$webhook->retries; // Instance of SessionWebhookRetryData
+```
+
+## `customHeaders` → `SessionWebhookCustomHeaderData[]|null`
 
 An array of custom headers to include in the webhook request.
 
 ```php
-$webhook->customHeaders; // ["X-Custom-Header" => "value"]
+$webhook->customHeaders; // Array of SessionWebhookCustomHeaderData objects
 ```

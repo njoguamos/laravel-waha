@@ -24,19 +24,19 @@ The response is an instance of `Saloon\Http\Response`.
 
 ```php
 $result->status(); // 200
-$result->json();   // ["name" => "default", "status" => "ONLINE", ...]
+$result->json();   // ["name" => "default", "status" => "WORKING", ...]
 ```
 
 ### DTO
 
-You can also get the result as a `SessionData` DTO.
-
 ```php
+use NjoguAmos\Waha\Enums\SessionStatus;
+use NjoguAmos\Waha\Facades\Session;
+
 $session = Session::get()->dtoOrFail();
 
 $session->name; // "default"
-$session->status; // "WORKING"
-$session->me->id; // "79111111@c.us"
+$session->status; // SessionStatus::WORKING
 ```
 
 ## Engines

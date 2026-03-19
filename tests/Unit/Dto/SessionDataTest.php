@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use NjoguAmos\Waha\Dto\SessionData;
 use NjoguAmos\Waha\Dto\SessionMeData;
+use NjoguAmos\Waha\Enums\SessionStatus;
 use NjoguAmos\Waha\Dto\SessionConfigData;
 use NjoguAmos\Waha\Dto\SessionEngineData;
 
@@ -12,9 +13,9 @@ it(description: 'can be created from array and converted to array', closure: fun
         'name'   => 'default',
         'status' => 'WORKING',
         'config' => [
-            'proxy'    => null,
             'webhooks' => [],
             'debug'    => false,
+            'metadata' => [],
         ],
         'me' => [
             'id'       => '79111111@c.us',
@@ -29,7 +30,7 @@ it(description: 'can be created from array and converted to array', closure: fun
 
     expect(value: $dto)->toBeInstanceOf(class: SessionData::class)
         ->and(value: $dto->name)->toBe(expected: 'default')
-        ->and(value: $dto->status)->toBe(expected: 'WORKING')
+        ->and(value: $dto->status)->toBe(expected: SessionStatus::WORKING)
         ->and(value: $dto->config)->toBeInstanceOf(class: SessionConfigData::class)
         ->and(value: $dto->me)->toBeInstanceOf(class: SessionMeData::class)
         ->and(value: $dto->engine)->toBeInstanceOf(class: SessionEngineData::class);

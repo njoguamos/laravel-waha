@@ -8,8 +8,8 @@ class SessionProxyData
 {
     public function __construct(
         public string $server,
-        public string $username,
-        public string $password,
+        public ?string $username = null,
+        public ?string $password = null,
     ) {
     }
 
@@ -17,17 +17,25 @@ class SessionProxyData
     {
         return new self(
             server: $data['server'],
-            username: $data['username'],
-            password: $data['password'],
+            username: $data['username'] ?? null,
+            password: $data['password'] ?? null,
         );
     }
 
     public function toArray(): array
     {
-        return [
-            'server'   => $this->server,
-            'username' => $this->username,
-            'password' => $this->password,
+        $array = [
+            'server' => $this->server,
         ];
+
+        if ($this->username !== null) {
+            $array['username'] = $this->username;
+        }
+
+        if ($this->password !== null) {
+            $array['password'] = $this->password;
+        }
+
+        return $array;
     }
 }
