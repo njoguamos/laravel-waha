@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use InvalidArgumentException;
 use NjoguAmos\Waha\Dto\SessionWebhookData;
 use NjoguAmos\Waha\Dto\SessionWebhookHmacData;
 use NjoguAmos\Waha\Dto\SessionWebhookRetryData;

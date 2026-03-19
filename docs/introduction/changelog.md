@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-beta.6] - 2026-03-19
+
+### Added
+- `Session` endpoint with new methods:
+  - `get()`: Retrieve details for a specific session.
+  - `all()`: List all sessions.
+- `SessionStatus` Enum to represent session states (starting, scanning, working, failed, etc.).
+- New `SessionData` DTO for structured session information.
+
+### Changed
+- Improved `SessionData` DTO with more robust data handling and type safety.
+
+## [0.1.0-beta.5] - 2026-03-18
+
+### Added
+- Enforced **Pest PHP** for all tests and clarified usage of the base `TestCase`.
+
+### Changed
+- Improved presence status resilience and logging for better reliability.
+
+## [0.1.0-beta.4] - 2026-03-18
+
+### Added
+- Support for `sendText()` with refined endpoint handling.
+- Enhanced default typing status configuration.
+
+### Changed
+- Updated AI development guidelines (AGENTS.md).
+
 ## [0.1.0-beta.3] - 2026-03-18
 
 ### Added
