@@ -20,6 +20,7 @@ use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
+use NjoguAmos\Waha\Requests\Observability\GetNodeCpuProfileRequest;
 use NjoguAmos\Waha\Requests\Observability\GetNodeHeapSnapshotRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
 
@@ -169,3 +170,18 @@ it(description: 'can generate a node heap snapshot', closure: function () {
     expect(value: $response->status())->toBe(expected: 200)
         ->and(value: $response->body())->toBe(expected: 'binary-content');
 });
+
+it(description: 'can generate a node cpu profile', closure: function (int $seconds) {
+    MockClient::global(mockData: [
+        GetNodeCpuProfileRequest::class => function (PendingRequest $request) use ($seconds) {
+            expect(value: $request->query()->all())->toBe(expected: ['seconds' => $seconds]);
+
+            return MockResponse::make(body: 'binary-content', status: 200);
+        }
+    ]);
+
+    $response = Observability::cpuProfile(seconds: $seconds);
+
+    expect(value: $response->status())->toBe(expected: 200)
+        ->and(value: $response->body())->toBe(expected: 'binary-content');
+})->with([30, 60]);

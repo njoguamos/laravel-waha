@@ -13,6 +13,7 @@ use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
+use NjoguAmos\Waha\Requests\Observability\GetNodeCpuProfileRequest;
 use NjoguAmos\Waha\Requests\Observability\GetNodeHeapSnapshotRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
 
@@ -92,6 +93,17 @@ class Observability extends Waha
     {
         return $this->connector->send(
             request: new GetNodeHeapSnapshotRequest()
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function cpuProfile(int $seconds = 30): Response
+    {
+        return $this->connector->send(
+            request: new GetNodeCpuProfileRequest(seconds: $seconds)
         );
     }
 }

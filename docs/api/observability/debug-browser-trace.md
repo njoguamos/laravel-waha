@@ -9,8 +9,8 @@ This feature is not implemented yet, please submit a [PR](https://github.com/njo
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
-|:-----:|:----:|:-----:|:----:|
-|   ✅   |  ❌   |   ❌   |  ❌   |
+|:-----:|:---:|:-----:|:----:|
+|   ✅   |  ✅  |   ❌   |  ❌   |
 
 ## References
 

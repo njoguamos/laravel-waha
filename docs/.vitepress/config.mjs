@@ -266,7 +266,7 @@ export default defineConfig({
                             {text: 'Restart Server', link: '/api/observability/restart-server'},
                             {text: 'Health Check', link: '/api/observability/health-check'},
                             {text: 'Node Heapsnapshot', link: '/api/observability/debug-heapsnapshot'},
-                            {text: 'Node CPU Profiling ⚠️', link: '/api/observability/debug-cpu-profiling'},
+                            {text: 'Node CPU Profiling', link: '/api/observability/debug-cpu-profiling'},
                             {text: 'Browser Trace ⚠️', link: '/api/observability/debug-browser-trace'},
                         ]
                     },
