@@ -2,10 +2,65 @@
 
 declare(strict_types=1);
 
+use NjoguAmos\Waha\Dto\LidData;
 use Saloon\Http\Faking\MockClient;
 use NjoguAmos\Waha\Facades\Contact;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
+
+describe(description: 'get lid by phone number', tests: function () {
+    it(description: 'can get lid for a given phone number', closure: function () {
+        MockClient::global(mockData: [
+            GetLidRequest::class => MockResponse::make([
+                'lid' => '123123123@lid',
+                'pn'  => '123456789@c.us',
+            ], status: 200),
+        ]);
+
+        $response = Contact::getLid(phone: '123456789@c.us');
+        $dto = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dto)->toBeInstanceOf(class: LidData::class)
+            ->and(value: $dto->lid)->toBe(expected: '123123123@lid')
+            ->and(value: $dto->pn)->toBe(expected: '123456789@c.us');
+    });
+
+    it(description: 'returns null lid if not found', closure: function () {
+        MockClient::global(mockData: [
+            GetLidRequest::class => MockResponse::make([
+                'lid' => null,
+                'pn'  => '123456789@c.us',
+            ], status: 200),
+        ]);
+
+        $response = Contact::getLid(phone: '123456789@c.us');
+        $dto = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dto->lid)->toBeNull()
+            ->and(value: $dto->pn)->toBe(expected: '123456789@c.us');
+    });
+
+    it(description: 'can get lid with custom session', closure: function () {
+        MockClient::global(mockData: [
+            GetLidRequest::class => MockResponse::make([
+                'lid' => '123123123@lid',
+                'pn'  => '123456789@c.us',
+            ], status: 200),
+        ]);
+
+        $response = Contact::getLid(phone: '123456789', session: 'custom-session');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (GetLidRequest $request): bool {
+            return str_contains($request->resolveEndpoint(), 'custom-session')
+                && str_contains($request->resolveEndpoint(), '123456789');
+        });
+    });
+});
 
 describe(description: 'check phone number exists', tests: function () {
     it(description: 'can check if phone number exists', closure: function () {
