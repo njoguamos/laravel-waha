@@ -23,15 +23,15 @@ class ScreenshotRequest extends Request
         return '/api/screenshot';
     }
 
+    public function createDtoFromResponse(Response $response): ScreenshotData
+    {
+        return ScreenshotData::fromArray($response->json());
+    }
+
     protected function defaultQuery(): array
     {
         return [
             'session' => $this->session,
         ];
-    }
-
-    public function createDtoFromResponse(Response $response): ScreenshotData
-    {
-        return ScreenshotData::fromArray($response->json());
     }
 }

@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
+use Carbon\CarbonImmutable;
+use Saloon\Http\PendingRequest;
 use NjoguAmos\Waha\Enums\Engine;
 use NjoguAmos\Waha\Enums\Version;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\PingResponseData;
+use NjoguAmos\Waha\Dto\ServerStatusData;
 use NjoguAmos\Waha\Dto\ServerVersionData;
 use NjoguAmos\Waha\Facades\Observability;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
+use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
-use Saloon\Http\PendingRequest;
 
 it(description: 'can ping the server', closure: function () {
     MockClient::global(mockData: [
@@ -64,3 +67,22 @@ it(description: 'can get server environment variables', closure: function (bool 
             'WAHA_HTTP_LOG_LEVEL' => 'debug',
         ]);
 })->with([true, false]);
+
+it(description: 'can get the server status', closure: function () {
+    $startTimestamp = 1723788847247;
+    $uptime = 3600000;
+
+    MockClient::global(mockData: [
+        GetServerStatusRequest::class => MockResponse::make(body: [
+            'startTimestamp' => $startTimestamp,
+            'uptime'         => $uptime,
+        ], status: 200)
+    ]);
+
+    $result = Observability::status()->dtoOrFail();
+
+    expect(value: $result)->toBeInstanceOf(class: ServerStatusData::class)
+        ->and(value: $result->startTimestamp)->toBeInstanceOf(class: CarbonImmutable::class)
+        ->and(value: $result->startTimestamp->getPreciseTimestamp(3))->toBe(expected: (float) $startTimestamp)
+        ->and(value: $result->uptime)->toBe(expected: $uptime);
+});

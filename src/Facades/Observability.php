@@ -10,6 +10,7 @@ use NjoguAmos\Waha\Endpoints\Observability as ObservabilityEndpoint;
 /**
  * @method static \Saloon\Http\Response ping()
  * @method static \Saloon\Http\Response version()
+ * @method static \Saloon\Http\Response status()
  * @method static \Saloon\Http\Response environment(bool $all = false)
  *
  * @see \NjoguAmos\Waha\Endpoints\Observability
