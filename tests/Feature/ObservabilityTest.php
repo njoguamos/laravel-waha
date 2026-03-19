@@ -8,15 +8,71 @@ use NjoguAmos\Waha\Enums\Engine;
 use NjoguAmos\Waha\Enums\Version;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Enums\HealthStatus;
+use NjoguAmos\Waha\Dto\HealthCheckData;
 use NjoguAmos\Waha\Dto\PingResponseData;
 use NjoguAmos\Waha\Dto\ServerStatusData;
 use NjoguAmos\Waha\Dto\ServerVersionData;
 use NjoguAmos\Waha\Facades\Observability;
+use NjoguAmos\Waha\Enums\HealthIndicatorStatus;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
 use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
+use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
+
+it(description: 'can get server health check', closure: function () {
+    $body = [
+        'status' => 'ok',
+        'info'   => [
+            'mediaFiles.space' => [
+                'status'    => 'up',
+                'path'      => '/tmp/whatsapp-files',
+                'diskPath'  => '/',
+                'free'      => 132979355648,
+                'threshold' => 104857600,
+            ],
+            'sessionsFiles.space' => [
+                'status'    => 'up',
+                'path'      => '/app/.sessions',
+                'diskPath'  => '/',
+                'free'      => 132979355648,
+                'threshold' => 104857600,
+            ],
+        ],
+        'error'   => [],
+        'details' => [
+            'mediaFiles.space' => [
+                'status'    => 'up',
+                'path'      => '/tmp/whatsapp-files',
+                'diskPath'  => '/',
+                'free'      => 132979355648,
+                'threshold' => 104857600,
+            ],
+            'sessionsFiles.space' => [
+                'status'    => 'up',
+                'path'      => '/app/.sessions',
+                'diskPath'  => '/',
+                'free'      => 132979355648,
+                'threshold' => 104857600,
+            ],
+        ],
+    ];
+
+    MockClient::global(mockData: [
+        GetHealthCheckRequest::class => MockResponse::make(body: $body, status: 200)
+    ]);
+
+    $result = Observability::health()->dtoOrFail();
+
+    expect(value: $result)->toBeInstanceOf(class: HealthCheckData::class)
+        ->and(value: $result->status)->toBe(expected: HealthStatus::OK)
+        ->and(value: $result->info)->toHaveKey(key: 'mediaFiles.space')
+        ->and(value: $result->info['mediaFiles.space']->status)->toBe(expected: HealthIndicatorStatus::UP)
+        ->and(value: $result->info['mediaFiles.space']->free)->toBe(expected: 132979355648)
+        ->and(value: $result->error)->toBeEmpty();
+});
 
 it(description: 'can ping the server', closure: function () {
     MockClient::global(mockData: [

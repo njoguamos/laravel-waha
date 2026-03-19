@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Facade;
 use NjoguAmos\Waha\Endpoints\Observability as ObservabilityEndpoint;
 
 /**
+ * @method static \Saloon\Http\Response health()
  * @method static \Saloon\Http\Response ping()
  * @method static \Saloon\Http\Response version()
  * @method static \Saloon\Http\Response status()

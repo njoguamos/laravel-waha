@@ -10,12 +10,24 @@ use Saloon\Exceptions\Request\RequestException;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Observability\PingRequest;
 use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
+use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
 
 class Observability extends Waha
 {
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function health(): Response
+    {
+        return $this->connector->send(
+            request: new GetHealthCheckRequest()
+        );
+    }
+
     /**
      * @throws FatalRequestException
      * @throws RequestException
