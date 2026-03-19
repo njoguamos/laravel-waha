@@ -11,8 +11,8 @@ The `Observability` facade's `ping` method may be used to check if the server is
 ```php [Usage]
 use NjoguAmos\Waha\Facades\Observability;
 
-/** @var \Saloon\Http\Response $observability */
-$observability = Observability::ping();
+/** @var \Saloon\Http\Response $ping */
+$ping = Observability::ping();
 ```
 
 :::
@@ -24,19 +24,19 @@ The response returned by the `ping` method is an instance of `Saloon\Http\Respon
 ::: code-group
 
 ```php [Saloon Response]
-/** @var \Saloon\Http\Response $observability */
+/** @var \Saloon\Http\Response $ping */
 
-$observability->status(); // 200
-$observability->json();   // ["message" => "pong"]
+$ping->status(); // 200
+$ping->json();   // ["message" => "pong"]
 ```
 
 ```php [DTO]
 use NjoguAmos\Waha\Facades\Observability;
 
-/** @var \NjoguAmos\Waha\Dto\PingResponseData $observability */
-$observability = Observability::ping()->dtoOrFail();
+/** @var \NjoguAmos\Waha\Dto\PingResponseData $ping */
+$ping = Observability::ping()->dtoOrFail();
 
-$observability->message; // "pong"
+$ping->message; // "pong"
 ```
 
 :::

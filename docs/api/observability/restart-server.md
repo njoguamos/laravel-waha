@@ -13,13 +13,13 @@ Docker will automatically restart the server, so you can use this endpoint to re
 ```php [Graceful Stop]
 use NjoguAmos\Waha\Facades\Observability;
 
-$response = Observability::stop();
+$stop = Observability::stop();
 ```
 
 ```php [Force Stop]
 use NjoguAmos\Waha\Facades\Observability;
 
-$response = Observability::stop(force: true);
+$stop = Observability::stop(force: true);
 ```
 
 :::
@@ -31,9 +31,9 @@ The response returned by the `stop` method is an instance of `Saloon\Http\Respon
 ::: code-group
 
 ```php [Saloon Response]
-/** @var \Saloon\Http\Response $response */
+/** @var \Saloon\Http\Response $stop */
 
-$response->status(); // 200
+$stop->status(); // 200
 ```
 
 :::

@@ -20,6 +20,7 @@ use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
+use NjoguAmos\Waha\Requests\Observability\GetNodeHeapSnapshotRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
 
 it(description: 'can get server health check', closure: function () {
@@ -157,3 +158,14 @@ it(description: 'can restart the server', closure: function (bool $force) {
 
     expect(value: $response->status())->toBe(expected: 200);
 })->with([true, false]);
+
+it(description: 'can generate a node heap snapshot', closure: function () {
+    MockClient::global(mockData: [
+        GetNodeHeapSnapshotRequest::class => MockResponse::make(body: 'binary-content', status: 200)
+    ]);
+
+    $response = Observability::heapSnapshot();
+
+    expect(value: $response->status())->toBe(expected: 200)
+        ->and(value: $response->body())->toBe(expected: 'binary-content');
+});

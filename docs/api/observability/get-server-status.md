@@ -11,8 +11,8 @@ The `Observability` facade's `status` method may be used to get the server statu
 ```php [Usage]
 use NjoguAmos\Waha\Facades\Observability;
 
-/** @var \Saloon\Http\Response $response */
-$response = Observability::status();
+/** @var \Saloon\Http\Response $status */
+$status = Observability::status();
 ```
 
 :::
@@ -24,10 +24,10 @@ The response returned by the `status` method is an instance of `Saloon\Http\Resp
 ::: code-group
 
 ```php [Saloon Response]
-/** @var \Saloon\Http\Response $response */
+/** @var \Saloon\Http\Response $status */
 
-$response->status(); // 200
-$response->json();   
+$status->status(); // 200
+$status->json();   
 /*
 {
   "startTimestamp": 1723788847247,

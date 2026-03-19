@@ -11,8 +11,8 @@ The `Observability` facade's `health` method may be used to get the server healt
 ```php [Usage]
 use NjoguAmos\Waha\Facades\Observability;
 
-/** @var \Saloon\Http\Response $response */
-$response = Observability::health();
+/** @var \Saloon\Http\Response $health */
+$health = Observability::health();
 ```
 
 :::
@@ -24,10 +24,10 @@ The response returned by the `health` method is an instance of `Saloon\Http\Resp
 ::: code-group
 
 ```php [Saloon Response]
-/** @var \Saloon\Http\Response $response */
+/** @var \Saloon\Http\Response $health */
 
-$response->status(); // 200
-$response->json();   
+$health->status(); // 200
+$health->json();   
 /*
 {
   "status": "ok",

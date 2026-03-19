@@ -13,6 +13,7 @@ use NjoguAmos\Waha\Requests\Observability\RestartServerRequest;
 use NjoguAmos\Waha\Requests\Observability\GetHealthCheckRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerStatusRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerVersionRequest;
+use NjoguAmos\Waha\Requests\Observability\GetNodeHeapSnapshotRequest;
 use NjoguAmos\Waha\Requests\Observability\GetServerEnvVariablesRequest;
 
 class Observability extends Waha
@@ -80,6 +81,17 @@ class Observability extends Waha
     {
         return $this->connector->send(
             request: new RestartServerRequest(force: $force)
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function heapSnapshot(): Response
+    {
+        return $this->connector->send(
+            request: new GetNodeHeapSnapshotRequest()
         );
     }
 }
