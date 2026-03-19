@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static Response checkExists(string $phone, ?string $session = null)
  * @method static Response getLid(string $phone, ?string $session = null)
  * @method static Response getPhoneNumber(string|int $lid, ?string $session = null)
+ * @method static Response countLids(?string $session = null)
  */
 class Contact extends Facade
 {

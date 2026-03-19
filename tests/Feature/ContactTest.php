@@ -8,6 +8,7 @@ use NjoguAmos\Waha\Facades\Contact;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\PhoneNumberData;
 use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
+use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
 
@@ -180,6 +181,38 @@ describe(description: 'check phone number exists', tests: function () {
 
         MockClient::global()->assertSent(function (CheckExistsRequest $request): bool {
             return $request->query()->get('session') === 'test-session';
+        });
+    });
+});
+
+describe(description: 'get count of lids', tests: function () {
+    it(description: 'can get the count of known lid mappings', closure: function () {
+        MockClient::global(mockData: [
+            CountLidsRequest::class => MockResponse::make([
+                'count' => 123,
+            ], status: 200),
+        ]);
+
+        $response = Contact::countLids();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $response->json(key: 'count'))->toBe(expected: 123);
+    });
+
+    it(description: 'can get count with custom session', closure: function () {
+        MockClient::global(mockData: [
+            CountLidsRequest::class => MockResponse::make([
+                'count' => 5,
+            ], status: 200),
+        ]);
+
+        $response = Contact::countLids(session: 'custom-session');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (CountLidsRequest $request): bool {
+            return str_contains($request->resolveEndpoint(), 'custom-session')
+                && str_contains($request->resolveEndpoint(), '/lids/count');
         });
     });
 });
