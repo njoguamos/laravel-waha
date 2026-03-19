@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-beta.7] - 2026-03-19
+
+### Added
+- `Observability` endpoint with support for:
+  - `health()`: Check server health.
+  - `ping()`: Ping the server.
+  - `version()`: Get server version.
+  - `status()`: Get server status.
+  - `environment()`: Get server environment variables.
+  - `stop()`: Stop/Restart the server.
+  - `heapSnapshot()`: Get Node.js heap snapshot.
+  - `cpuProfile()`: Get Node.js CPU profile.
+  - `browserTrace()`: Get browser trace for a session.
+- New methods to `Session` endpoint:
+  - `create()`: Create a new session.
+  - `update()`: Update session configuration.
+  - `delete()`: Delete a session.
+  - `me()`: Get information about the authenticated user.
+  - `logout()`: Logout from a session.
+  - `restart()`: Restart a session.
+  - `screenshot()`: Take a screenshot of the session.
+  - `stop()`: Stop a session.
+  - `deleteApp()`: Delete a specific app from the session.
+- New `SessionCreateData` and `SessionUpdateData` DTOs.
+
+### Changed
+- Improved documentation with response handling guides and better API reference structure.
+- Updated OpenAPI specification.
+- Refined `SessionData` DTO.
+
 ## [0.1.0-beta.6] - 2026-03-19
 
 ### Added
