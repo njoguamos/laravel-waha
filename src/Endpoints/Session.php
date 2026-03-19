@@ -12,13 +12,13 @@ use Saloon\Exceptions\Request\RequestException;
 use NjoguAmos\Waha\Requests\Session\GetMeRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Session\GetSessionRequest;
+use NjoguAmos\Waha\Requests\Session\ScreenshotRequest;
 use NjoguAmos\Waha\Requests\Session\StopSessionRequest;
 use NjoguAmos\Waha\Requests\Session\ListSessionsRequest;
 use NjoguAmos\Waha\Requests\Session\StartSessionRequest;
 use NjoguAmos\Waha\Requests\Session\CreateSessionRequest;
 use NjoguAmos\Waha\Requests\Session\DeleteSessionRequest;
 use NjoguAmos\Waha\Requests\Session\LogoutSessionRequest;
-use NjoguAmos\Waha\Requests\Session\ScreenshotRequest;
 use NjoguAmos\Waha\Requests\Session\UpdateSessionRequest;
 use NjoguAmos\Waha\Requests\Session\RestartSessionRequest;
 
