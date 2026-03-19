@@ -51,18 +51,29 @@ jobs:
             git checkout $BRANCH_NAME
             git pull origin $BRANCH_NAME
             # Ensure we are up-to-date with main if main has changed
-            git merge origin/main --no-edit || true
+            if ! git merge origin/main --no-edit; then
+              echo "Merge conflict detected with origin/main. Aborting."
+              git merge --abort
+              exit 1
+            fi
           else
             git checkout -b $BRANCH_NAME
           fi
 
           cp /tmp/remote-openapi.json openapi.json
           git add openapi.json
-          git commit -m "chore: update openapi.json from remote" || echo "No changes to commit"
-          git push origin $BRANCH_NAME
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update openapi.json from remote"
+            git push origin $BRANCH_NAME
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create Pull Request
-        if: steps.compare.outputs.diff == 'true'
+        if: steps.compare.outputs.diff == 'true' && steps.update.outputs.has_changes == 'true'
         env:
           # Note: Requires "Allow GitHub Actions to create and approve pull requests" 
           # to be enabled in repository Settings > Actions > General > Workflow permissions
