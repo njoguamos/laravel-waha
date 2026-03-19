@@ -6,8 +6,10 @@ use NjoguAmos\Waha\Dto\LidData;
 use Saloon\Http\Faking\MockClient;
 use NjoguAmos\Waha\Facades\Contact;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Dto\PhoneNumberData;
 use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
+use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
 
 describe(description: 'get lid by phone number', tests: function () {
     it(description: 'can get lid for a given phone number', closure: function () {
@@ -58,6 +60,58 @@ describe(description: 'get lid by phone number', tests: function () {
         MockClient::global()->assertSent(function (GetLidRequest $request): bool {
             return str_contains($request->resolveEndpoint(), 'custom-session')
                 && str_contains($request->resolveEndpoint(), '123456789');
+        });
+    });
+});
+
+describe(description: 'get phone number by lid', tests: function () {
+    it(description: 'can get phone number for a given lid', closure: function () {
+        MockClient::global(mockData: [
+            GetPhoneNumberRequest::class => MockResponse::make([
+                'lid' => '123123123@lid',
+                'pn'  => '123456789@c.us',
+            ], status: 200),
+        ]);
+
+        $response = Contact::getPhoneNumber(lid: '123123123@lid');
+        $dto = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dto)->toBeInstanceOf(class: PhoneNumberData::class)
+            ->and(value: $dto->lid)->toBe(expected: '123123123@lid')
+            ->and(value: $dto->pn)->toBe(expected: '123456789@c.us');
+    });
+
+    it(description: 'returns null phone number if not found', closure: function () {
+        MockClient::global(mockData: [
+            GetPhoneNumberRequest::class => MockResponse::make([
+                'lid' => '123123123@lid',
+                'pn'  => null,
+            ], status: 200),
+        ]);
+
+        $response = Contact::getPhoneNumber(lid: '123123123@lid');
+        $dto = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dto->pn)->toBeNull();
+    });
+
+    it(description: 'can get phone number with custom session and escapes @', closure: function () {
+        MockClient::global(mockData: [
+            GetPhoneNumberRequest::class => MockResponse::make([
+                'lid' => '123123123@lid',
+                'pn'  => '123456789@c.us',
+            ], status: 200),
+        ]);
+
+        $response = Contact::getPhoneNumber(lid: '123123123@lid', session: 'custom-session');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (GetPhoneNumberRequest $request): bool {
+            return str_contains($request->resolveEndpoint(), 'custom-session')
+                && str_contains($request->resolveEndpoint(), '123123123%40lid');
         });
     });
 });
