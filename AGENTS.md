@@ -32,8 +32,8 @@ This is **Laravel WAHA** - a PHP Laravel package that provides an elegant API cl
 ### Core Patterns
  
  1. **Saloon HTTP:** `WahaConnector` (auth & headers) → `Request` classes (per endpoint) → DTOs
- 2. **Endpoints:** Extend `Waha` base class, return typed DTOs, accessible via facades
- 3. **DTOs:** Have `toArray()` serialization. `fromArray()` is allowed only when needed.
+ 2. **Endpoints:** Extend `Waha` base class, return `Saloon\Http\Response`, accessible via facades. Use `dtoOrFail()` to transform the response into a typed DTO.
+ 3. **DTOs:** Have `toArray()` serialization. `fromArray()` is allowed only when needed. `createDtoFromResponse()` in `Request` classes is used for `dtoOrFail()`.
  4. **Testing:** All tests MUST use **Pest PHP** syntax (`test()` or `it()`). PHPUnit class-based tests are prohibited.
  5. **Service Provider:** Binds `WahaConnector` to container, publishes config
  6. **Facades:** Static access via `Status::sendText()` instead of `app(Status::class)->sendText()`
@@ -276,7 +276,36 @@ class SomethingData
 }
 ```
 
-3. **Add to Endpoint** in `src/Endpoints/`, write tests in `tests/Feature/`:
+3. **Add to Endpoint** in `src/Endpoints/`, return `Saloon\Http\Response`, and write tests in `tests/Feature/`. Use `dtoOrFail()` on the response to access DTO data:
+
+```php
+// In Endpoint class
+public function getSomething(string $session, SomethingData $data): Response
+{
+    return $this->connector->send(new GetSomething($session, $data));
+}
+
+// In usage/tests
+$response = Status::getSomething(session: 'default', data: $somethingData);
+$dto = $response->dtoOrFail();
+```
+
+## Base Class (Waha)
+
+All endpoint classes extend the `NjoguAmos\Waha\Waha` base class, which provides internal utility methods:
+
+- **`humanDelay(int $min = 1, int $max = 10): void`**: Adds a random sleep between `$min` and `$max` seconds to mimic human behavior.
+- **`sendPresenceStatus(string $session, string $chatId): void`**: Sends a sequence of Online → Typing → Paused presence statuses with random delays to mimic human-like messaging behavior.
+
+## Documentation Standards (refine-doc)
+
+When updating documentation in `docs/`:
+
+1. **Title and Subtitle:** `#` for main title, `##` for sections like `Usage`, `Response`, `Engines`, and `References`.
+2. **Code Blocks:** Use `::: code-group` for multiple implementation examples (e.g., `[Saloon Response]` vs `[DTO]`).
+3. **Response Section:** Describe the response type (`Saloon\Http\Response`) and show how to handle it using `json()` and `dtoOrFail()`.
+4. **References:** Always include a `## References` section linking to official WAHA docs and relevant DTO references using site-absolute paths (`/reference/dto/<slug>.md`).
+5. **Engines Table:** Include a compatibility table for different WAHA engines (WEBJS, WPP, NOWEB, GOWS).
 
 ## Important Notes
 
