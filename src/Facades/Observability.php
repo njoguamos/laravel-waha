@@ -9,6 +9,7 @@ use NjoguAmos\Waha\Endpoints\Observability as ObservabilityEndpoint;
 
 /**
  * @method static \Saloon\Http\Response ping()
+ * @method static \Saloon\Http\Response version()
  *
  * @see \NjoguAmos\Waha\Endpoints\Observability
  */

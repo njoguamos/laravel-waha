@@ -7,7 +7,7 @@ use NjoguAmos\Waha\Enums\Version;
 it(description: 'has expected cases', closure: function () {
     expect(value: Version::cases())->toHaveCount(count: 2)
         ->and(value: Version::CORE->value)->toBe(expected: 'CORE')
-        ->and(value: Version::PRO->value)->toBe(expected: 'PRO');
+        ->and(value: Version::PRO->value)->toBe(expected: 'PLUS');
 });
 
 it(description: 'returns correct labels', closure: function () {
