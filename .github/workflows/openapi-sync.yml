@@ -2,8 +2,7 @@ name: Sync OpenAPI Spec
 
 on:
   schedule:
-#    - cron: '0 7 * * *'   # 07:00 UTC every day (10:00 AM Nairobi time)
-    - cron: '0 * * * *' # Hourly for testing
+    - cron: '0 7 * * *'   # 07:00 UTC every day (10:00 AM Nairobi time)
 
 jobs:
   sync-openapi:
@@ -54,7 +53,7 @@ jobs:
           git add openapi.json
           
           if ! git diff --cached --quiet; then
-            git commit -m "chore: update openapi.json from remote"
+            git commit -m "Update openapi.json from remote"
             # Force push to overwrite the remote branch, avoiding any conflicts or "stale info" errors
             git push origin $BRANCH_NAME --force
             echo "has_changes=true" >> $GITHUB_OUTPUT
