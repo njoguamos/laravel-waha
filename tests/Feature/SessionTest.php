@@ -6,11 +6,18 @@ use Saloon\Http\Faking\MockClient;
 use NjoguAmos\Waha\Dto\SessionData;
 use NjoguAmos\Waha\Facades\Session;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Dto\SessionMeData;
+use NjoguAmos\Waha\Dto\SessionCreateData;
+use NjoguAmos\Waha\Dto\SessionUpdateData;
+use NjoguAmos\Waha\Requests\Session\GetMeRequest;
 use NjoguAmos\Waha\Requests\Session\GetSessionRequest;
 use NjoguAmos\Waha\Requests\Session\StopSessionRequest;
 use NjoguAmos\Waha\Requests\Session\ListSessionsRequest;
 use NjoguAmos\Waha\Requests\Session\StartSessionRequest;
+use NjoguAmos\Waha\Requests\Session\CreateSessionRequest;
+use NjoguAmos\Waha\Requests\Session\DeleteSessionRequest;
 use NjoguAmos\Waha\Requests\Session\LogoutSessionRequest;
+use NjoguAmos\Waha\Requests\Session\UpdateSessionRequest;
 use NjoguAmos\Waha\Requests\Session\RestartSessionRequest;
 
 describe(description: 'list sessions', tests: function () {
@@ -63,6 +70,58 @@ describe(description: 'list sessions', tests: function () {
     });
 });
 
+describe(description: 'create session', tests: function () {
+    it(description: 'can create session', closure: function () {
+        MockClient::global(mockData: [
+            CreateSessionRequest::class => MockResponse::make(body: ['name' => 'default', 'status' => 'STARTING'], status: 201)
+        ]);
+
+        $data = new SessionCreateData(name: 'default');
+        $result = Session::create(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201)
+            ->and(value: $result->json(key: 'name'))->toBe(expected: 'default');
+
+        MockClient::global()->assertSent(function (CreateSessionRequest $request): bool {
+            return $request->body()->all() === ['name' => 'default', 'start' => true];
+        });
+    });
+});
+
+describe(description: 'update session', tests: function () {
+    it(description: 'can update session', closure: function () {
+        MockClient::global(mockData: [
+            UpdateSessionRequest::class => MockResponse::make(body: ['name' => 'default', 'status' => 'WORKING'], status: 201)
+        ]);
+
+        $data = new SessionUpdateData(apps: [['app' => 'calls', 'enabled' => true]]);
+        $result = Session::update(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (UpdateSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/default'
+                && $request->body()->all() === ['apps' => [['app' => 'calls', 'enabled' => true]]];
+        });
+    });
+});
+
+describe(description: 'delete session', tests: function () {
+    it(description: 'can delete session', closure: function () {
+        MockClient::global(mockData: [
+            DeleteSessionRequest::class => MockResponse::make(status: 201)
+        ]);
+
+        $result = Session::delete();
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (DeleteSessionRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/default';
+        });
+    });
+});
+
 describe(description: 'get session', tests: function () {
     it(description: 'can get session', closure: function () {
         MockClient::global(mockData: [
@@ -110,6 +169,38 @@ describe(description: 'get session', tests: function () {
     });
 });
 
+describe(description: 'get authenticated account info', tests: function () {
+    it(description: 'can get authenticated account info', closure: function () {
+        MockClient::global(mockData: [
+            GetMeRequest::class => MockResponse::make(body: ['id' => '123456789@c.us', 'name' => 'John'], status: 201)
+        ]);
+
+        $result = Session::me();
+
+        expect(value: $result->status())->toBe(expected: 201)
+            ->and(value: $result->json(key: 'id'))->toBe(expected: '123456789@c.us');
+
+        MockClient::global()->assertSent(function (GetMeRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sessions/default/me';
+        });
+    });
+
+    it(description: 'can return SessionMeData DTO', closure: function () {
+        $body = [
+            'id'       => '123456789@c.us',
+            'pushName' => 'John',
+        ];
+
+        MockClient::global(mockData: [
+            GetMeRequest::class => MockResponse::make(body: $body, status: 201),
+        ]);
+
+        $me = Session::me()->dtoOrFail();
+
+        expect(value: $me)->toBeInstanceOf(class: SessionMeData::class);
+    });
+});
+
 describe(description: 'start session', tests: function () {
     it(description: 'can start session', closure: function () {
         MockClient::global(mockData: [
@@ -122,7 +213,7 @@ describe(description: 'start session', tests: function () {
             ->and(value: $result->json(key: 'name'))->toBe(expected: 'default');
 
         MockClient::global()->assertSent(function (StartSessionRequest $request): bool {
-            return $request->body()->all() === ['name' => 'default'];
+            return $request->resolveEndpoint() === '/api/sessions/default/start';
         });
     });
 
@@ -137,7 +228,7 @@ describe(description: 'start session', tests: function () {
             ->and(value: $result->json(key: 'name'))->toBe(expected: 'custom-session');
 
         MockClient::global()->assertSent(function (StartSessionRequest $request): bool {
-            return $request->body()->all() === ['name' => 'custom-session'];
+            return $request->resolveEndpoint() === '/api/sessions/custom-session/start';
         });
     });
 
@@ -154,7 +245,7 @@ describe(description: 'start session', tests: function () {
             ->and(value: $result->json(key: 'name'))->toBe(expected: 'test-session');
 
         MockClient::global()->assertSent(function (StartSessionRequest $request): bool {
-            return $request->body()->all() === ['name' => 'test-session'];
+            return $request->resolveEndpoint() === '/api/sessions/test-session/start';
         });
     });
 });

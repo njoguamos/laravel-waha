@@ -19,3 +19,7 @@
 .content-container h1:not(:first-of-type) {
     margin-top: 2.5rem;
 }
+
+.item {
+    padding: 2px 0;
+}
