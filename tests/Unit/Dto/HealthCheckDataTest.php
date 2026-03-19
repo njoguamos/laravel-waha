@@ -21,8 +21,10 @@ test('health check data can be created from array', function () {
 
     expect($data->status)->toBe(HealthStatus::OK)
         ->and($data->info['disk'])->toBeInstanceOf(HealthIndicatorData::class)
+        ->and($data->info['disk']->status)->toBe(HealthIndicatorStatus::UP)
         ->and($data->error)->toBe([])
-        ->and($data->details['disk'])->toBeInstanceOf(HealthIndicatorData::class);
+        ->and($data->details['disk'])->toBeInstanceOf(HealthIndicatorData::class)
+        ->and($data->details['disk']->free)->toBe(1024);
 });
 
 test('health check data to array', function () {

@@ -60,6 +60,8 @@ test('session create data to array excludes null config and apps', function () {
         apps: null,
     );
 
-    expect($data->toArray())->not->toHaveKey('config')
-        ->and($data->toArray())->not->toHaveKey('apps');
+    $array = $data->toArray();
+
+    expect($array)->not->toHaveKey('config')
+        ->and($array)->not->toHaveKey('apps');
 });

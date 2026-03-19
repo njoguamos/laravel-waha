@@ -15,5 +15,5 @@ test('server status data to array', function () {
     $array = $data->toArray();
 
     expect($array['uptime'])->toBe(3600)
-        ->and($array['startTimestamp'])->toBeFloat();
+        ->and($array['startTimestamp'])->toBe($timestamp->getPreciseTimestamp(3));
 });

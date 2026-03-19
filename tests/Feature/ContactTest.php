@@ -98,8 +98,7 @@ describe(description: 'get lid by phone number', tests: function () {
         expect(value: $response->status())->toBe(expected: 200);
 
         MockClient::global()->assertSent(function (GetLidRequest $request): bool {
-            return str_contains($request->resolveEndpoint(), 'custom-session')
-                && str_contains($request->resolveEndpoint(), '123456789');
+            return $request->resolveEndpoint() === '/api/custom-session/lids/pn/123456789';
         });
     });
 });
@@ -150,8 +149,7 @@ describe(description: 'get phone number by lid', tests: function () {
         expect(value: $response->status())->toBe(expected: 200);
 
         MockClient::global()->assertSent(function (GetPhoneNumberRequest $request): bool {
-            return str_contains($request->resolveEndpoint(), 'custom-session')
-                && str_contains($request->resolveEndpoint(), '123123123%40lid');
+            return $request->resolveEndpoint() === '/api/custom-session/lids/123123123%40lid';
         });
     });
 });

@@ -21,13 +21,7 @@ class GetPhoneNumberRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        $lid = (string) $this->lid;
-
-        if (str_contains($lid, '@')) {
-            $lid = str_replace('@', '%40', $lid);
-        }
-
-        return '/api/'.$this->session.'/lids/'.$lid;
+        return '/api/'.rawurlencode($this->session).'/lids/'.rawurlencode((string) $this->lid);
     }
 
     public function createDtoFromResponse(Response $response): PhoneNumberData

@@ -21,7 +21,7 @@ class AppData
     }
 
     /**
-     * @return array{session: string, app: string, enabled: bool, config: array<string, mixed>, id?: string|null}
+     * @return array{session: string, app: string, enabled: bool, config: array<string, mixed>, id?: string}
      */
     public function toArray(): array
     {
