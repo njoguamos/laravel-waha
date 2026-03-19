@@ -9,8 +9,47 @@ use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\PhoneNumberData;
 use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
 use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
+use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
+
+describe(description: 'get all known lids', tests: function () {
+    it(description: 'can get all known lids', closure: function () {
+        MockClient::global(mockData: [
+            GetAllLidsRequest::class => MockResponse::make([
+                [
+                    'lid' => '123123123@lid',
+                    'pn'  => '123456789@c.us',
+                ],
+            ], status: 200),
+        ]);
+
+        $response = Contact::getAllLids();
+        $dtos = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dtos)->toBeArray()
+            ->and(value: $dtos[0])->toBeInstanceOf(class: LidData::class)
+            ->and(value: $dtos[0]->lid)->toBe(expected: '123123123@lid')
+            ->and(value: $dtos[0]->pn)->toBe(expected: '123456789@c.us');
+    });
+
+    it(description: 'can get all known lids with custom limit and offset', closure: function () {
+        MockClient::global(mockData: [
+            GetAllLidsRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        $response = Contact::getAllLids(limit: 50, offset: 10, session: 'custom-session');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (GetAllLidsRequest $request): bool {
+            return str_contains($request->resolveEndpoint(), 'custom-session')
+                && $request->query()->get('limit') === 50
+                && $request->query()->get('offset') === 10;
+        });
+    });
+});
 
 describe(description: 'get lid by phone number', tests: function () {
     it(description: 'can get lid for a given phone number', closure: function () {

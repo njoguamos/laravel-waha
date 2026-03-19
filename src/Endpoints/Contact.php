@@ -10,11 +10,27 @@ use Saloon\Exceptions\Request\RequestException;
 use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
+use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
 
 class Contact extends Waha
 {
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function getAllLids(int $limit = 100, int $offset = 0, ?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new GetAllLidsRequest(
+                session: $session ?? $this->session,
+                limit:   $limit,
+                offset:  $offset,
+            )
+        );
+    }
+
     /**
      * @throws FatalRequestException
      * @throws RequestException
