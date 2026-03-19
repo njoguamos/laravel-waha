@@ -1,33 +1,43 @@
 # Get Screenshot
 
-Get a screenshot of the session (usually for QR code or current state).
-Returns an instance of `Saloon\Http\Response`.
+Retrieve a screenshot of the session.
 
 ## Usage
 
-```php
+The `Session` facade's `screenshot` method may be used to retrieve a screenshot of the session (usually for QR code or current state). By default, it retrieves a screenshot of the default session. You can also specify a session name to retrieve a screenshot of a specific session.
+
+::: code-group
+
+```php [Default Session]
 use NjoguAmos\Waha\Facades\Session;
 
-$result = Session::screenshot();
+/** @var \Saloon\Http\Response $session */
+$session = Session::screenshot();
 ```
 
-### Get Screenshot of Custom Session
-
-```php
+```php [Specific Session]
 use NjoguAmos\Waha\Facades\Session;
 
-$result = Session::screenshot(session: 'custom-session');
+/** @var \Saloon\Http\Response $session */
+$session = Session::screenshot(session: 'custom-session');
 ```
 
-## Result
+:::
 
-The response is an instance of `Saloon\Http\Response`.
-The body is a PNG image.
+## Response
 
-```php
-$result->status(); // 200
-$result->body();   // PNG image binary data
+The response returned by the `screenshot` method is an instance of `Saloon\Http\Response`. The body is a PNG image:
+
+::: code-group
+
+```php [Saloon Response]
+/** @var \Saloon\Http\Response $session */
+
+$session->status(); // 200
+$session->body();   // PNG image binary data
 ```
+
+:::
 
 ## Engines
 

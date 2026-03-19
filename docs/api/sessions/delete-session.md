@@ -1,28 +1,42 @@
 # Delete Session
 
-Delete the session with the given name. Stop and logout as well. Idempotent operation.
+Delete a WhatsApp session.
 
 ## Usage
 
-```php
+The `Session` facade's `delete` method may be used to delete a WhatsApp session. By default, it deletes the default session. You can also specify a session name to delete a specific session.
+
+::: code-group
+
+```php [Default Session]
 use NjoguAmos\Waha\Facades\Session;
 
-$result = Session::delete();
+/** @var \Saloon\Http\Response $session */
+$session = Session::delete();
 ```
 
-### Delete Custom Session
+```php [Specific Session]
+use NjoguAmos\Waha\Facades\Session;
 
-```php
-$result = Session::delete(session: 'custom-session');
+/** @var \Saloon\Http\Response $session */
+$session = Session::delete(session: 'custom-session');
 ```
 
-## Result
+:::
 
-The response is an instance of `Saloon\Http\Response`.
+## Response
 
-```php
-$result->status(); // 201
+The response returned by the `delete` method is an instance of `Saloon\Http\Response`. You may use the `status` method to check the response status:
+
+::: code-group
+
+```php [Saloon Response]
+/** @var \Saloon\Http\Response $session */
+
+$session->status(); // 201
 ```
+
+:::
 
 ## Engines
 

@@ -39,11 +39,11 @@ class SessionData
     public function toArray(): array
     {
         $array = [
-            'name'           => $this->name,
-            'status'         => $this->status->value,
-            'config'         => $this->config?->toArray(),
-            'me'             => $this->me?->toArray(),
-            'engine'         => $this->engine?->toArray(),
+            'name'   => $this->name,
+            'status' => $this->status->value,
+            'config' => $this->config?->toArray(),
+            'me'     => $this->me?->toArray(),
+            'engine' => $this->engine?->toArray(),
         ];
 
         if (count($this->apps) > 0) {
