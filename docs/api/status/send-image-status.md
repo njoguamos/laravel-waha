@@ -71,4 +71,4 @@ $result->json();   // ["file" => [...], "caption" => "Image ", ...]
 ## References
 
 - [WAHA API Documentation - Send Image Status](https://waha.devlike.pro/docs/how-to/status/#send-image-status)
-- [`ImageStatusData` DTO](../reference/dto/image-status-data.md)
+- [`ImageStatusData` DTO](/reference/dto/image-status-data.md)

@@ -71,5 +71,5 @@ $response = Message::sendText(data: $data);
 
 ## References
 
-- [`MessageTextData` DTO](../reference/dto/message-text-data.md)
+- [`MessageTextData` DTO](/reference/dto/message-text-data.md)
 - [WAHA Documentation: Send Text](https://waha.devlike.pro/docs/how-to/send-messages/#send-text)
