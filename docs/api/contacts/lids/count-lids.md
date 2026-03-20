@@ -12,14 +12,14 @@ You can use the `Contact` facade to get the count of LID mappings for a session.
 use NjoguAmos\Waha\Facades\Contact;
 
 /** @var \Saloon\Http\Response $response */
-$response = Contact::countLids();
+$response = Contact::lidCount();
 ```
 
 :::
 
 ## Response
 
-The response returned by the `countLids` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array.
+The response returned by the `lidCount` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array.
 
 ::: code-group
 

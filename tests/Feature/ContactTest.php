@@ -28,7 +28,7 @@ describe(description: 'get all known lids', tests: function () {
             ], status: 200),
         ]);
 
-        $response = Contact::getAllLids();
+        $response = Contact::allLids();
         $dtos = $response->dtoOrFail();
 
         expect(value: $response->status())->toBe(expected: 200)
@@ -43,7 +43,7 @@ describe(description: 'get all known lids', tests: function () {
             GetAllLidsRequest::class => MockResponse::make([], status: 200),
         ]);
 
-        $response = Contact::getAllLids(limit: 50, offset: 10, session: 'custom-session');
+        $response = Contact::allLids(limit: 50, offset: 10, session: 'custom-session');
 
         expect(value: $response->status())->toBe(expected: 200);
 
@@ -167,7 +167,7 @@ describe(description: 'check phone number exists', tests: function () {
             ], status: 201),
         ]);
 
-        $result = Contact::checkExists(phone: '11231231231');
+        $result = Contact::exists(phone: '11231231231');
 
         expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json())->toBeArray()
@@ -183,7 +183,7 @@ describe(description: 'check phone number exists', tests: function () {
             ], status: 201),
         ]);
 
-        $result = Contact::checkExists(phone: '99999999999');
+        $result = Contact::exists(phone: '99999999999');
 
         expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json(key: 'numberExists'))->toBeFalse()
@@ -198,7 +198,7 @@ describe(description: 'check phone number exists', tests: function () {
             ], status: 201),
         ]);
 
-        $result = Contact::checkExists(phone: '55xxxxxxxxxxx', session: 'custom-session');
+        $result = Contact::exists(phone: '55xxxxxxxxxxx', session: 'custom-session');
 
         expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json(key: 'numberExists'))->toBeTrue()
@@ -215,7 +215,7 @@ describe(description: 'check phone number exists', tests: function () {
             ], status: 201),
         ]);
 
-        $result = Contact::checkExists(phone: '11231231231');
+        $result = Contact::exists(phone: '11231231231');
 
         expect(value: $result->status())->toBe(expected: 201)
             ->and(value: $result->json(key: 'numberExists'))->toBeTrue();
@@ -234,7 +234,7 @@ describe(description: 'get count of lids', tests: function () {
             ], status: 200),
         ]);
 
-        $response = Contact::countLids();
+        $response = Contact::lidCount();
 
         expect(value: $response->status())->toBe(expected: 200)
             ->and(value: $response->json(key: 'count'))->toBe(expected: 123);
@@ -247,7 +247,7 @@ describe(description: 'get count of lids', tests: function () {
             ], status: 200),
         ]);
 
-        $response = Contact::countLids(session: 'custom-session');
+        $response = Contact::lidCount(session: 'custom-session');
 
         expect(value: $response->status())->toBe(expected: 200);
 

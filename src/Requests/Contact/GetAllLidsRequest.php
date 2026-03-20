@@ -25,6 +25,9 @@ class GetAllLidsRequest extends Request
         return '/api/'.rawurlencode($this->session).'/lids';
     }
 
+    /**
+     * @return list<LidData>
+     */
     public function createDtoFromResponse(Response $response): array
     {
         return array_map(

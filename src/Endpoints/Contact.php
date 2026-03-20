@@ -24,8 +24,11 @@ class Contact extends Waha
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function getAllLids(int $limit = 100, int $offset = 0, ?string $session = null): Response
+    public function allLids(int $limit = 100, int $offset = 0, ?string $session = null): Response
     {
+        $limit = max(1, $limit);
+        $offset = max(0, $offset);
+
         return $this->connector->send(
             request: new GetAllLidsRequest(
                 session: $session ?? $this->session,
@@ -67,7 +70,7 @@ class Contact extends Waha
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function checkExists(string $phone, ?string $session = null): Response
+    public function exists(string $phone, ?string $session = null): Response
     {
         return $this->connector->send(
             request: new CheckExistsRequest(
@@ -138,7 +141,7 @@ class Contact extends Waha
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function countLids(?string $session = null): Response
+    public function lidCount(?string $session = null): Response
     {
         return $this->connector->send(
             request: new CountLidsRequest(

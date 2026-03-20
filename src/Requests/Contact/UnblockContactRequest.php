@@ -17,7 +17,7 @@ class UnblockContactRequest extends Request implements HasBody
 
     public function __construct(
         protected string $contactId,
-        protected ?string $session = null,
+        protected string $session,
     ) {
     }
 
@@ -30,7 +30,7 @@ class UnblockContactRequest extends Request implements HasBody
     {
         return [
             'contactId' => $this->contactId,
-            'session'   => $this->session ?? config(key: 'waha.session'),
+            'session'   => $this->session,
         ];
     }
 }

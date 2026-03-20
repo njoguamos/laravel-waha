@@ -20,6 +20,10 @@ class PhoneNumberData
             throw new InvalidArgumentException(message: "The 'lid' key is required and must be a non-empty string.");
         }
 
+        if (array_key_exists(key: 'pn', array: $data) && $data['pn'] !== null && ! is_string(value: $data['pn'])) {
+            throw new InvalidArgumentException(message: "The 'pn' key must be a string or null.");
+        }
+
         return new self(
             lid: $data['lid'],
             pn:  $data['pn'] ?? null,

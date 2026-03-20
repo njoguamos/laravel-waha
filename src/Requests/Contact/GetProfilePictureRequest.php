@@ -13,8 +13,8 @@ class GetProfilePictureRequest extends Request
 
     public function __construct(
         protected string $contactId,
-        protected bool $refresh = false,
-        protected ?string $session = null,
+        protected bool $refresh,
+        protected string $session,
     ) {
     }
 
@@ -28,7 +28,7 @@ class GetProfilePictureRequest extends Request
         return [
             'contactId' => $this->contactId,
             'refresh'   => $this->refresh ? 'True' : 'False',
-            'session'   => $this->session ?? config(key: 'waha.session'),
+            'session'   => $this->session,
         ];
     }
 }

@@ -16,14 +16,14 @@ You can use the `Contact` facade to query all known LIDs.
 use NjoguAmos\Waha\Facades\Contact;
 
 /** @var \Saloon\Http\Response $response */
-$response = Contact::getAllLids(limit: 100, offset: 0);
+$response = Contact::allLids(limit: 100, offset: 0);
 ```
 
 :::
 
 ## Response
 
-The response returned by the `getAllLids` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array or the `dtoOrFail` method to retrieve an array of `LidData` DTOs:
+The response returned by the `allLids` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array or the `dtoOrFail` method to retrieve an array of `LidData` DTOs:
 
 ::: code-group
 
@@ -38,7 +38,7 @@ $response->json();   // [["lid" => "123123123@lid", "pn" => "123456789@c.us"]]
 use NjoguAmos\Waha\Facades\Contact;
 
 /** @var \NjoguAmos\Waha\Dto\LidData[] $dtos */
-$dtos = Contact::getAllLids()->dtoOrFail();
+$dtos = Contact::allLids()->dtoOrFail();
 
 foreach ($dtos as $dto) {
     $dto->lid; // "123123123@lid"

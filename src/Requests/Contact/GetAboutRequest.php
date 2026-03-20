@@ -13,7 +13,7 @@ class GetAboutRequest extends Request
 
     public function __construct(
         protected string $contactId,
-        protected ?string $session = null,
+        protected string $session,
     ) {
     }
 
@@ -26,7 +26,7 @@ class GetAboutRequest extends Request
     {
         return [
             'contactId' => $this->contactId,
-            'session'   => $this->session ?? config(key: 'waha.session'),
+            'session'   => $this->session,
         ];
     }
 }
