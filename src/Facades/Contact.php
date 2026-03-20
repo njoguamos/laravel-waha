@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static Response checkExists(string $phone, ?string $session = null)
  * @method static Response getAllLids(int $limit = 100, int $offset = 0, ?string $session = null)
  * @method static Response getLid(string $phone, ?string $session = null)
+ * @method static Response getAbout(string $contactId, ?string $session = null)
+ * @method static Response block(string $contactId, ?string $session = null)
+ * @method static Response unblock(string $contactId, ?string $session = null)
+ * @method static Response getProfilePicture(string $contactId, bool $refresh = false, ?string $session = null)
  * @method static Response getPhoneNumber(string|int $lid, ?string $session = null)
  * @method static Response countLids(?string $session = null)
  */

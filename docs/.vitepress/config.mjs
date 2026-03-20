@@ -134,10 +134,10 @@ export default defineConfig({
                                     {text: 'Get Contact ⚠️', link: '/api/contacts/c.us/get-contact'},
                                     {text: 'Update Contact ⚠️', link: '/api/contacts/c.us/update-contact'},
                                     {text: 'Check Exists', link: '/api/contacts/c.us/check-exists'},
-                                    {text: 'Get About ⚠️', link: '/api/contacts/c.us/get-about'},
-                                    {text: 'Profile Picture ⚠️', link: '/api/contacts/c.us/profile-picture'},
-                                    {text: 'Block Contact ⚠️', link: '/api/contacts/c.us/block-contact'},
-                                    {text: 'Unblock Contact ⚠️', link: '/api/contacts/c.us/unblock-contact'},
+                                    {text: 'Get About', link: '/api/contacts/c.us/get-about'},
+                                    {text: 'Profile Picture', link: '/api/contacts/c.us/profile-picture'},
+                                    {text: 'Block Contact', link: '/api/contacts/c.us/block-contact'},
+                                    {text: 'Unblock Contact', link: '/api/contacts/c.us/unblock-contact'},
                                 ]
                             },
                             {

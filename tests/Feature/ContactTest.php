@@ -8,10 +8,14 @@ use NjoguAmos\Waha\Facades\Contact;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\PhoneNumberData;
 use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
+use NjoguAmos\Waha\Requests\Contact\GetAboutRequest;
 use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
+use NjoguAmos\Waha\Requests\Contact\BlockContactRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
+use NjoguAmos\Waha\Requests\Contact\UnblockContactRequest;
+use NjoguAmos\Waha\Requests\Contact\GetProfilePictureRequest;
 
 describe(description: 'get all known lids', tests: function () {
     it(description: 'can get all known lids', closure: function () {
@@ -250,6 +254,123 @@ describe(description: 'get count of lids', tests: function () {
         MockClient::global()->assertSent(function (CountLidsRequest $request): bool {
             return str_contains($request->resolveEndpoint(), 'custom-session')
                 && str_contains($request->resolveEndpoint(), '/lids/count');
+        });
+    });
+});
+
+describe(description: 'get contact about', tests: function () {
+    it(description: 'can get about info for a contact', closure: function () {
+        MockClient::global(mockData: [
+            GetAboutRequest::class => MockResponse::make([
+                'about' => 'Hi, I use WhatsApp!',
+            ], status: 200),
+        ]);
+
+        $response = Contact::getAbout(contactId: '123456789@c.us');
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $response->json(key: 'about'))->toBe(expected: 'Hi, I use WhatsApp!');
+    });
+
+    it(description: 'can get about info with custom session', closure: function () {
+        MockClient::global(mockData: [
+            GetAboutRequest::class => MockResponse::make([
+                'about' => 'Available',
+            ], status: 200),
+        ]);
+
+        Contact::getAbout(contactId: '123456789', session: 'custom-session');
+
+        MockClient::global()->assertSent(function (GetAboutRequest $request): bool {
+            return $request->query()->get(key: 'contactId') === '123456789'
+                && $request->query()->get(key: 'session') === 'custom-session';
+        });
+    });
+});
+
+describe(description: 'get contact profile picture', tests: function () {
+    it(description: 'can get profile picture URL for a contact', closure: function () {
+        MockClient::global(mockData: [
+            GetProfilePictureRequest::class => MockResponse::make([
+                'profilePictureURL' => 'https://example.com/profile.jpg',
+            ], status: 200),
+        ]);
+
+        $response = Contact::getProfilePicture(contactId: '123456789@c.us');
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $response->json(key: 'profilePictureURL'))->toBe(expected: 'https://example.com/profile.jpg');
+    });
+
+    it(description: 'can get profile picture with refresh and custom session', closure: function () {
+        MockClient::global(mockData: [
+            GetProfilePictureRequest::class => MockResponse::make([
+                'profilePictureURL' => 'https://example.com/profile.jpg',
+            ], status: 200),
+        ]);
+
+        Contact::getProfilePicture(contactId: '123456789', refresh: true, session: 'custom-session');
+
+        MockClient::global()->assertSent(function (GetProfilePictureRequest $request): bool {
+            return $request->query()->get(key: 'contactId') === '123456789'
+                && $request->query()->get(key: 'refresh') === 'True'
+                && $request->query()->get(key: 'session') === 'custom-session';
+        });
+    });
+});
+
+describe(description: 'block and unblock contact', tests: function () {
+    it(description: 'can block a contact', closure: function () {
+        MockClient::global(mockData: [
+            BlockContactRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        $response = Contact::block(contactId: '123456789@c.us');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (BlockContactRequest $request): bool {
+            return $request->body()->get(key: 'contactId') === '123456789@c.us';
+        });
+    });
+
+    it(description: 'can block a contact with custom session', closure: function () {
+        MockClient::global(mockData: [
+            BlockContactRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        Contact::block(contactId: '123456789', session: 'custom-session');
+
+        MockClient::global()->assertSent(function (BlockContactRequest $request): bool {
+            return $request->body()->get(key: 'contactId') === '123456789'
+                && $request->body()->get(key: 'session') === 'custom-session';
+        });
+    });
+
+    it(description: 'can unblock a contact', closure: function () {
+        MockClient::global(mockData: [
+            UnblockContactRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        $response = Contact::unblock(contactId: '123456789@c.us');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (UnblockContactRequest $request): bool {
+            return $request->body()->get(key: 'contactId') === '123456789@c.us';
+        });
+    });
+
+    it(description: 'can unblock a contact with custom session', closure: function () {
+        MockClient::global(mockData: [
+            UnblockContactRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        Contact::unblock(contactId: '123456789', session: 'custom-session');
+
+        MockClient::global()->assertSent(function (UnblockContactRequest $request): bool {
+            return $request->body()->get(key: 'contactId') === '123456789'
+                && $request->body()->get(key: 'session') === 'custom-session';
         });
     });
 });
