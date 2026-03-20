@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-beta.8] - 2026-03-20
+
+### Added
+- `App` module for managing third-party applications:
+  - `all()`: List all applications for a session.
+  - `create()`: Create a new application.
+  - `update()`: Update an existing application.
+  - `delete()`: Delete an application.
+- New methods to `Contact` endpoint:
+  - `allLids()`: List all LIDs (LinkedIn Identifiers).
+  - `getLid()`: Get LID for a phone number.
+  - `getPhoneNumber()`: Get phone number for an LID.
+  - `lidCount()`: Get total count of LIDs.
+  - `getAbout()`: Get about information for a contact.
+  - `getProfilePicture()`: Get profile picture URL for a contact.
+  - `block()`: Block a contact.
+  - `unblock()`: Unblock a contact.
+- New `AppData`, `LidData`, and `PhoneNumberData` DTOs.
+- `AppType` Enum for application types (Chatwoot, Calls).
+
+### Changed
+- Moved `deleteApp()` from `Session` endpoint to `App` endpoint.
+- Renamed `checkExists()` to `exists()` in `Contact` endpoint.
+
 ## [0.1.0-beta.7] - 2026-03-19
 
 ### Added
