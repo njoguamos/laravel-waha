@@ -2,8 +2,34 @@
 
 Block contact on WhatsApp.
 
-::: danger
-This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
+## Usage
+
+The `Contact` facade's `block` method may be used to block a contact.
+
+::: code-group
+
+```php [Usage]
+use NjoguAmos\Waha\Facades\Contact;
+
+/** @var \Saloon\Http\Response $response */
+$response = Contact::block(contactId: '11231231231');
+```
+
+:::
+
+## Response
+
+The response returned by the `block` method is an instance of `Saloon\Http\Response`.
+
+::: code-group
+
+```php [Saloon Response]
+/** @var \Saloon\Http\Response $response */
+
+$response->status(); // 200
+$response->json();   // []
+```
+
 :::
 
 ## Engines
