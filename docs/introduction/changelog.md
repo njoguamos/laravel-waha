@@ -128,7 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `sendText()`: Send a text status update.
   - `sendImage()`: Send an image status update.
 - `Contact` endpoint with support for:
-  - `checkExists()`: Check if a phone number exists on WhatsApp.
+  - `exists()`: Check if a phone number exists on WhatsApp.
 - DTOs for structured data:
   - `TextStatusData`
   - `ImageStatusData`

@@ -11,7 +11,7 @@ Check if a phone number is registered on WhatsApp, even if the number is not in 
 ```php
 use NjoguAmos\Waha\Facades\Contact;
 
-$result = Contact::checkExists(phone: '+254722000111');
+$result = Contact::exists(phone: '+254722000111');
 ```
 
 ### With Custom Session
@@ -19,7 +19,7 @@ $result = Contact::checkExists(phone: '+254722000111');
 ```php
 use NjoguAmos\Waha\Facades\Contact;
 
-$result = Contact::checkExists(
+$result = Contact::exists(
     phone: '+11231231231',
     session: 'my-custom-session'
 );

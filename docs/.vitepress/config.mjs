@@ -134,20 +134,20 @@ export default defineConfig({
                                     {text: 'Get Contact ⚠️', link: '/api/contacts/c.us/get-contact'},
                                     {text: 'Update Contact ⚠️', link: '/api/contacts/c.us/update-contact'},
                                     {text: 'Check Exists', link: '/api/contacts/c.us/check-exists'},
-                                    {text: 'Get About ⚠️', link: '/api/contacts/c.us/get-about'},
-                                    {text: 'Profile Picture ⚠️', link: '/api/contacts/c.us/profile-picture'},
-                                    {text: 'Block Contact ⚠️', link: '/api/contacts/c.us/block-contact'},
-                                    {text: 'Unblock Contact ⚠️', link: '/api/contacts/c.us/unblock-contact'},
+                                    {text: 'Get About', link: '/api/contacts/c.us/get-about'},
+                                    {text: 'Profile Picture', link: '/api/contacts/c.us/profile-picture'},
+                                    {text: 'Block Contact', link: '/api/contacts/c.us/block-contact'},
+                                    {text: 'Unblock Contact', link: '/api/contacts/c.us/unblock-contact'},
                                 ]
                             },
                             {
                                 text: 'LIDs',
                                 collapsed: false,
                                 items: [
-                                    {text: 'Known LIDs ⚠️', link: '/api/contacts/lids/known-lids'},
-                                    {text: 'Count of LIDs ⚠️', link: '/api/contacts/lids/count-lids'},
-                                    {text: 'Phone Number by LID ⚠️', link: '/api/contacts/lids/phone-number-by-lid'},
-                                    {text: 'LID by Phone Number ⚠️', link: '/api/contacts/lids/lid-by-phone-number'},
+                                    {text: 'Known LIDs', link: '/api/contacts/lids/known-lids'},
+                                    {text: 'Count of LIDs', link: '/api/contacts/lids/count-lids'},
+                                    {text: 'Phone Number by LID', link: '/api/contacts/lids/phone-number-by-lid'},
+                                    {text: 'LID by Phone Number', link: '/api/contacts/lids/lid-by-phone-number'},
                                 ]
                             },
                         ]
