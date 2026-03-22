@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use NjoguAmos\Waha\Enums\Presence;
 use NjoguAmos\Waha\Dto\SessionData;
 use NjoguAmos\Waha\Dto\SessionMeData;
 use NjoguAmos\Waha\Enums\SessionStatus;
@@ -24,6 +25,7 @@ it(description: 'can be created from array and converted to array', closure: fun
         'engine' => [
             'engine' => 'NOWEB',
         ],
+        'presence' => 'offline',
     ];
 
     $dto = SessionData::fromArray($data);
@@ -31,6 +33,7 @@ it(description: 'can be created from array and converted to array', closure: fun
     expect(value: $dto)->toBeInstanceOf(class: SessionData::class)
         ->and(value: $dto->name)->toBe(expected: 'default')
         ->and(value: $dto->status)->toBe(expected: SessionStatus::WORKING)
+        ->and(value: $dto->presence)->toBe(expected: Presence::OFFLINE)
         ->and(value: $dto->config)->toBeInstanceOf(class: SessionConfigData::class)
         ->and(value: $dto->me)->toBeInstanceOf(class: SessionMeData::class)
         ->and(value: $dto->engine)->toBeInstanceOf(class: SessionEngineData::class);

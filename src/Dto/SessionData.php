@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace NjoguAmos\Waha\Dto;
 
+use NjoguAmos\Waha\Enums\Presence;
 use NjoguAmos\Waha\Enums\SessionStatus;
 
 class SessionData
@@ -16,7 +17,7 @@ class SessionData
         public ?SessionEngineData $engine = null,
         public array $apps = [],
         public ?string $assignedWorker = null,
-        public ?array $presence = null,
+        public ?Presence $presence = null,
         public ?array $timestamps = null,
     ) {
     }
@@ -31,7 +32,7 @@ class SessionData
             engine: isset($data['engine']) ? SessionEngineData::fromArray($data['engine']) : null,
             apps: $data['apps'] ?? [],
             assignedWorker: $data['assignedWorker'] ?? null,
-            presence: $data['presence'] ?? null,
+            presence: isset($data['presence']) ? Presence::from($data['presence']) : null,
             timestamps: $data['timestamps'] ?? null,
         );
     }
@@ -55,7 +56,7 @@ class SessionData
         }
 
         if ($this->presence !== null) {
-            $array['presence'] = $this->presence;
+            $array['presence'] = $this->presence->value;
         }
 
         if ($this->timestamps !== null) {

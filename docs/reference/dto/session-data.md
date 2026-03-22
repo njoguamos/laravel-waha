@@ -50,3 +50,37 @@ Information about the engine being used.
 ```php
 $session->engine?->engine; // "NOWEB"
 ```
+
+## `presence` → [`Presence`](../enums/presence.md) or `null`
+
+The current presence status of the session.
+
+```php
+use NjoguAmos\Waha\Enums\Presence;
+
+$session->presence; // Presence::OFFLINE
+```
+
+## `apps` → `array`
+
+The applications associated with the session.
+
+```php
+$session->apps; // []
+```
+
+## `assignedWorker` → `string` or `null`
+
+The ID of the worker assigned to the session.
+
+```php
+$session->assignedWorker; // "worker-1"
+```
+
+## `timestamps` → `array` or `null`
+
+Various timestamps associated with session activity.
+
+```php
+$session->timestamps['activity']; // 1774197185628
+```
