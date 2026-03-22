@@ -25,13 +25,13 @@ class SessionWebhookData
 
     public static function fromArray(array $data): self
     {
-        if (isset($data['hmac'])) {
+        if (! empty($data['hmac'])) {
             if (! is_array($data['hmac']) || ! array_key_exists('key', $data['hmac'])) {
                 throw new InvalidArgumentException('The [hmac] must be an array and contain [key].');
             }
         }
 
-        if (isset($data['retries'])) {
+        if (! empty($data['retries'])) {
             $required = ['policy', 'delaySeconds', 'attempts'];
             foreach ($required as $key) {
                 if (! is_array($data['retries']) || ! array_key_exists($key, $data['retries'])) {
@@ -40,7 +40,7 @@ class SessionWebhookData
             }
         }
 
-        if (isset($data['customHeaders'])) {
+        if (! empty($data['customHeaders'])) {
             if (! is_array($data['customHeaders']) || (count($data['customHeaders']) > 0 && ! is_array($data['customHeaders'][0]))) {
                 throw new InvalidArgumentException('The [customHeaders] must be an indexed array of associative arrays.');
             }
@@ -55,9 +55,9 @@ class SessionWebhookData
         return new self(
             url: $data['url'],
             events: $data['events'],
-            hmac: isset($data['hmac']) ? SessionWebhookHmacData::fromArray($data['hmac']) : null,
-            retries: isset($data['retries']) ? SessionWebhookRetryData::fromArray($data['retries']) : null,
-            customHeaders: isset($data['customHeaders']) ? array_map(static fn (array $header) => SessionWebhookCustomHeaderData::fromArray($header), $data['customHeaders']) : null,
+            hmac: ! empty($data['hmac']) ? SessionWebhookHmacData::fromArray($data['hmac']) : null,
+            retries: ! empty($data['retries']) ? SessionWebhookRetryData::fromArray($data['retries']) : null,
+            customHeaders: ! empty($data['customHeaders']) ? array_map(static fn (array $header) => SessionWebhookCustomHeaderData::fromArray($header), $data['customHeaders']) : null,
         );
     }
 

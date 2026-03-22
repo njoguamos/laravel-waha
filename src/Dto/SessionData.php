@@ -27,9 +27,9 @@ class SessionData
         return new self(
             name: $data['name'],
             status: SessionStatus::from($data['status']),
-            config: isset($data['config']) ? SessionConfigData::fromArray($data['config']) : null,
-            me: isset($data['me']) ? SessionMeData::fromArray($data['me']) : null,
-            engine: isset($data['engine']) ? SessionEngineData::fromArray($data['engine']) : null,
+            config: ! empty($data['config']) ? SessionConfigData::fromArray($data['config']) : null,
+            me: ! empty($data['me']) ? SessionMeData::fromArray($data['me']) : null,
+            engine: ! empty($data['engine']) ? SessionEngineData::fromArray($data['engine']) : null,
             apps: $data['apps'] ?? [],
             assignedWorker: $data['assignedWorker'] ?? null,
             presence: isset($data['presence']) ? Presence::from($data['presence']) : null,

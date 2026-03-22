@@ -25,14 +25,14 @@ class SessionConfigData
     public static function fromArray(array $data): self
     {
         return new self(
-            proxy: isset($data['proxy']) ? SessionProxyData::fromArray($data['proxy']) : null,
+            proxy: ! empty($data['proxy']) ? SessionProxyData::fromArray($data['proxy']) : null,
             webhooks: array_map(static fn (array $webhook) => SessionWebhookData::fromArray($webhook), $data['webhooks'] ?? []),
             debug: $data['debug'] ?? false,
-            noweb: isset($data['noweb']) ? SessionConfigNowebData::fromArray($data['noweb']) : null,
-            webjs: isset($data['webjs']) ? SessionConfigWebjsData::fromArray($data['webjs']) : null,
-            gows: isset($data['gows']) ? SessionConfigGowsData::fromArray($data['gows']) : null,
-            client: isset($data['client']) ? SessionConfigClientData::fromArray($data['client']) : null,
-            ignore: isset($data['ignore']) ? SessionConfigIgnoreData::fromArray($data['ignore']) : null,
+            noweb: ! empty($data['noweb']) ? SessionConfigNowebData::fromArray($data['noweb']) : null,
+            webjs: ! empty($data['webjs']) ? SessionConfigWebjsData::fromArray($data['webjs']) : null,
+            gows: ! empty($data['gows']) ? SessionConfigGowsData::fromArray($data['gows']) : null,
+            client: ! empty($data['client']) ? SessionConfigClientData::fromArray($data['client']) : null,
+            ignore: ! empty($data['ignore']) ? SessionConfigIgnoreData::fromArray($data['ignore']) : null,
             metadata: $data['metadata'] ?? [],
         );
     }
