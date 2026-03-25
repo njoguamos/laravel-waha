@@ -8,6 +8,7 @@ use Saloon\Http\Response;
 use Illuminate\Support\Facades\Facade;
 
 /**
+ * @method static Response all(string $sortBy = 'name', string $sortOrder = 'desc', int $limit = 100, int $offset = 0, ?string $session = null)
  * @method static Response exists(string $phone, ?string $session = null)
  * @method static Response allLids(int $limit = 100, int $offset = 0, ?string $session = null)
  * @method static Response getLid(string $phone, ?string $session = null)
