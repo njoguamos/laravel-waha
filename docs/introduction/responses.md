@@ -66,7 +66,9 @@ $response = Status::sendText(session: 'default', data: $statusData)->throw();
 
 ## DTO Transformation
 
-Many endpoints in this package are configured to automatically transform the response into a Data Transfer Object (DTO). You can access the DTO using the `dto()` method or `dtoOrFail()`:
+Some endpoints in this package support automatic transformation of the response into a Data Transfer Object (DTO). If an endpoint supports this, it will be documented on that specific endpoint page.
+
+When supported, you can use the `dto()` or `dtoOrFail()` methods on the response.
 
 ```php
 use NjoguAmos\Waha\Facades\Sessions;
