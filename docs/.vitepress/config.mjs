@@ -130,7 +130,7 @@ export default defineConfig({
                                 text: 'c.us',
                                 collapsed: false,
                                 items: [
-                                    {text: 'All Contacts ⚠️', link: '/api/contacts/c.us/all-contacts'},
+                                    {text: 'All Contacts', link: '/api/contacts/c.us/all-contacts'},
                                     {text: 'Get Contact ⚠️', link: '/api/contacts/c.us/get-contact'},
                                     {text: 'Update Contact ⚠️', link: '/api/contacts/c.us/update-contact'},
                                     {text: 'Check Exists', link: '/api/contacts/c.us/check-exists'},
