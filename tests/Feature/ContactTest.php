@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use NjoguAmos\Waha\Dto\LidData;
 use Saloon\Http\Faking\MockClient;
+use NjoguAmos\Waha\Dto\ContactData;
 use NjoguAmos\Waha\Facades\Contact;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\PhoneNumberData;
@@ -13,9 +14,115 @@ use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\BlockContactRequest;
+use NjoguAmos\Waha\Requests\Contact\GetAllContactsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
 use NjoguAmos\Waha\Requests\Contact\UnblockContactRequest;
 use NjoguAmos\Waha\Requests\Contact\GetProfilePictureRequest;
+
+describe(description: 'get all contacts', tests: function () {
+    it(description: 'can get all contacts', closure: function () {
+        MockClient::global(mockData: [
+            GetAllContactsRequest::class => MockResponse::make([
+                [
+                    'id'          => '11231231231@c.us',
+                    'number'      => '11231231231',
+                    'name'        => 'Contact Name',
+                    'pushname'    => 'Pushname',
+                    'shortName'   => 'Shortname',
+                    'isMe'        => true,
+                    'isGroup'     => false,
+                    'isWAContact' => true,
+                    'isMyContact' => true,
+                    'isBlocked'   => false,
+                ],
+            ], status: 200),
+        ]);
+
+        $response = Contact::all();
+        $dtos = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dtos)->toBeArray()
+            ->and(value: $dtos[0])->toBeInstanceOf(class: ContactData::class)
+            ->and(value: $dtos[0]->id)->toBe(expected: '11231231231@c.us')
+            ->and(value: $dtos[0]->number)->toBe(expected: '11231231231')
+            ->and(value: $dtos[0]->name)->toBe(expected: 'Contact Name')
+            ->and(value: $dtos[0]->pushname)->toBe(expected: 'Pushname')
+            ->and(value: $dtos[0]->shortName)->toBe(expected: 'Shortname')
+            ->and(value: $dtos[0]->isMe)->toBeTrue()
+            ->and(value: $dtos[0]->isGroup)->toBeFalse()
+            ->and(value: $dtos[0]->isWAContact)->toBeTrue()
+            ->and(value: $dtos[0]->isMyContact)->toBeTrue()
+            ->and(value: $dtos[0]->isBlocked)->toBeFalse();
+    });
+
+    it(description: 'can get all contacts with partial fields', closure: function () {
+        MockClient::global(mockData: [
+            GetAllContactsRequest::class => MockResponse::make([
+                [
+                    'id'     => '11231231231@c.us',
+                    'number' => '11231231231',
+                ],
+            ], status: 200),
+        ]);
+
+        $response = Contact::all();
+        $dtos = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dtos[0]->id)->toBe(expected: '11231231231@c.us')
+            ->and(value: $dtos[0]->name)->toBeNull()
+            ->and(value: $dtos[0]->isMe)->toBeNull();
+    });
+
+    it(description: 'uses default pagination and sorting parameters', closure: function () {
+        MockClient::global(mockData: [
+            GetAllContactsRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        $response = Contact::all();
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (GetAllContactsRequest $request): bool {
+            return $request->query()->get('sortBy') === 'name'
+                && $request->query()->get('sortOrder') === 'desc'
+                && $request->query()->get('limit') === 100
+                && $request->query()->get('offset') === 0;
+        });
+    });
+
+    it(description: 'can get all contacts with custom pagination', closure: function () {
+        MockClient::global(mockData: [
+            GetAllContactsRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        $response = Contact::all(limit: 50, offset: 10, session: 'custom-session');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (GetAllContactsRequest $request): bool {
+            return $request->query()->get('session') === 'custom-session'
+                && $request->query()->get('limit') === 50
+                && $request->query()->get('offset') === 10;
+        });
+    });
+
+    it(description: 'can get all contacts with custom sorting', closure: function () {
+        MockClient::global(mockData: [
+            GetAllContactsRequest::class => MockResponse::make([], status: 200),
+        ]);
+
+        $response = Contact::all(sortBy: 'id', sortOrder: 'asc');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (GetAllContactsRequest $request): bool {
+            return $request->query()->get('sortBy') === 'id'
+                && $request->query()->get('sortOrder') === 'asc';
+        });
+    });
+});
 
 describe(description: 'get all known lids', tests: function () {
     it(description: 'can get all known lids', closure: function () {
