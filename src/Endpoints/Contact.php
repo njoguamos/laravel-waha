@@ -14,12 +14,35 @@ use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\BlockContactRequest;
+use NjoguAmos\Waha\Requests\Contact\GetAllContactsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
 use NjoguAmos\Waha\Requests\Contact\UnblockContactRequest;
 use NjoguAmos\Waha\Requests\Contact\GetProfilePictureRequest;
 
 class Contact extends Waha
 {
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function all(
+        string $sortBy = 'name',
+        string $sortOrder = 'desc',
+        int $limit = 100,
+        int $offset = 0,
+        ?string $session = null,
+    ): Response {
+        return $this->connector->send(
+            request: new GetAllContactsRequest(
+                session:   $session ?? $this->session,
+                sortBy:    $sortBy,
+                sortOrder: $sortOrder,
+                limit:     $limit,
+                offset:    $offset,
+            )
+        );
+    }
+
     /**
      * @throws FatalRequestException
      * @throws RequestException
