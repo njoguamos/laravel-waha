@@ -3,17 +3,19 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Sleep;
-use NjoguAmos\Waha\Dto\SeenData;
 use NjoguAmos\Waha\Dto\PollData;
+use NjoguAmos\Waha\Dto\SeenData;
 use NjoguAmos\Waha\Enums\Presence;
 use Saloon\Http\Faking\MockClient;
 use Illuminate\Support\Facades\Log;
 use NjoguAmos\Waha\Facades\Message;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Dto\MessageFileData;
 use NjoguAmos\Waha\Dto\MessagePollData;
 use NjoguAmos\Waha\Dto\MessageTextData;
 use NjoguAmos\Waha\Dto\MessageImageData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
+use NjoguAmos\Waha\Requests\Message\SendFileRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollRequest;
 use NjoguAmos\Waha\Requests\Message\SendSeenRequest;
 use NjoguAmos\Waha\Requests\Message\SendTextRequest;
@@ -185,6 +187,29 @@ describe(description: 'send image message', tests: function () {
 
         MockClient::global()->assertSent(function (SendImageRequest $request): bool {
             return $request->resolveEndpoint() === '/api/sendImage'
+                && $request->body()->get('session') === 'default';
+        });
+    });
+});
+
+describe(description: 'send file message', tests: function () {
+    it(description: 'can send file message', closure: function () {
+        MockClient::global(mockData: [
+            SendFileRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageFileData(
+            chatId: '123456789@c.us',
+            file: 'https://example.com/document.pdf',
+            caption: 'Important document'
+        );
+
+        $result = Message::sendFile(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (SendFileRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sendFile'
                 && $request->body()->get('session') === 'default';
         });
     });
