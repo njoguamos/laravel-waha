@@ -11,7 +11,6 @@ use NjoguAmos\Waha\Dto\MessageVideoData;
 $data = new MessageVideoData(
     chatId: '123456789@c.us',
     file: ['url' => 'https://example.com/video.mp4'],
-    convert: true,
     caption: 'Watch this!',
 );
 
@@ -33,7 +32,6 @@ $json = $response->json();
 $data = new MessageVideoData(
     chatId: '123456789@c.us',
     file: ['url' => 'https://example.com/video.mp4'],
-    convert: true,
     reply_to: 'false_1111@c.us_AAA',
 );
 

@@ -11,6 +11,8 @@ use NjoguAmos\Waha\Dto\MessageFileData;
 use NjoguAmos\Waha\Dto\MessagePollData;
 use NjoguAmos\Waha\Dto\MessageTextData;
 use NjoguAmos\Waha\Dto\MessageImageData;
+use NjoguAmos\Waha\Dto\MessageVideoData;
+use NjoguAmos\Waha\Dto\MessageVoiceData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
 use Saloon\Exceptions\Request\RequestException;
 use NjoguAmos\Waha\Requests\Message\SendFileRequest;
@@ -19,6 +21,8 @@ use NjoguAmos\Waha\Requests\Message\SendSeenRequest;
 use NjoguAmos\Waha\Requests\Message\SendTextRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Message\SendImageRequest;
+use NjoguAmos\Waha\Requests\Message\SendVideoRequest;
+use NjoguAmos\Waha\Requests\Message\SendVoiceRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
 
 class Message extends Waha
@@ -65,6 +69,34 @@ class Message extends Waha
     {
         return $this->connector->send(
             request: new SendFileRequest(
+                session: $session ?? $this->session,
+                data: $data
+            )
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function sendVideo(MessageVideoData $data, ?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new SendVideoRequest(
+                session: $session ?? $this->session,
+                data: $data
+            )
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function sendVoice(MessageVoiceData $data, ?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new SendVoiceRequest(
                 session: $session ?? $this->session,
                 data: $data
             )

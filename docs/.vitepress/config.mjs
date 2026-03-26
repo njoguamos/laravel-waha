@@ -69,9 +69,9 @@ export default defineConfig({
                         items: [
                             {text: 'Send Text', link: '/api/send-messages/send-text'},
                             {text: 'Send Image', link: '/api/send-messages/send-image'},
-                            {text: 'Send File ⚠️', link: '/api/send-messages/send-file'},
-                            {text: 'Send Voice ⚠️', link: '/api/send-messages/send-voice'},
-                            {text: 'Send Video ⚠️', link: '/api/send-messages/send-video'},
+                            {text: 'Send File', link: '/api/send-messages/send-file'},
+                            {text: 'Send Voice', link: '/api/send-messages/send-voice'},
+                            {text: 'Send Video', link: '/api/send-messages/send-video'},
                             {text: 'Send Location ⚠️', link: '/api/send-messages/send-location'},
                             {text: 'Send Link Preview ⚠️', link: '/api/send-messages/send-link-preview'},
                             {text: 'Send Poll', link: '/api/send-messages/send-poll'},
