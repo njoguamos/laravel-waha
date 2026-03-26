@@ -8,6 +8,7 @@ use NjoguAmos\Waha\Dto\ContactData;
 use NjoguAmos\Waha\Facades\Contact;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\PhoneNumberData;
+use NjoguAmos\Waha\Dto\ContactUpdateData;
 use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAboutRequest;
 use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
@@ -15,6 +16,7 @@ use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetContactRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\BlockContactRequest;
+use NjoguAmos\Waha\Requests\Contact\UpdateContactRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllContactsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
 use NjoguAmos\Waha\Requests\Contact\UnblockContactRequest;
@@ -199,6 +201,68 @@ describe(description: 'get single contact', tests: function () {
         MockClient::global()->assertSent(function (GetContactRequest $request): bool {
             return $request->query()->get('contactId') === '11231231231'
                 && $request->query()->get('session') === 'custom-session';
+        });
+    });
+});
+
+describe(description: 'update contact', tests: function () {
+    it(description: 'can update a contact', closure: function () {
+        MockClient::global(mockData: [
+            UpdateContactRequest::class => MockResponse::make([
+                'success' => true,
+            ], status: 200),
+        ]);
+
+        $data = new ContactUpdateData(firstName: 'John', lastName: 'Doe');
+
+        $response = Contact::update(chatId: '11231231231@c.us', data: $data);
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $response->json(key: 'success'))->toBeTrue();
+
+        MockClient::global()->assertSent(function (UpdateContactRequest $request): bool {
+            return str_contains($request->resolveEndpoint(), '11231231231%40c.us')
+                && $request->body()->get('firstName') === 'John'
+                && $request->body()->get('lastName') === 'Doe';
+        });
+    });
+
+    it(description: 'can update a contact with phone number', closure: function () {
+        MockClient::global(mockData: [
+            UpdateContactRequest::class => MockResponse::make([
+                'success' => true,
+            ], status: 200),
+        ]);
+
+        $data = new ContactUpdateData(firstName: 'Jane', lastName: 'Smith');
+
+        $response = Contact::update(chatId: '11231231231', data: $data);
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (UpdateContactRequest $request): bool {
+            return str_contains($request->resolveEndpoint(), '11231231231')
+                && $request->body()->get('firstName') === 'Jane'
+                && $request->body()->get('lastName') === 'Smith';
+        });
+    });
+
+    it(description: 'can update a contact with custom session', closure: function () {
+        MockClient::global(mockData: [
+            UpdateContactRequest::class => MockResponse::make([
+                'success' => true,
+            ], status: 200),
+        ]);
+
+        $data = new ContactUpdateData(firstName: 'John', lastName: 'Doe');
+
+        $response = Contact::update(chatId: '11231231231', data: $data, session: 'custom-session');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (UpdateContactRequest $request): bool {
+            return str_contains($request->resolveEndpoint(), 'custom-session')
+                && str_contains($request->resolveEndpoint(), '11231231231');
         });
     });
 });
