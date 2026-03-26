@@ -16,6 +16,7 @@ use NjoguAmos\Waha\Dto\MessageTextData;
 use NjoguAmos\Waha\Dto\MessageImageData;
 use NjoguAmos\Waha\Dto\MessageVideoData;
 use NjoguAmos\Waha\Dto\MessageVoiceData;
+use NjoguAmos\Waha\Dto\MessageLocationData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
 use NjoguAmos\Waha\Requests\Message\SendFileRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollRequest;
@@ -24,6 +25,7 @@ use NjoguAmos\Waha\Requests\Message\SendTextRequest;
 use NjoguAmos\Waha\Requests\Message\SendImageRequest;
 use NjoguAmos\Waha\Requests\Message\SendVideoRequest;
 use NjoguAmos\Waha\Requests\Message\SendVoiceRequest;
+use NjoguAmos\Waha\Requests\Message\SendLocationRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
 use NjoguAmos\Waha\Requests\Presence\SetPresenceRequest;
 
@@ -261,6 +263,30 @@ describe(description: 'send voice message', tests: function () {
             return $request->resolveEndpoint() === '/api/sendVoice'
                 && $request->body()->get('session') === 'default'
                 && $request->body()->get('convert') === false;
+        });
+    });
+});
+
+describe(description: 'send location message', tests: function () {
+    it(description: 'can send location message', closure: function () {
+        MockClient::global(mockData: [
+            SendLocationRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageLocationData(
+            chatId: '123456789@c.us',
+            latitude: 38.8937255,
+            longitude: -77.0969763,
+            title: 'Our office',
+        );
+
+        $result = Message::sendLocation(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (SendLocationRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sendLocation'
+                && $request->body()->get('session') === 'default';
         });
     });
 });

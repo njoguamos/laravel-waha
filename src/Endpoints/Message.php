@@ -13,6 +13,7 @@ use NjoguAmos\Waha\Dto\MessageTextData;
 use NjoguAmos\Waha\Dto\MessageImageData;
 use NjoguAmos\Waha\Dto\MessageVideoData;
 use NjoguAmos\Waha\Dto\MessageVoiceData;
+use NjoguAmos\Waha\Dto\MessageLocationData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
 use Saloon\Exceptions\Request\RequestException;
 use NjoguAmos\Waha\Requests\Message\SendFileRequest;
@@ -23,6 +24,7 @@ use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Message\SendImageRequest;
 use NjoguAmos\Waha\Requests\Message\SendVideoRequest;
 use NjoguAmos\Waha\Requests\Message\SendVoiceRequest;
+use NjoguAmos\Waha\Requests\Message\SendLocationRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
 
 class Message extends Waha
@@ -97,6 +99,20 @@ class Message extends Waha
     {
         return $this->connector->send(
             request: new SendVoiceRequest(
+                session: $session ?? $this->session,
+                data: $data
+            )
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function sendLocation(MessageLocationData $data, ?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new SendLocationRequest(
                 session: $session ?? $this->session,
                 data: $data
             )

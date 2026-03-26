@@ -72,7 +72,7 @@ export default defineConfig({
                             {text: 'Send File', link: '/api/send-messages/send-file'},
                             {text: 'Send Voice', link: '/api/send-messages/send-voice'},
                             {text: 'Send Video', link: '/api/send-messages/send-video'},
-                            {text: 'Send Location ⚠️', link: '/api/send-messages/send-location'},
+                            {text: 'Send Location', link: '/api/send-messages/send-location'},
                             {text: 'Send Link Preview ⚠️', link: '/api/send-messages/send-link-preview'},
                             {text: 'Send Poll', link: '/api/send-messages/send-poll'},
                             {text: 'Send Poll Vote', link: '/api/send-messages/send-poll-vote'},
@@ -404,6 +404,7 @@ export default defineConfig({
                             {text: 'Message Poll Data', link: '/reference/dto/message-poll-data'},
                             {text: 'Message Poll Vote Data', link: '/reference/dto/message-poll-vote-data'},
                             {text: 'Poll Data', link: '/reference/dto/poll-data'},
+                            {text: 'Message Location Data', link: '/reference/dto/message-location-data'},
                         ]
                     },
                     {

@@ -18,6 +18,7 @@ enum FileType: string
     case MP3 = 'mp3';
     case MPEG = 'mpeg';
     case OGG = 'ogg';
+    case OPUS = 'opus';
     case WEBM = 'webm';
     case ZIP = 'zip';
     case TXT = 'txt';
@@ -34,27 +35,27 @@ enum FileType: string
     {
         return match ($this) {
             self::JPG, self::JPEG => 'image/jpeg',
-            self::PNG             => 'image/png',
-            self::GIF             => 'image/gif',
-            self::WEBP            => 'image/webp',
-            self::BMP             => 'image/bmp',
-            self::SVG             => 'image/svg+xml',
-            self::PDF             => 'application/pdf',
-            self::MP4             => 'video/mp4',
-            self::MP3             => 'audio/mpeg',
-            self::MPEG            => 'video/mpeg',
-            self::OGG             => 'audio/ogg',
-            self::WEBM            => 'video/webm',
-            self::ZIP             => 'application/zip',
-            self::TXT             => 'text/plain',
-            self::JSON            => 'application/json',
-            self::DOC             => 'application/msword',
-            self::DOCX            => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            self::XLS             => 'application/vnd.ms-excel',
-            self::XLSX            => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            self::PPT             => 'application/vnd.ms-powerpoint',
-            self::PPTX            => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-            self::OCTET_STREAM    => 'application/octet-stream',
+            self::PNG  => 'image/png',
+            self::GIF  => 'image/gif',
+            self::WEBP => 'image/webp',
+            self::BMP  => 'image/bmp',
+            self::SVG  => 'image/svg+xml',
+            self::PDF  => 'application/pdf',
+            self::MP4  => 'video/mp4',
+            self::MP3  => 'audio/mpeg',
+            self::MPEG => 'video/mpeg',
+            self::OGG, self::OPUS => 'audio/ogg',
+            self::WEBM         => 'video/webm',
+            self::ZIP          => 'application/zip',
+            self::TXT          => 'text/plain',
+            self::JSON         => 'application/json',
+            self::DOC          => 'application/msword',
+            self::DOCX         => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            self::XLS          => 'application/vnd.ms-excel',
+            self::XLSX         => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            self::PPT          => 'application/vnd.ms-powerpoint',
+            self::PPTX         => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            self::OCTET_STREAM => 'application/octet-stream',
         };
     }
 }
