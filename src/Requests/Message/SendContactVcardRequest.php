@@ -29,6 +29,9 @@ class SendContactVcardRequest extends Request implements HasBody
 
     protected function defaultBody(): array
     {
-        return $this->data->toArray();
+        return [
+            'session' => $this->session,
+            ...$this->data->toArray(),
+        ];
     }
 }

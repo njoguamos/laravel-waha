@@ -19,7 +19,8 @@ trait ResolvesMimeType
         }
 
         if (str_starts_with($file, 'http')) {
-            $extension = pathinfo(parse_url($file, PHP_URL_PATH), PATHINFO_EXTENSION);
+            $path = parse_url($file, PHP_URL_PATH);
+            $extension = $path ? pathinfo((string) $path, PATHINFO_EXTENSION) : '';
 
             if ($extension !== '') {
                 $type = FileType::tryFrom(mb_strtolower($extension));
@@ -36,8 +37,19 @@ trait ResolvesMimeType
             $file = explode('base64,', $file)[1];
         }
 
+        $decoded = base64_decode($file, true);
+
+        if ($decoded === false) {
+            return 'application/octet-stream';
+        }
+
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimeType = finfo_buffer($finfo, base64_decode($file));
+
+        if ($finfo === false) {
+            return 'application/octet-stream';
+        }
+
+        $mimeType = finfo_buffer($finfo, $decoded);
         finfo_close($finfo);
 
         return $mimeType ?: 'application/octet-stream';

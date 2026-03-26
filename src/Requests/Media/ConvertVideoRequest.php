@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\Waha\Requests\Message;
+namespace NjoguAmos\Waha\Requests\Media;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
-use NjoguAmos\Waha\Dto\MessageStarData;
+use NjoguAmos\Waha\Dto\MediaConvertData;
 
-class StarMessageRequest extends Request implements HasBody
+class ConvertVideoRequest extends Request implements HasBody
 {
     use HasJsonBody;
 
@@ -18,20 +18,17 @@ class StarMessageRequest extends Request implements HasBody
 
     public function __construct(
         protected string $session,
-        protected MessageStarData $data,
+        protected MediaConvertData $data,
     ) {
     }
 
     public function resolveEndpoint(): string
     {
-        return '/api/'.rawurlencode($this->session).'/star';
+        return '/api/'.rawurlencode($this->session).'/media/convert/video';
     }
 
     protected function defaultBody(): array
     {
-        return [
-            'session' => $this->session,
-            ...$this->data->toArray(),
-        ];
+        return $this->data->toArray();
     }
 }

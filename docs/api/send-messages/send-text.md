@@ -69,7 +69,7 @@ $response = Message::sendText(data: $data);
 ::: warning Send Typing Status
 Enabling `send_typing_status` in your `config/waha.php` reduces the chances of being blocked by WhatsApp but may add 3–30 seconds of blocking latency to every `sendText()` call.
 
-The package mimics human behavior by sending "online", "typing", and "paused" presence statuses. If any of these presence updates fail (e.g., due to engine limitations), the error is logged, and the message sending continues.
+The package sends 'online', 'typing', and 'paused' presence updates; if any update fails (e.g., due to engine limitations) the error is logged and message sending continues.
 :::
 
 ## Response
@@ -92,6 +92,8 @@ $response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "times
 | WEBJS | WPP | NOWEB | GOWS |
 |:---:|:---:|:---:|:---:|
 | ✔️ | ✔️ | ✔️ | ✔️ |
+
+Checks indicate WAHA API engine support, independent of Laravel wrapper implementation status.
 
 ## References
 

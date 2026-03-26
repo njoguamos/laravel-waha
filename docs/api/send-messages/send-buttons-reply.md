@@ -1,6 +1,6 @@
 # Send Buttons Reply
 
-Send a reply to a button message.
+If you’re using Official Business API to send buttons and wanna “click” on the buttons (for testing or other purposes) you can do it using the API
 
 ## Usage
 

@@ -10,7 +10,7 @@ We recommend adding fallback logic using Send Text or 📶 Polls.
 
 List Messages can only be sent to direct chats (1:1).
 
-The chatId must be one of the following formats: `phone`, `phone@c.us`, `{number}@docs/api/contacts/lids`.
+The chatId must be one of the following formats: `phone`, `phone@c.us`, `{number}@lids`.
 
 ## Usage
 
