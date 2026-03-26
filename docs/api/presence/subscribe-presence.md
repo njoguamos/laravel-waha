@@ -1,10 +1,37 @@
 # Subscribe to Presence
 
-Subscribe to presence information for a specific chat.
+Subscribe to presence information for a specific chat. You can later retrieve presence information via [Get Chat Presence](./get-chat-presence.md) or by listening to the `presence.update` webhook event.
 
-::: danger
-This feature is not implemented yet, please submit a [PR](https://github.com/njoguamos/laravel-waha).
+## Usage
+
+::: code-group
+
+```php [Default Session]
+use NjoguAmos\Waha\Facades\Presence;
+
+/** @var \Saloon\Http\Response $response */
+$response = Presence::subscribe(chatId: '1234567890@c.us');
+```
+
+```php [Specific Session]
+use NjoguAmos\Waha\Facades\Presence;
+
+/** @var \Saloon\Http\Response $response */
+$response = Presence::subscribe(chatId: '1234567890@c.us', session: 'my-session');
+```
+
 :::
+
+## Response
+
+The response returned by the `subscribe` method is an instance of `Saloon\Http\Response`:
+
+```php
+/** @var \Saloon\Http\Response $response */
+
+$response->status(); // 200
+$response->ok();     // true
+```
 
 ## Engines
 

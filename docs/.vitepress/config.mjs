@@ -144,14 +144,6 @@ export default defineConfig({
                         ]
                     },
                     {
-                        text: '📶 Polls',
-                        collapsed: true,
-                        items: [
-                            {text: 'Send Poll ⚠️', link: '/api/polls/send-poll'},
-                            {text: 'Send Poll Vote ⚠️', link: '/api/polls/send-poll-vote'},
-                        ]
-                    },
-                    {
                         text: '💬 Chats',
                         collapsed: true,
                         items: [
@@ -273,9 +265,9 @@ export default defineConfig({
                         text: '✅ Presence',
                         collapsed: true,
                         items: [
-                            {text: 'Get All Presence ⚠️', link: '/api/presence/get-presence'},
+                            {text: 'Get All Presence', link: '/api/presence/get-presence'},
                             {text: 'Set Presence', link: '/api/presence/set-presence'},
-                            {text: 'Subscribe to Presence ⚠️', link: '/api/presence/subscribe-presence'},
+                            {text: 'Subscribe to Presence', link: '/api/presence/subscribe-presence'},
                         ]
                     },
                     {
