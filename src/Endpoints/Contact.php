@@ -12,6 +12,7 @@ use NjoguAmos\Waha\Requests\Contact\GetAboutRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
+use NjoguAmos\Waha\Requests\Contact\GetContactRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\BlockContactRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllContactsRequest;
@@ -39,6 +40,20 @@ class Contact extends Waha
                 sortOrder: $sortOrder,
                 limit:     $limit,
                 offset:    $offset,
+            )
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function get(string $contactId, ?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new GetContactRequest(
+                contactId: $contactId,
+                session:   $session ?? $this->session,
             )
         );
     }

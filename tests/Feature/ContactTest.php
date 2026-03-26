@@ -12,6 +12,7 @@ use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAboutRequest;
 use NjoguAmos\Waha\Requests\Contact\CountLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
+use NjoguAmos\Waha\Requests\Contact\GetContactRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\BlockContactRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllContactsRequest;
@@ -120,6 +121,84 @@ describe(description: 'get all contacts', tests: function () {
         MockClient::global()->assertSent(function (GetAllContactsRequest $request): bool {
             return $request->query()->get('sortBy') === 'id'
                 && $request->query()->get('sortOrder') === 'asc';
+        });
+    });
+});
+
+describe(description: 'get single contact', tests: function () {
+    it(description: 'can get a contact by phone number', closure: function () {
+        MockClient::global(mockData: [
+            GetContactRequest::class => MockResponse::make([
+                'id'          => '11231231231@c.us',
+                'number'      => '11231231231',
+                'name'        => 'Contact Name',
+                'pushname'    => 'Pushname',
+                'shortName'   => 'Shortname',
+                'isMe'        => false,
+                'isGroup'     => false,
+                'isWAContact' => true,
+                'isMyContact' => true,
+                'isBlocked'   => false,
+            ], status: 200),
+        ]);
+
+        $response = Contact::get(contactId: '11231231231');
+        $dto = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dto)->toBeInstanceOf(class: ContactData::class)
+            ->and(value: $dto->id)->toBe(expected: '11231231231@c.us')
+            ->and(value: $dto->number)->toBe(expected: '11231231231')
+            ->and(value: $dto->name)->toBe(expected: 'Contact Name')
+            ->and(value: $dto->isMyContact)->toBeTrue();
+    });
+
+    it(description: 'can get a contact by chat id', closure: function () {
+        MockClient::global(mockData: [
+            GetContactRequest::class => MockResponse::make([
+                'id'     => '11231231231@c.us',
+                'number' => '11231231231',
+            ], status: 200),
+        ]);
+
+        $response = Contact::get(contactId: '11231231231@c.us');
+        $dto = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dto->id)->toBe(expected: '11231231231@c.us');
+    });
+
+    it(description: 'can get a contact by lid', closure: function () {
+        MockClient::global(mockData: [
+            GetContactRequest::class => MockResponse::make([
+                'id'     => '123456@lid',
+                'number' => null,
+            ], status: 200),
+        ]);
+
+        $response = Contact::get(contactId: '123456@lid');
+        $dto = $response->dtoOrFail();
+
+        expect(value: $response->status())->toBe(expected: 200)
+            ->and(value: $dto->id)->toBe(expected: '123456@lid')
+            ->and(value: $dto->number)->toBeNull();
+    });
+
+    it(description: 'can get a contact with custom session', closure: function () {
+        MockClient::global(mockData: [
+            GetContactRequest::class => MockResponse::make([
+                'id'     => '11231231231@c.us',
+                'number' => '11231231231',
+            ], status: 200),
+        ]);
+
+        $response = Contact::get(contactId: '11231231231', session: 'custom-session');
+
+        expect(value: $response->status())->toBe(expected: 200);
+
+        MockClient::global()->assertSent(function (GetContactRequest $request): bool {
+            return $request->query()->get('contactId') === '11231231231'
+                && $request->query()->get('session') === 'custom-session';
         });
     });
 });
