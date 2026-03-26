@@ -6,6 +6,7 @@ namespace NjoguAmos\Waha\Endpoints;
 
 use NjoguAmos\Waha\Waha;
 use Saloon\Http\Response;
+use NjoguAmos\Waha\Dto\ContactUpdateData;
 use Saloon\Exceptions\Request\RequestException;
 use NjoguAmos\Waha\Requests\Contact\GetLidRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAboutRequest;
@@ -15,6 +16,7 @@ use NjoguAmos\Waha\Requests\Contact\GetAllLidsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetContactRequest;
 use NjoguAmos\Waha\Requests\Contact\CheckExistsRequest;
 use NjoguAmos\Waha\Requests\Contact\BlockContactRequest;
+use NjoguAmos\Waha\Requests\Contact\UpdateContactRequest;
 use NjoguAmos\Waha\Requests\Contact\GetAllContactsRequest;
 use NjoguAmos\Waha\Requests\Contact\GetPhoneNumberRequest;
 use NjoguAmos\Waha\Requests\Contact\UnblockContactRequest;
@@ -54,6 +56,21 @@ class Contact extends Waha
             request: new GetContactRequest(
                 contactId: $contactId,
                 session:   $session ?? $this->session,
+            )
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function update(string $chatId, ContactUpdateData $data, ?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new UpdateContactRequest(
+                chatId:  $chatId,
+                data:    $data,
+                session: $session ?? $this->session,
             )
         );
     }
