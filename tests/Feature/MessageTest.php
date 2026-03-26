@@ -12,10 +12,12 @@ use NjoguAmos\Waha\Facades\Message;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\MessagePollData;
 use NjoguAmos\Waha\Dto\MessageTextData;
+use NjoguAmos\Waha\Dto\MessageImageData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
 use NjoguAmos\Waha\Requests\Message\SendPollRequest;
 use NjoguAmos\Waha\Requests\Message\SendSeenRequest;
 use NjoguAmos\Waha\Requests\Message\SendTextRequest;
+use NjoguAmos\Waha\Requests\Message\SendImageRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
 use NjoguAmos\Waha\Requests\Presence\SetPresenceRequest;
 
@@ -162,6 +164,29 @@ describe(description: 'send text message', tests: function () {
 
         // Verify that SendTextRequest was still sent
         MockClient::global()->assertSent(SendTextRequest::class);
+    });
+});
+
+describe(description: 'send image message', tests: function () {
+    it(description: 'can send image message', closure: function () {
+        MockClient::global(mockData: [
+            SendImageRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageImageData(
+            chatId: '123456789@c.us',
+            file: ['url' => 'https://example.com/image.jpg'],
+            caption: 'The only way to do great work is to love what you do.'
+        );
+
+        $result = Message::sendImage(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (SendImageRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sendImage'
+                && $request->body()->get('session') === 'default';
+        });
     });
 });
 

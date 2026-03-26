@@ -9,10 +9,12 @@ use NjoguAmos\Waha\Dto\SeenData;
 use NjoguAmos\Waha\Dto\MessagePollData;
 use Illuminate\Support\Facades\Facade;
 use NjoguAmos\Waha\Dto\MessageTextData;
+use NjoguAmos\Waha\Dto\MessageImageData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
 
 /**
  * @method static Response sendText(MessageTextData $data, ?string $session = null)
+ * @method static Response sendImage(MessageImageData $data, ?string $session = null)
  * @method static Response sendSeen(SeenData $data, ?string $session = null)
  * @method static Response sendPoll(MessagePollData $data, ?string $session = null)
  * @method static Response sendPollVote(MessagePollVoteData $data, ?string $session = null)

@@ -68,7 +68,7 @@ export default defineConfig({
                         collapsed: true,
                         items: [
                             {text: 'Send Text', link: '/api/send-messages/send-text'},
-                            {text: 'Send Image ⚠️', link: '/api/send-messages/send-image'},
+                            {text: 'Send Image', link: '/api/send-messages/send-image'},
                             {text: 'Send File ⚠️', link: '/api/send-messages/send-file'},
                             {text: 'Send Voice ⚠️', link: '/api/send-messages/send-voice'},
                             {text: 'Send Video ⚠️', link: '/api/send-messages/send-video'},

@@ -9,11 +9,13 @@ use Saloon\Http\Response;
 use NjoguAmos\Waha\Dto\SeenData;
 use NjoguAmos\Waha\Dto\MessagePollData;
 use NjoguAmos\Waha\Dto\MessageTextData;
+use NjoguAmos\Waha\Dto\MessageImageData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
 use Saloon\Exceptions\Request\RequestException;
 use NjoguAmos\Waha\Requests\Message\SendPollRequest;
 use NjoguAmos\Waha\Requests\Message\SendSeenRequest;
 use NjoguAmos\Waha\Requests\Message\SendTextRequest;
+use NjoguAmos\Waha\Requests\Message\SendImageRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
 
@@ -36,6 +38,20 @@ class Message extends Waha
 
         return $this->connector->send(
             request: new SendTextRequest(session: $session, data: $data)
+        );
+    }
+
+    /**
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function sendImage(MessageImageData $data, ?string $session = null): Response
+    {
+        return $this->connector->send(
+            request: new SendImageRequest(
+                session: $session ?? $this->session,
+                data: $data
+            )
         );
     }
 
