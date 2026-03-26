@@ -86,11 +86,11 @@ export default defineConfig({
                         text: '🆔 Profile',
                         collapsed: true,
                         items: [
-                            {text: 'Get Profile ⚠️', link: '/api/profile/get-profile'},
-                            {text: 'Set Profile Name ⚠️', link: '/api/profile/set-profile-name'},
-                            {text: 'Set Profile Status ⚠️', link: '/api/profile/set-profile-status'},
-                            {text: 'Set Profile Picture ⚠️', link: '/api/profile/set-profile-picture'},
-                            {text: 'Delete Profile Picture ⚠️', link: '/api/profile/delete-profile-picture'},
+                            {text: 'Get Profile', link: '/api/profile/get-profile'},
+                            {text: 'Set Profile Name', link: '/api/profile/set-profile-name'},
+                            {text: 'Set Profile Status', link: '/api/profile/set-profile-status'},
+                            {text: 'Set Profile Picture', link: '/api/profile/set-profile-picture'},
+                            {text: 'Delete Profile Picture', link: '/api/profile/delete-profile-picture'},
                         ]
                     },
                     {
