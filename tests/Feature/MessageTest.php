@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 use Illuminate\Support\Sleep;
 use NjoguAmos\Waha\Dto\SeenData;
+use NjoguAmos\Waha\Dto\PollData;
 use NjoguAmos\Waha\Enums\Presence;
 use Saloon\Http\Faking\MockClient;
 use Illuminate\Support\Facades\Log;
 use NjoguAmos\Waha\Facades\Message;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Dto\MessagePollData;
 use NjoguAmos\Waha\Dto\MessageTextData;
+use NjoguAmos\Waha\Dto\MessagePollVoteData;
+use NjoguAmos\Waha\Requests\Message\SendPollRequest;
 use NjoguAmos\Waha\Requests\Message\SendSeenRequest;
 use NjoguAmos\Waha\Requests\Message\SendTextRequest;
+use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
 use NjoguAmos\Waha\Requests\Presence\SetPresenceRequest;
 
 describe(description: 'send text message', tests: function () {
@@ -210,6 +215,54 @@ describe(description: 'send seen', tests: function () {
 
         MockClient::global()->assertSent(function (SendSeenRequest $request): bool {
             return $request->resolveEndpoint() === '/api/test-session/sendSeen';
+        });
+    });
+});
+
+describe(description: 'send poll', tests: function () {
+    it(description: 'can send poll', closure: function () {
+        MockClient::global(mockData: [
+            SendPollRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessagePollData(
+            chatId: '123456789@c.us',
+            poll: new PollData(
+                name: 'How are you?',
+                options: ['Awesome!', 'Good!', 'Not bad!'],
+            ),
+        );
+
+        $result = Message::sendPoll(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (SendPollRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sendPoll'
+                && $request->body()->get('session') === 'default';
+        });
+    });
+});
+
+describe(description: 'send poll vote', tests: function () {
+    it(description: 'can send poll vote', closure: function () {
+        MockClient::global(mockData: [
+            SendPollVoteRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessagePollVoteData(
+            chatId: '123456789@c.us',
+            pollMessageId: 'false_123456789@c.us_AAAAAAAAAAAAAAAAAAAA',
+            votes: [['Awesome!']],
+        );
+
+        $result = Message::sendPollVote(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+
+        MockClient::global()->assertSent(function (SendPollVoteRequest $request): bool {
+            return $request->resolveEndpoint() === '/api/sendPollVote'
+                && $request->body()->get('session') === 'default';
         });
     });
 });

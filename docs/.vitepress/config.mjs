@@ -74,7 +74,8 @@ export default defineConfig({
                             {text: 'Send Video ⚠️', link: '/api/send-messages/send-video'},
                             {text: 'Send Location ⚠️', link: '/api/send-messages/send-location'},
                             {text: 'Send Link Preview ⚠️', link: '/api/send-messages/send-link-preview'},
-                            {text: 'Send Poll ⚠️', link: '/api/send-messages/send-poll'},
+                            {text: 'Send Poll', link: '/api/send-messages/send-poll'},
+                            {text: 'Send Poll Vote', link: '/api/send-messages/send-poll-vote'},
                             {text: 'Send List ⚠️', link: '/api/send-messages/send-list'},
                             {text: 'Forward Message ⚠️', link: '/api/send-messages/forward-message'},
                             {text: 'Send Seen', link: '/api/send-messages/send-seen'},
@@ -400,6 +401,9 @@ export default defineConfig({
                             {text: 'Session Config WEBJS Data', link: '/reference/dto/session-config-webjs-data'},
                             {text: 'Server Version Data', link: '/reference/dto/server-version-data'},
                             {text: 'App Data', link: '/reference/dto/app-data'},
+                            {text: 'Message Poll Data', link: '/reference/dto/message-poll-data'},
+                            {text: 'Message Poll Vote Data', link: '/reference/dto/message-poll-vote-data'},
+                            {text: 'Poll Data', link: '/reference/dto/poll-data'},
                         ]
                     },
                     {
