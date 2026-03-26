@@ -17,7 +17,7 @@ it(description: 'can be converted to an array', closure: function () {
     expect($array)->toBe([
         'chatId' => '123456789@c.us',
         'file'   => [
-            'mimetype' => 'audio/ogg',
+            'mimetype' => 'audio/opus',
             'filename' => 'voice.opus',
             'url'      => 'https://example.com/voice.opus',
         ],

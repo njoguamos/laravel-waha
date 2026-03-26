@@ -18,6 +18,7 @@ $data = new MessageFileData(
     caption: 'Check this out!',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendFile(data: $data);
 ```
 
@@ -32,6 +33,7 @@ $data = new MessageFileData(
     caption: 'Check this out!',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendFile(data: $data);
 ```
 
@@ -47,6 +49,7 @@ $data = new MessageFileData(
     caption: 'Check this out!',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendFile(data: $data);
 ```
 
@@ -60,6 +63,7 @@ $data = new MessageFileData(
     reply_to: 'false_1111@c.us_AAA',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendFile(data: $data);
 ```
 
@@ -82,7 +86,7 @@ The response returned by the `sendFile` method is an instance of `Saloon\Http\Re
 /** @var \Saloon\Http\Response $response */
 
 $response->status(); // 201
-$response->json();   // ["id" => "...", ...]
+$response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "timestamp" => 1629200000, ...]
 ```
 
 ```php [DTO]
@@ -94,6 +98,7 @@ $data = new MessageFileData(
     file: 'https://example.com/document.pdf',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendFile(data: $data);
 $json = $response->json();
 ```
@@ -103,8 +108,8 @@ $json = $response->json();
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
-|:-----:|:---:|:-----:|:----:|
-|   ➕   |  ➕  |   ➕   |  ➕   |
+|:---:|:---:|:---:|:---:|
+| ➕ | ➕ | ➕ | ➕ |
 
 ## References
 

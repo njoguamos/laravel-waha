@@ -4,7 +4,7 @@ Send voice messages (audio recordings) to a chat.
 
 ## Usage
 
-The `Message` facade's `sendVoice` method may be used to send a voice message to a chat. You must provide a `MessageVoiceData` DTO.
+The `Message` facade's `sendVoice` method may be used to send a voice message to a chat.
 
 ::: code-group
 
@@ -17,6 +17,7 @@ $data = new MessageVoiceData(
     file: 'https://example.com/voice.opus',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendVoice(data: $data);
 ```
 
@@ -29,10 +30,11 @@ $data = new MessageVoiceData(
     file: 'data:audio/ogg;base64,base64-encoded-data...',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendVoice(data: $data);
 ```
 
-```php [Reply to Message]
+```php [Reply]
 use NjoguAmos\Waha\Facades\Message;
 use NjoguAmos\Waha\Dto\MessageVoiceData;
 
@@ -42,15 +44,16 @@ $data = new MessageVoiceData(
     reply_to: 'false_1111@c.us_AAA',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendVoice(data: $data);
 ```
+
+:::
 
 ::: warning Voice File Format
 WhatsApp accept only file with **OPUS encoding** and packed in **OGG container**.
 
 If you have a file in a different format (like mp3) you can use the `convert: true` option to have WAHA convert it for you automatically.
-:::
-
 :::
 
 ## Response
@@ -63,7 +66,7 @@ The response returned by the `sendVoice` method is an instance of `Saloon\Http\R
 /** @var \Saloon\Http\Response $response */
 
 $response->status(); // 201
-$response->json();   // ["id" => "...", ...]
+$response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "timestamp" => 1629200000, ...]
 ```
 
 ```php [DTO]
@@ -75,6 +78,7 @@ $data = new MessageVoiceData(
     file: 'https://example.com/voice.opus',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendVoice(data: $data);
 $json = $response->json();
 ```
@@ -84,8 +88,8 @@ $json = $response->json();
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
-|:-----:|:---:|:-----:|:----:|
-|   ✅   |  ✅  |   ✅   |  ✅   |
+|:---:|:---:|:---:|:---:|
+| ➕ | ➕ | ➕ | ➕ |
 
 ## References
 

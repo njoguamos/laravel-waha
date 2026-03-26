@@ -11,23 +11,31 @@ use Illuminate\Support\Facades\Log;
 use NjoguAmos\Waha\Facades\Message;
 use Saloon\Http\Faking\MockResponse;
 use NjoguAmos\Waha\Dto\MessageFileData;
+use NjoguAmos\Waha\Dto\MessageListData;
 use NjoguAmos\Waha\Dto\MessagePollData;
+use NjoguAmos\Waha\Dto\MessageStarData;
 use NjoguAmos\Waha\Dto\MessageTextData;
 use NjoguAmos\Waha\Dto\MessageImageData;
 use NjoguAmos\Waha\Dto\MessageVideoData;
 use NjoguAmos\Waha\Dto\MessageVoiceData;
+use NjoguAmos\Waha\Dto\MessageForwardData;
 use NjoguAmos\Waha\Dto\MessageLocationData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
+use NjoguAmos\Waha\Dto\MessageReactionData;
 use NjoguAmos\Waha\Requests\Message\SendFileRequest;
+use NjoguAmos\Waha\Requests\Message\SendListRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollRequest;
 use NjoguAmos\Waha\Requests\Message\SendSeenRequest;
 use NjoguAmos\Waha\Requests\Message\SendTextRequest;
 use NjoguAmos\Waha\Requests\Message\SendImageRequest;
 use NjoguAmos\Waha\Requests\Message\SendVideoRequest;
 use NjoguAmos\Waha\Requests\Message\SendVoiceRequest;
+use NjoguAmos\Waha\Requests\Message\StarMessageRequest;
 use NjoguAmos\Waha\Requests\Message\SendLocationRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
+use NjoguAmos\Waha\Requests\Message\SendReactionRequest;
 use NjoguAmos\Waha\Requests\Presence\SetPresenceRequest;
+use NjoguAmos\Waha\Requests\Message\ForwardMessageRequest;
 
 describe(description: 'send text message', tests: function () {
     it(description: 'can send text message', closure: function () {
@@ -229,7 +237,7 @@ describe(description: 'send video message', tests: function () {
 
         $data = new MessageVideoData(
             chatId: '123456789@c.us',
-            file: ['url' => 'https://example.com/video.mp4']
+            file: 'https://example.com/video.mp4'
         );
 
         $result = Message::sendVideo(data: $data);
@@ -390,5 +398,84 @@ describe(description: 'send poll vote', tests: function () {
             return $request->resolveEndpoint() === '/api/sendPollVote'
                 && $request->body()->get('session') === 'default';
         });
+    });
+});
+
+describe(description: 'send message with list', tests: function () {
+    it(description: 'can send message with list', closure: function () {
+        MockClient::global(mockData: [
+            SendListRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageListData(
+            chatId: '123456789@c.us',
+            title: 'Menu',
+            button: 'Choose',
+            sections: [
+                new NjoguAmos\Waha\Dto\MessageListSectionData(
+                    title: 'Section 1',
+                    rows: [
+                        new NjoguAmos\Waha\Dto\MessageListRowData(title: 'Option 1', rowId: 'opt1')
+                    ]
+                )
+            ]
+        );
+
+        $result = Message::sendList(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+    });
+});
+
+describe(description: 'forward message', tests: function () {
+    it(description: 'can forward message', closure: function () {
+        MockClient::global(mockData: [
+            ForwardMessageRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageForwardData(
+            chatId: '123456789@c.us',
+            messageId: 'true_123456789@c.us_BAE6A33293978B16'
+        );
+
+        $result = Message::forwardMessage(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+    });
+});
+
+describe(description: 'send reaction', tests: function () {
+    it(description: 'can send reaction', closure: function () {
+        MockClient::global(mockData: [
+            SendReactionRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageReactionData(
+            chatId: '123456789@c.us',
+            messageId: 'true_123456789@c.us_BAE6A33293978B16',
+            reaction: '👍'
+        );
+
+        $result = Message::sendReaction(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
+    });
+});
+
+describe(description: 'star message', tests: function () {
+    it(description: 'can star message', closure: function () {
+        MockClient::global(mockData: [
+            StarMessageRequest::class => MockResponse::make(body: [], status: 201)
+        ]);
+
+        $data = new MessageStarData(
+            chatId: '123456789@c.us',
+            messageId: 'true_123456789@c.us_BAE6A33293978B16',
+            star: true
+        );
+
+        $result = Message::starMessage(data: $data);
+
+        expect(value: $result->status())->toBe(expected: 201);
     });
 });

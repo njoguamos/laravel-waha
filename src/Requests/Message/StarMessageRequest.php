@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace NjoguAmos\Waha\Requests\Message;
+
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasJsonBody;
+use NjoguAmos\Waha\Dto\MessageStarData;
+
+class StarMessageRequest extends Request implements HasBody
+{
+    use HasJsonBody;
+
+    protected Method $method = Method::POST;
+
+    public function __construct(
+        protected string $session,
+        protected MessageStarData $data,
+    ) {
+    }
+
+    public function resolveEndpoint(): string
+    {
+        return '/api/'.rawurlencode($this->session).'/star';
+    }
+
+    protected function defaultBody(): array
+    {
+        return $this->data->toArray();
+    }
+}

@@ -2,6 +2,10 @@
 
 Show "typing..." status in the chat.
 
+## Usage
+
+The `Message` facade's `startTyping` method may be used to show "typing..." status in a chat.
+
 ::: code-group
 
 ```php [DTO]
@@ -12,14 +16,23 @@ $data = new ChatData(
     chatId: '123456789@c.us',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::startTyping(data: $data);
 ```
 
-```php [Response]
-$response = Message::startTyping(data: $data);
+:::
 
-// Get JSON response
-$json = $response->json();
+## Response
+
+The response returned by the `startTyping` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array:
+
+::: code-group
+
+```php [Saloon Response]
+/** @var \Saloon\Http\Response $response */
+
+$response->status(); // 201
+$response->json();   // ["status" => "success", ...]
 ```
 
 :::
@@ -27,8 +40,8 @@ $json = $response->json();
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
-|:-----:|:---:|:-----:|:----:|
-|   ✅   |  ✅  |   ✅   |  ✅   |
+|:---:|:---:|:---:|:---:|
+| ✔️ | ✔️ | ✔️ | ✔️ |
 
 ## References
 

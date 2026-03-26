@@ -15,9 +15,10 @@ use NjoguAmos\Waha\Dto\MessagePollVoteData;
 $data = new MessagePollVoteData(
     chatId: '123456789@c.us',
     pollMessageId: 'false_123456789@c.us_AAAAAAAAAAAAAAAAAAAA',
-    votes: [['Awesome!']],
+    votes: ['Awesome!'],
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendPollVote(data: $data);
 ```
 
@@ -28,9 +29,10 @@ use NjoguAmos\Waha\Dto\MessagePollVoteData;
 $data = new MessagePollVoteData(
     chatId: '123456789@c.us',
     pollMessageId: 'false_123456789@c.us_AAAAAAAAAAAAAAAAAAAA',
-    votes: [['Awesome!'], ['Good!']],
+    votes: ['Awesome!', 'Good!'],
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendPollVote(data: $data);
 ```
 
@@ -46,7 +48,7 @@ The response returned by the `sendPollVote` method is an instance of `Saloon\Htt
 /** @var \Saloon\Http\Response $response */
 
 $response->status(); // 201
-$response->json();   // ["id" => "...", ...]
+$response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "timestamp" => 1629200000, ...]
 ```
 
 ```php [DTO]
@@ -56,9 +58,10 @@ use NjoguAmos\Waha\Dto\MessagePollVoteData;
 $data = new MessagePollVoteData(
     chatId: '123456789@c.us',
     pollMessageId: 'false_123456789@c.us_AAAAAAAAAAAAAAAAAAAA',
-    votes: [['Awesome!']],
+    votes: ['Awesome!'],
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendPollVote(data: $data);
 $json = $response->json();
 ```
@@ -68,8 +71,12 @@ $json = $response->json();
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
-|:-----:|:---:|:-----:|:----:|
-|   ➕   |  ➖  |   ➕   | ➖    |
+|:---:|:---:|:---:|:---:|
+| ✔️ | ✔️ | ✔️ | ✔️ |
+
+➕ = supported, ➖ = not supported
+
+The "Engines" table reflects WAHA API-level engine support (WEBJS, WPP, NOWEB, GOWS) and is independent of any wrapper/feature implementation.
 
 ## References
 

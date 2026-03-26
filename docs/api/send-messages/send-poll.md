@@ -21,6 +21,7 @@ $data = new MessagePollData(
     ),
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendPoll(data: $data);
 ```
 
@@ -38,6 +39,7 @@ $data = new MessagePollData(
     ),
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendPoll(data: $data);
 ```
 
@@ -55,13 +57,14 @@ $data = new MessagePollData(
     reply_to: 'false_1111@c.us_AAA',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendPoll(data: $data);
 ```
 
 :::
 
 ::: warning Save the Poll ID
-Save the `id` field from the response in your database so that you can identify the poll for which you receive a vote (see webhook events below).
+Save the `id` field from the response in your database so that you can identify the poll for which you receive a vote.
 :::
 
 ## Response
@@ -74,7 +77,7 @@ The response returned by the `sendPoll` method is an instance of `Saloon\Http\Re
 /** @var \Saloon\Http\Response $response */
 
 $response->status(); // 201
-$response->json();   // ["id" => "...", ...]
+$response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "timestamp" => 1629200000, ...]
 ```
 
 ```php [DTO]
@@ -90,6 +93,7 @@ $data = new MessagePollData(
     ),
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendPoll(data: $data);
 $json = $response->json();
 ```
@@ -99,8 +103,8 @@ $json = $response->json();
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
-|:-----:|:---:|:-----:|:----:|
-|   ✅   |  ✅  |   ✅   |  ✅   |
+|:---:|:---:|:---:|:---:|
+| ✔️ | ✔️ | ✔️ | ✔️ |
 
 ## References
 

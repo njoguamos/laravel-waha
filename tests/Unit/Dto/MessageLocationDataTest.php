@@ -10,7 +10,7 @@ it(description: 'can be converted to an array', closure: function () {
         latitude: 38.8937255,
         longitude: -77.0969763,
         title: 'Our office',
-        replyTo: 'false_1111@c.us_AAA',
+        reply_to: 'false_1111@c.us_AAA',
     );
 
     $array = $dto->toArray();

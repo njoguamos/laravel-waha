@@ -11,7 +11,7 @@ class MessageLocationData
         public float $latitude,
         public float $longitude,
         public string $title,
-        public ?string $replyTo = null,
+        public ?string $reply_to = null,
     ) {
     }
 
@@ -24,8 +24,8 @@ class MessageLocationData
             'title'     => $this->title,
         ];
 
-        if ($this->replyTo !== null) {
-            $array['reply_to'] = $this->replyTo;
+        if ($this->reply_to !== null) {
+            $array['reply_to'] = $this->reply_to;
         }
 
         return $array;

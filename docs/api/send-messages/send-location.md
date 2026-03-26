@@ -4,7 +4,7 @@ Send location (latitude and longitude) to your contacts.
 
 ## Usage
 
-Send a location message to a specific contact or group.
+The `Message` facade's `sendLocation` method may be used to send a location (latitude and longitude) to a contact or group.
 
 ::: code-group
 
@@ -19,10 +19,11 @@ $data = new MessageLocationData(
     title: 'Our office',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendLocation(data: $data);
 ```
 
-```php [Reply to Message]
+```php [Reply]
 use NjoguAmos\Waha\Facades\Message;
 use NjoguAmos\Waha\Dto\MessageLocationData;
 
@@ -34,6 +35,7 @@ $data = new MessageLocationData(
     replyTo: 'false_1111@c.us_AAA',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendLocation(data: $data);
 ```
 
@@ -41,20 +43,15 @@ $response = Message::sendLocation(data: $data);
 
 ## Response
 
-The `sendLocation` method returns a `Saloon\Http\Response` object. You can use the `json()` method to get the response data or `dtoOrFail()` to transform the response into a DTO (if applicable).
+The response returned by the `sendLocation` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array:
 
 ::: code-group
 
-```php [JSON Response]
-$response = Message::sendLocation(data: $data);
+```php [Saloon Response]
+/** @var \Saloon\Http\Response $response */
 
-$json = $response->json();
-```
-
-```php [DTO]
-$response = Message::sendLocation(data: $data);
-
-$dto = $response->dtoOrFail();
+$response->status(); // 201
+$response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "timestamp" => 1629200000, ...]
 ```
 
 :::
@@ -63,7 +60,7 @@ $dto = $response->dtoOrFail();
 
 | WEBJS | WPP | NOWEB | GOWS |
 |:---:|:---:|:---:|:---:|
-| ✅ | ✅ | ✅ | ✅ |
+| ✔️ | ✔️ | ✔️ | ✔️ |
 
 ## References
 

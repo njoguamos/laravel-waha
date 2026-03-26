@@ -2,7 +2,13 @@
 
 Send a read receipt (double green tick) for messages in a chat.
 
-```php
+## Usage
+
+The `Message` facade's `sendSeen` method may be used to send a read receipt (double green tick) for messages in a chat.
+
+::: code-group
+
+```php [DTO]
 use NjoguAmos\Waha\Facades\Message;
 use NjoguAmos\Waha\Dto\SeenData;
 
@@ -10,14 +16,11 @@ $data = new SeenData(
     chatId: '123456789@c.us',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendSeen(data: $data);
 ```
 
-## Read specific messages
-
-In **NOWEB** and **GOWS** Engines you can control what messages to read by using `messageIds` field:
-
-```php
+```php [Specific Messages]
 use NjoguAmos\Waha\Facades\Message;
 use NjoguAmos\Waha\Dto\SeenData;
 
@@ -26,14 +29,11 @@ $data = new SeenData(
     messageIds: ['false_123456789@c.us_AAAAAAAAAAAAAAAAAAAA'],
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendSeen(data: $data);
 ```
 
-## Group Messages
-
-For Group Message you need to provide `participant` field:
-
-```php
+```php [Group Messages]
 use NjoguAmos\Waha\Facades\Message;
 use NjoguAmos\Waha\Dto\SeenData;
 
@@ -43,14 +43,32 @@ $data = new SeenData(
     participant: '987654321@c.us',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendSeen(data: $data);
 ```
+
+:::
+
+## Response
+
+The response returned by the `sendSeen` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array:
+
+::: code-group
+
+```php [Saloon Response]
+/** @var \Saloon\Http\Response $response */
+
+$response->status(); // 201
+$response->json();   // ["status" => "success", ...]
+```
+
+:::
 
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
 |:---:|:---:|:---:|:---:|
-| ✅ | ✅ | ✅ | ✅ |
+| ✔️ | ✔️ | ✔️ | ✔️ |
 
 ## References
 

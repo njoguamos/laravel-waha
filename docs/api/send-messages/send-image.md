@@ -18,6 +18,7 @@ $data = new MessageImageData(
     caption: 'Check this out!',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendImage(data: $data);
 ```
 
@@ -35,6 +36,7 @@ $data = new MessageImageData(
     caption: 'Check this out!',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendImage(data: $data);
 ```
 
@@ -48,6 +50,7 @@ $data = new MessageImageData(
     reply_to: 'false_1111@c.us_AAA',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendImage(data: $data);
 ```
 
@@ -63,7 +66,7 @@ The response returned by the `sendImage` method is an instance of `Saloon\Http\R
 /** @var \Saloon\Http\Response $response */
 
 $response->status(); // 201
-$response->json();   // ["id" => "...", ...]
+$response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "timestamp" => 1629200000, ...]
 ```
 
 ```php [DTO]
@@ -75,6 +78,7 @@ $data = new MessageImageData(
     file: ['url' => 'https://example.com/image.jpg'],
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendImage(data: $data);
 $json = $response->json();
 ```
@@ -82,15 +86,15 @@ $json = $response->json();
 :::
 
 ::: warning Image File Format
-WhatsApp works best when images are sent in JPEG format. You must convert to JPEG `image/jpeg`  before sending.
-In your request, set `file.mimetype` to and use a `.jpg/.jpeg` filename.
+WhatsApp works best when images are sent in JPEG format. You must convert to JPEG `image/jpeg` before sending.
+In your request, set `file.mimetype` to `image/jpeg` and use a `.jpg/.jpeg` filename.
 :::
 
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
-|:-----:|:---:|:-----:|:----:|
-|   ✅   |  ✅  |   ✅   |  ✅   |
+|:---:|:---:|:---:|:---:|
+| ➕ | ➕ | ➕ | ➕ |
 
 ## References
 

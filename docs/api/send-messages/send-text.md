@@ -2,7 +2,13 @@
 
 Use the API to send text messages to the chat.
 
-```php
+## Usage
+
+The `Message` facade's `sendText` method may be used to send text messages to a chat.
+
+::: code-group
+
+```php [DTO]
 use NjoguAmos\Waha\Facades\Message;
 use NjoguAmos\Waha\Dto\MessageTextData;
 
@@ -11,48 +17,42 @@ $data = new MessageTextData(
     text: 'Hello World!',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendText(data: $data);
 ```
 
-::: warning Send Typing Status
-Enabling `send_typing_status` in your `config/waha.php` reduces the chances of being blocked by WhatsApp but may add 3–30 seconds of blocking latency to every `sendText()` call.
+```php [Reply]
+use NjoguAmos\Waha\Facades\Message;
+use NjoguAmos\Waha\Dto\MessageTextData;
 
-The package mimics human behavior by sending "online", "typing", and "paused" presence statuses. If any of these presence updates fail (e.g., due to engine limitations), the error is logged, and the message sending continues.
-:::
-
-## Reply to message
-
-To reply to a message, use the `reply_to` field:
-
-```php
 $data = new MessageTextData(
     chatId: '123456789@c.us',
     text: 'This is a reply',
     reply_to: 'false_1111@c.us_AAA',
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendText(data: $data);
 ```
 
-## Mentions
+```php [Mentions]
+use NjoguAmos\Waha\Facades\Message;
+use NjoguAmos\Waha\Dto\MessageTextData;
 
-To mention a contact in a group, use the `mentions` field:
-
-```php
 $data = new MessageTextData(
     chatId: '123456789@g.us',
     text: 'Hello @123456789',
     mentions: ['123456789@c.us'],
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendText(data: $data);
 ```
 
-## Link Preview
+```php [Link Preview]
+use NjoguAmos\Waha\Facades\Message;
+use NjoguAmos\Waha\Dto\MessageTextData;
 
-By default, WAHA generates a preview for links in the message. You can control this using the `linkPreview` and `linkPreviewHighQuality` fields:
-
-```php
 $data = new MessageTextData(
     chatId: '123456789@c.us',
     text: 'Check this out: https://waha.devlike.pro/',
@@ -60,14 +60,38 @@ $data = new MessageTextData(
     linkPreviewHighQuality: true,
 );
 
+/** @var \Saloon\Http\Response $response */
 $response = Message::sendText(data: $data);
 ```
+
+:::
+
+::: warning Send Typing Status
+Enabling `send_typing_status` in your `config/waha.php` reduces the chances of being blocked by WhatsApp but may add 3–30 seconds of blocking latency to every `sendText()` call.
+
+The package mimics human behavior by sending "online", "typing", and "paused" presence statuses. If any of these presence updates fail (e.g., due to engine limitations), the error is logged, and the message sending continues.
+:::
+
+## Response
+
+The response returned by the `sendText` method is an instance of `Saloon\Http\Response`. You may use the `json` method to retrieve the response as an array:
+
+::: code-group
+
+```php [Saloon Response]
+/** @var \Saloon\Http\Response $response */
+
+$response->status(); // 201
+$response->json();   // ["id" => "false_123456789@c.us_BAE6A33293978B16", "timestamp" => 1629200000, ...]
+```
+
+:::
 
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
 |:---:|:---:|:---:|:---:|
-| ✅ | ✅ | ✅ | ✅ |
+| ✔️ | ✔️ | ✔️ | ✔️ |
 
 ## References
 

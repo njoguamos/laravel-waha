@@ -20,7 +20,7 @@ The mimetype of the file. If not provided, it will be automatically determined f
 
 ## `convert` → `bool`
 
-Whether to convert the input file to the required format (OGG/OPUS) using ffmpeg before sending. Default: `true`.
+Whether to convert the input file to the required format (OGG/OPUS) using ffmpeg before sending. Default: `false`.
 
 ## `reply_to` → `string` or `null`
 
