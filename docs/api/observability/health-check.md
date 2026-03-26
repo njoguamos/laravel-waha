@@ -83,22 +83,6 @@ $health->info['mediaFiles.space']->free;   // 132979355648
 
 :::
 
-## Known Errors
-
-### Feature available only in Plus version
-
-If you are using the **WAHA Core** version, the health check endpoint will return a `422 Unprocessable Entity` response. This feature is only available in the **WAHA PLUS** version.
-
-`Saloon\Exceptions\Request\Statuses\UnprocessableEntityException: Unprocessable Entity (422) Response:`
-
-```json
-{
-    "message": "The feature is available only in Plus version for 'WEBJS' engine. Check this out: https://waha.devlike.pro/",
-    "error": "Unprocessable Entity",
-    "statusCode": 422
-}
-```
-
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |

@@ -37,14 +37,6 @@ $response->json();   // ["success" => true]
 
 :::
 
-## Known Errors
-
-### Using on WAHA Core version
-
-Delete Profile Picture requires the **WAHA PLUS** version. If you are using the **WAHA Core** version, the package will throw a `RuntimeException` before making the API request:
-
-`RuntimeException: Delete Profile Picture is not supported on CORE version. Upgrade to PLUS.`
-
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |

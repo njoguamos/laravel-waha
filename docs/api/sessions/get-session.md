@@ -50,25 +50,6 @@ $session->status; // SessionStatus::WORKING
 
 :::
 
-## Known Errors
-
-### Trying to access a session other than `default` on WAHA Core
-
-If you are using the **WAHA Core** version and attempt to access a session other than `default`, the API will return a `422 Unprocessable Entity` response. This is because WAHA Core only supports a single session.
-
-`Saloon\Exceptions\Request\Statuses\UnprocessableEntityException: Unprocessable Entity (422) Response:` 
-
-```json
-{ 
-    "message":"WAHA Core support only 'default' session. You tried to access 'fd' session (base64: ZmQ=). If you want to run more then one WhatsApp account ...",
-    "error":"Unprocessable Entity",
-    "statusCode":422 
-}
-```
-
-To run more than one WhatsApp account, you will need the **WAHA PLUS** version.
-
-
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |

@@ -69,7 +69,7 @@ $json = $response->json();
 
 | WEBJS | WPP | NOWEB | GOWS |
 |:-----:|:---:|:-----:|:----:|
-|   ✅   |  ✅  |   ✅   |  ✅   |
+|   ➕   |  ➖  |   ➕   | ➖    |
 
 ## References
 
