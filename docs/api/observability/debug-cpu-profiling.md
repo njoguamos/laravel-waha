@@ -42,22 +42,6 @@ $response->body();   // Binary content of the CPU profile
 
 :::
 
-## Known Errors
-
-### Debug Mode Disabled
-
-If `WAHA_DEBUG_MODE` is not enabled, the endpoint will return a `404 Not Found` response.
-
-`Saloon\Exceptions\Request\Statuses\NotFoundException: Not Found (404) Response:`
-
-```json
-{
-    "message": "WAHA_DEBUG_MODE is disabled",
-    "error": "Not Found",
-    "statusCode": 404
-}
-```
-
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |

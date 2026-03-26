@@ -82,4 +82,56 @@ $me = $response->dto();
 $me = $response->dtoOrFail();
 ```
 
+## Handling Errors
+
+Laravel WAHA uses [Saloon exceptions](https://docs.saloon.dev/the-basics/exceptions) to handle request failures. You can catch these exceptions to handle errors gracefully in your application.
+
+### Example: Handling Errors
+
+You can catch [Saloon exceptions](https://docs.saloon.dev/the-basics/exceptions) to handle request failures and use the `json()` or `dtoOrFail()` methods to handle the response data.
+
+::: code-group
+```php [JSON Response]
+use NjoguAmos\Waha\Facades\Sessions;
+use Saloon\Exceptions\Request\RequestException;
+
+try {
+    $response = Sessions::getMe(session: 'default')->throw();
+    $data = $response->json();
+} catch (RequestException $e) {
+    // Handle error (4xx or 5xx)
+    $error = $e->getResponse()->json('message');
+}
+```
+
+```php [DTO Transformation]
+use NjoguAmos\Waha\Facades\Sessions;
+use Saloon\Exceptions\Request\RequestException;
+
+try {
+    $me = Sessions::getMe(session: 'default')->dtoOrFail();
+    // $me is an instance of SessionMeData
+} catch (RequestException $e) {
+    // Handle error (4xx or 5xx)
+    $error = $e->getResponse()->json('message');
+}
+```
+:::
+
+### Common API Errors
+
+The WAHA API may return errors in several scenarios, typically related to engine limitations or core vs. plus version restrictions.
+
+- **404 Not Found**: Often occurs when a feature is disabled via environment variables (e.g., `WAHA_DEBUG_MODE=False`) or when a session/resource does not exist.
+- **422 Unprocessable Entity**: Usually indicates that a feature is restricted to the **WAHA PLUS** version or is not supported by the current engine (e.g., creating multiple sessions on WAHA Core).
+- **500 Internal Server Error**: Can occur if the underlying WhatsApp engine encounters an unexpected error.
+
+### Engine and Version Limitations
+
+Some features in WAHA are only available for specific engines (WEBJS, WPP, NOWEB, GOWS) or require the **WAHA PLUS** version. If you attempt to use a restricted feature, the API will return a `422 Unprocessable Entity` response with a message explaining the limitation.
+
+For example, attempting to create a session other than `default` on **WAHA Core** or using the `health` check endpoint on the Core version will result in a 422 error.
+
+Always check the **Engines** table at the bottom of each endpoint's documentation page to ensure compatibility with your environment.
+
 For more advanced response handling features like headers and cookies, please refer to the [Saloon Response Documentation](https://docs.saloon.dev/the-basics/responses).

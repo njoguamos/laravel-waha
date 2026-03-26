@@ -41,22 +41,6 @@ $heap->body();   // Binary content of the heapsnapshot
 
 :::
 
-## Known Errors
-
-### Debug Mode Disabled
-
-If the `WAHA_DEBUG_MODE` environment variable is not set to `True`, the heapsnapshot endpoint will return a `404 Not Found` response.
-
-`Saloon\Exceptions\Request\Statuses\NotFoundException: Not Found (404) Response:`
-
-```json
-{
-    "message": "WAHA_DEBUG_MODE is disabled",
-    "error": "Not Found",
-    "statusCode": 404
-}
-```
-
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |

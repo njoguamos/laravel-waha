@@ -52,22 +52,6 @@ $trace->body();   // Binary content of the trace
 
 :::
 
-## Known Errors
-
-### Debug mode is disabled
-
-If `WAHA_DEBUG_MODE` is not set to `True`, the server will return a `404 Not Found` response.
-
-`Saloon\Exceptions\Request\Statuses\NotFoundException: Not Found (404) Response:`
-
-```json
-{
-    "message": "WAHA_DEBUG_MODE is disabled",
-    "error": "Not Found",
-    "statusCode": 404
-}
-```
-
 ## Engines
 
 | WEBJS | WPP | NOWEB | GOWS |
