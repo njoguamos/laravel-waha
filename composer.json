@@ -43,16 +43,7 @@
         "laravel": {
             "providers": [
                 "NjoguAmos\\Waha\\WahaServiceProvider"
-            ],
-            "aliases": {
-                "Status": "NjoguAmos\\Waha\\Facades\\Status",
-                "Contact": "NjoguAmos\\Waha\\Facades\\Contact",
-                "Message": "NjoguAmos\\Waha\\Facades\\Message",
-                "Presence": "NjoguAmos\\Waha\\Facades\\Presence",
-                "Session": "NjoguAmos\\Waha\\Facades\\Session",
-                "App": "NjoguAmos\\Waha\\Facades\\App",
-                "Observability": "NjoguAmos\\Waha\\Facades\\Observability"
-            }
+            ]
         }
     },
     "minimum-stability": "stable",
