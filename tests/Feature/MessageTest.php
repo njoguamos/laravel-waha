@@ -10,6 +10,7 @@ use Saloon\Http\Faking\MockClient;
 use Illuminate\Support\Facades\Log;
 use NjoguAmos\Waha\Facades\Message;
 use Saloon\Http\Faking\MockResponse;
+use NjoguAmos\Waha\Dto\LinkPreviewData;
 use NjoguAmos\Waha\Dto\MessageFileData;
 use NjoguAmos\Waha\Dto\MessageListData;
 use NjoguAmos\Waha\Dto\MessagePollData;
@@ -22,6 +23,7 @@ use NjoguAmos\Waha\Dto\MessageForwardData;
 use NjoguAmos\Waha\Dto\MessageLocationData;
 use NjoguAmos\Waha\Dto\MessagePollVoteData;
 use NjoguAmos\Waha\Dto\MessageReactionData;
+use NjoguAmos\Waha\Dto\MessageLinkCustomPreviewData;
 use NjoguAmos\Waha\Requests\Message\SendFileRequest;
 use NjoguAmos\Waha\Requests\Message\SendListRequest;
 use NjoguAmos\Waha\Requests\Message\SendPollRequest;
@@ -36,6 +38,7 @@ use NjoguAmos\Waha\Requests\Message\SendPollVoteRequest;
 use NjoguAmos\Waha\Requests\Message\SendReactionRequest;
 use NjoguAmos\Waha\Requests\Presence\SetPresenceRequest;
 use NjoguAmos\Waha\Requests\Message\ForwardMessageRequest;
+use NjoguAmos\Waha\Requests\Message\SendLinkCustomPreviewRequest;
 
 describe(description: 'send text message', tests: function () {
     it(description: 'can send text message', closure: function () {
@@ -478,4 +481,31 @@ describe(description: 'star message', tests: function () {
 
         expect(value: $result->status())->toBe(expected: 201);
     });
+});
+
+
+describe(description: 'send custom link preview', tests: function (): void {
+    it(description: 'sends the session in the body to the shared preview endpoint', closure: function (?string $session, string $configuredSession, string $expectedSession): void {
+        config()->set(key: 'waha.session', value: $configuredSession);
+        MockClient::global(mockData: [
+            SendLinkCustomPreviewRequest::class => MockResponse::make(body: [], status: 201),
+        ]);
+        $data = new MessageLinkCustomPreviewData(
+            chatId: '123456789@c.us',
+            text: 'Check this out! https://github.com/',
+            preview: new LinkPreviewData(url: 'https://github.com/', title: 'GitHub', description: 'Where the world builds software'),
+        );
+
+        $result = Message::sendLinkCustomPreview(data: $data, session: $session);
+
+        expect(value: $result->status())->toBe(expected: 201);
+        MockClient::global()->assertSent(function (SendLinkCustomPreviewRequest $request) use ($data, $expectedSession): bool {
+            return $request->resolveEndpoint() === '/api/send/link-custom-preview'
+                && $request->body()->all() === ['session' => $expectedSession, ...$data->toArray()];
+        });
+    })->with(data: [
+        'default session'    => [null, 'default', 'default'],
+        'configured session' => [null, 'test-session', 'test-session'],
+        'explicit session'   => ['custom-session', 'default', 'custom-session'],
+    ]);
 });
