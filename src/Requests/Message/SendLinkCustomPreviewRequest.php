@@ -24,7 +24,7 @@ class SendLinkCustomPreviewRequest extends Request implements HasBody
 
     public function resolveEndpoint(): string
     {
-        return '/api/'.rawurlencode($this->session).'/send/link-custom-preview';
+        return '/api/send/link-custom-preview';
     }
 
     protected function defaultBody(): array
